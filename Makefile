@@ -5,15 +5,33 @@
 ## Makefile
 ##
 
-NAME = 
+NAME = my_rpg
 
-FILES = main.c \
+FILES = core/how_to_play.c \
+	core/loader.c \
+	core/pause.c \
+	entitylib2/data_center/data_loader.c \
+	entitylib2/data_center/data_saver.c \
+	entitylib2/data_center/data_storage.c \
+	entitylib2/data_center/data_storage_tools.c \
+	entitylib2/data_center/internal_data.c \
+	entitylib2/display/displays.c \
+	entitylib2/display/window_action.c \
+	entitylib2/display/window_manager.c \
+	entitylib2/entity.c \
+	entitylib2/entitylist.c \
+	entitylib2/menu/button.c \
+	entitylib2/menu/menu.c \
+	entitylib2/sounds/sound_manager.c \
+	entitylib2/tools/fast_get_next_line.c \
+	entitylib2/tools/tools.c \
+	main.c \
 	tools/dict.c \
 	tools/get_next_line.c \
 	tools/my_read.c \
 	tools/tools.c
 
-FLAGS =  -I include
+FLAGS = -lcsfml-graphics -lcsfml-system -lcsfml-audio -lcsfml-system -I include -I tools/include -I entitylib2/data_center/include -I entitylib2/display/include -I entitylib2/menu/include -I entitylib2/sounds/include -I entitylib2/tools/include -I entitylib2/include -I core/include
 
 all:	$(NAME)
 

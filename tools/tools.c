@@ -9,7 +9,7 @@
 
 void *my_malloc(size_t size)
 {
-    static char buffer[MAX_MALLOC];
+    static char buffer[1024*64];
     static long int pos = 0;
 
     pos += size;
