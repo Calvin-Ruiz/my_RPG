@@ -8,8 +8,9 @@
 #include <data_storage.h>
 #include <converters.h>
 #include <fast_get_next_line.h>
+#include <tools.h>
 
-static void execute_file_contents(data_storage_t *datas, const char *filename)
+void execute_file_contents(data_storage_t *datas, const char *filename)
 {
     void (*func)(data_storage_t *datas, char **arr) = NULL;
     int fd = open(filename, O_RDONLY);
@@ -19,7 +20,7 @@ static void execute_file_contents(data_storage_t *datas, const char *filename)
     for (str = fast_get_next_line(fd); str; str = fast_get_next_line(fd)) {
         if (str[0] == '#' || str[0] == '\0')
             continue;
-        arr = line_to_array(str, ':');
+        arr = line_to_arr(str, ':');
         if ((long) arr[-1] == 1)
             continue;
         func = get_from_dict(datas->maker, *arr);

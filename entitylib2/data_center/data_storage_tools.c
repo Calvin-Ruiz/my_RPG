@@ -7,7 +7,7 @@
 #include <entitylib.h>
 #include <converters.h>
 
-void import_sound(data_storage_t *datas, const char *filename, int i)
+void import_sound(data_storage_t *datas, char *filename)
 {
     sfSoundBuffer *tmp = sfSoundBuffer_createFromFile(filename);
     sfSound *tmp2 = sfSound_create();
@@ -29,7 +29,7 @@ void update_all(data_storage_t *datas)
     int i = -1;
 
     while (++i < datas->nb_entitylist)
-        datas->entitylists[i]->update(self, datas);
+        datas->entitylists[i]->update(datas->entitylists[i], datas);
 }
 
 void save_higher_score(data_storage_t *datas)

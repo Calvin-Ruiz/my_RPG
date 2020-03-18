@@ -14,3 +14,4 @@ Les caractéristiques liées au joueur
 Peut-être aussi les menus (à voir)
 UTILISEZ DES COMMENTAIRES ET DES SAUT DE LIGNES DANS LES FICHIERS DE CONFIG
 (Une ligne vide ou une ligne commençant par '#' ne sera pas interprétée)
+(Les ':' sont des séparateurs)

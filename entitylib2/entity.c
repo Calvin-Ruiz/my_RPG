@@ -27,7 +27,6 @@ void create_entity_base(entity_t *new, uint_t *size, float fdelay, int hp)
     new->frame_delay = fdelay * 1000000;
     new->frame_dec = 0;
     new->frame = 0;
-    new->on_select = no_update;
     new->destroy = default_destroy;
     new->load = NULL;
     new->save = NULL;

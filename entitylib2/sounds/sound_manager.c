@@ -20,9 +20,11 @@ int load_music(data_storage_t *data, const char *filename)
 
 void update_volume(data_storage_t *data)
 {
-    int i = -1;
+    dict_t *sounds = data->sounds;
 
     sfMusic_setVolume(data->music, data->volume);
-    while (++i < data->nb_sounds)
-        sfSound_setVolume(data->sounds[i], data->volume);
+    while (sounds) {
+        sfSound_setVolume(sounds->data, data->volume);
+        sounds = sounds->next;
+    }
 }

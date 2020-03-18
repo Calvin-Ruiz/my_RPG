@@ -11,8 +11,7 @@ void my_closure(data_storage_t *datas)
 {
     sfRenderWindow_close(datas->window);
     datas->on_mainloop = 0;
-    destroy_dict(datas->texture_dict, NULL);
-    free_storage_content(datas, 63);
+    free_storage_content(datas, 7);
 }
 
 int main(int ac, char **av)

@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2019
-** MUL_my_defender_2019
+** MUL_my_rpg_2019
 ** File description:
 ** how_to_play.c
 */
@@ -41,7 +41,8 @@ static void htp_menu(data_storage_t *datas)
 
     if (self.view == NULL || self.background == NULL)
         return;
-    sfSprite_setTexture(self.background, datas->textures[1], sfTrue);
+    sfSprite_setTexture(self.background, get_from_dict(datas->textures,
+        "htp.png"), sfTrue);
     while (self.opened) {
         sfRenderWindow_drawSprite(datas->window, self.background, NULL);
         sfRenderWindow_display(datas->window);

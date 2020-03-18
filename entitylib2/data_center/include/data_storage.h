@@ -58,12 +58,12 @@ typedef struct data_storage {
 } data_storage_t;
 
 data_storage_t *get_data_storage(void);
-data_storage_t *init_data_storage(int nb_sounds, int nb_textures,
-    int nb_entity, int nb_entitylist);
+data_storage_t *init_data_storage(int nb_entitylist);
 int check_data_storage_content(data_storage_t *datas);
 void free_storage_content(data_storage_t *datas, int mask);
 void update_all(data_storage_t *datas);
-void import_sound(data_storage_t *datas, const char *filename, int pos);
+void import_sound(data_storage_t *datas, char *filename);
 void save_higher_score(data_storage_t *datas);
+void execute_file_contents(data_storage_t *datas, const char *filename);
 
 #endif /* DATA_STORAGE_H_ */

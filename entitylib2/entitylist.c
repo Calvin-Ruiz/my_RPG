@@ -7,16 +7,6 @@
 #include <entity.h>
 #include <data_storage.h>
 
-void entitylist_pre_draw(entitylist_t *self, sfRenderWindow *window)
-{
-    entity_t *entity = self->next;
-
-    while (entity) {
-        entity->pre_draw(entity, window);
-        entity = entity->next;
-    }
-}
-
 char entitylist_update(entitylist_t *self, data_storage_t *datas)
 {
     entity_t **entity = &(self->next);
