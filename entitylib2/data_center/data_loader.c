@@ -7,6 +7,28 @@
 #include <entity.h>
 #include <data_storage.h>
 #include <converters.h>
+#include <fast_get_next_line.h>
+
+static void execute_file_contents(data_storage_t *datas, const char *filename)
+{
+    void (*func)(data_storage_t *datas, char **arr) = NULL;
+    int fd = open(filename, O_RDONLY);
+    char *str = fast_get_next_line(-1);
+    char **arr = NULL;
+
+    for (str = fast_get_next_line(fd); str; str = fast_get_next_line(fd)) {
+        if (str[0] == '#' || str[0] == '\0')
+            continue;
+        arr = line_to_array(str, ':');
+        if ((long) arr[-1] == 1)
+            continue;
+        func = get_from_dict(datas->maker, *arr);
+        if (func)
+            func(datas, arr);
+        free(arr - 1);
+    }
+    close(fd);
+}
 
 static int load_entitylist(int fd, entitylist_t *elist, data_storage_t *datas)
 {

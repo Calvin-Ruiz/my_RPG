@@ -9,18 +9,19 @@
 
 void import_sound(data_storage_t *datas, const char *filename, int i)
 {
-    datas->sound_buffs[i] = sfSoundBuffer_createFromFile(filename);
-    if (datas->sound_buffs[i] == NULL) {
-        datas->sounds[i] = NULL;
+    sfSoundBuffer *tmp = sfSoundBuffer_createFromFile(filename);
+    sfSound *tmp2 = sfSound_create();
+
+    if (tmp == NULL)
+        return;
+    if (tmp2 == NULL) {
+        sfSoundBuffer_destroy(tmp);
         return;
     }
-    datas->sounds[i] = sfSound_create();
-    if (datas->sounds[i] == NULL) {
-        sfSoundBuffer_destroy(datas->sound_buffs[i]);
-        datas->sound_buffs[i] = NULL;
-    }
-    sfSound_setBuffer(datas->sounds[i], datas->sound_buffs[i]);
-    sfSound_setVolume(datas->sounds[i], datas->volume);
+    sfSound_setBuffer(tmp2, tmp);
+    sfSound_setVolume(tmp2, datas->volume);
+    append_to_dict(&datas->sound_buffs, filename + 7, tmp);
+    append_to_dict(&datas->sounds, filename + 7, tmp2);
 }
 
 void update_all(data_storage_t *datas)
@@ -28,7 +29,7 @@ void update_all(data_storage_t *datas)
     int i = -1;
 
     while (++i < datas->nb_entitylist)
-        entitylist_update(datas->entitylists[i], datas);
+        datas->entitylists[i]->update(self, datas);
 }
 
 void save_higher_score(data_storage_t *datas)
@@ -48,35 +49,27 @@ void save_higher_score(data_storage_t *datas)
     }
 }
 
-static void free_groups(data_storage_t *datas)
+static void auto_destroy(entity_t *self)
 {
-    free(datas->sounds);
-    free(datas->textures);
-    free(datas->entities);
-    free(datas->entitylists);
-    sfClock_destroy(datas->clock);
+    self->destroy(self);
 }
 
 void free_storage_content(data_storage_t *datas, int mask)
 {
     int i = -1;
-    while (++i < datas->nb_sounds && (mask & 4))
-        if (datas->sounds[i] != NULL) {
-            sfSound_destroy(datas->sounds[i]);
-            sfSoundBuffer_destroy(datas->sound_buffs[i]);
-        }
-    i = -1;
-    while (++i < datas->nb_textures && (mask & 8))
-        if (datas->textures[i] != NULL)
-            sfTexture_destroy(datas->textures[i]);
-    i = -1;
-    while (++i < datas->nb_entity && (mask & 16))
-        free_entity(datas->entities[i]);
-    i = -1;
-    while (++i < datas->nb_entitylist && (mask & 32))
-        destroy_entitylist(datas->entitylists[i]);
+
+    destroy_dict(datas->sounds, sfSound_destroy);
+    destroy_dict(datas->sound_buffs, sfSoundBuffer_destroy);
+    destroy_dict(datas->textures, sfTexture_destroy);
+    destroy_dict(datas->entities, auto_destroy);
+    destroy_dict(datas->maker, NULL);
+    if (mask & 4) {
+        while (++i < datas->nb_entitylist)
+            destroy_entitylist(datas->entitylists[i]);
+    }
     if ((mask & 2) && datas->window != NULL)
         destroy_window(datas);
     save_higher_score(datas);
-    free_groups(datas);
+    free(datas->entitylists);
+    sfClock_destroy(datas->clock);
 }

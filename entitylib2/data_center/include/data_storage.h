@@ -10,6 +10,10 @@
 
 #include <dict.h>
 
+enum {
+    NB_DATAS,
+};
+
 typedef struct my_mouse {
     char left;
     char wheel;
@@ -22,27 +26,26 @@ typedef struct my_keys {
     char right;
     char up;
     char down;
+    char space;
 } my_keys_t;
 
 typedef struct data_storage {
     sfRenderWindow *window;
     sfView *view;
-    void *main_menu;
-    void *pause_menu;
     sfVector2f pos;
     sfVector2f size;
+    void *main_menu;
+    void *pause_menu;
+    void *global[NB_DATAS];
     my_mouse_t mouse;
     my_keys_t key;
-    sfSoundBuffer **sound_buffs;
-    sfSound **sounds;
-    int nb_sounds;
-    sfTexture **textures;
-    dict_t *texture_dict;
-    int nb_textures;
+    dict_t *sound_buffs;
+    dict_t *sounds;
+    dict_t *textures;
+    dict_t *entities;
+    dict_t *maker;
     entitylist_t **entitylists;
     int nb_entitylist;
-    entity_t **entities;
-    int nb_entity;
     int score;
     int higher_score;
     float coef_x;

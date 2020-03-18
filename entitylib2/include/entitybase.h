@@ -35,9 +35,7 @@ typedef struct entity {
     uchar_t frame_dec;
     uchar_t frame;
     pos_t pos;
-    void (*pre_draw)();
     void (*update)();
-    void (*on_select)();
     void *(*new)();
     void (*destroy)();
     void *(*load)();
@@ -49,6 +47,8 @@ typedef struct entitylist {
     sfClock *clock;
     sfInt64 last;
     entity_t *next;
+    char (*collide)();
+    void (*update)();
 } entitylist_t;
 
 #endif /* ENTITYBASE_H_ */

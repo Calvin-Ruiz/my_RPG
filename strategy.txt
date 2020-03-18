@@ -1,0 +1,16 @@
+This file must be deleted BEFORE the last commit.
+
+On peux peut-être reprendre le système de combat de "RPG maker VX Ace"
+Mini interpréteur de commandes pour le debug ? - si besoin dans un sfThread
+
+Seront défini dans les fichiers config :
+Les textures
+Les sons
+La musique
+Les entités
+La majorité des éléments de la map (en coordonnées de préférence)
+Les compétences
+Les caractéristiques liées au joueur
+Peut-être aussi les menus (à voir)
+UTILISEZ DES COMMENTAIRES ET DES SAUT DE LIGNES DANS LES FICHIERS DE CONFIG
+(Une ligne vide ou une ligne commençant par '#' ne sera pas interprétée)

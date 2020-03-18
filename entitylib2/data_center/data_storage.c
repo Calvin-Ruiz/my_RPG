@@ -35,18 +35,14 @@ static void init_data_storage_2(data_storage_t *datas)
         datas->entitylists[fd] = create_entitylist();
 }
 
-data_storage_t *init_data_storage(int nb_sounds, int nb_textures,
-    int nb_entity, int nb_entitylist)
+data_storage_t *init_data_storage(int nb_entitylist)
 {
     data_storage_t *datas = get_data_storage();
 
-    datas->sound_buffs = malloc(sizeof(*(datas->sound_buffs)) * nb_sounds);
-    datas->sounds = malloc(sizeof(*(datas->sounds)) * nb_sounds);
-    datas->nb_sounds = nb_sounds;
-    datas->textures = malloc(sizeof(*(datas->textures)) * nb_textures);
-    datas->nb_textures = nb_textures;
-    datas->entities = malloc(sizeof(*(datas->entities)) * nb_entity);
-    datas->nb_entity = nb_entity;
+    datas->sound_buffs = NULL;
+    datas->sounds = NULL;
+    datas->textures = NULL;
+    datas->entities = NULL;
     datas->entitylists = malloc(sizeof(*(datas->entitylists)) * nb_entitylist);
     datas->nb_entitylist = nb_entitylist;
     datas->score = 0;
@@ -64,16 +60,7 @@ int check_data_storage_content(data_storage_t *datas)
 
     if (check)
         return (check);
-    while (++i < datas->nb_sounds)
-        check = check | ((datas->sounds[i] == NULL) << 2);
-    i = -1;
-    while (++i < datas->nb_textures)
-        check = check | ((datas->textures[i] == NULL) << 3);
-    i = -1;
-    while (++i < datas->nb_entity)
-        check = check | ((datas->entities[i] == NULL) << 4);
-    i = -1;
     while (++i < datas->nb_entitylist)
-        check = check | ((datas->entitylists[i] == NULL) << 5);
+        check = check | ((datas->entitylists[i] == NULL) << 2);
     return (check);
 }
