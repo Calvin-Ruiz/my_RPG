@@ -14,9 +14,12 @@ static void my_save_screenshoot(sfImage *image)
 {
     int fd = open("saves/nbr_screenshoots.dat", O_RDONLY);
     int_to_raw_t nbr_screenshoots;
+    char name[] = "screenshoots/screenshoot_0000.png";
+    char *str = name + 28;
+    int size = 0;
 
     if (fd != -1) {
-        int size = read(fd, nbr_screenshoots.raw, 4);
+        size = read(fd, nbr_screenshoots.raw, 4);
         nbr_screenshoots.value = (size == 4) ? nbr_screenshoots.value + 1 : 1;
         close(fd);
     } else
@@ -24,9 +27,6 @@ static void my_save_screenshoot(sfImage *image)
     fd = open("saves/nbr_screenshoots.dat", O_WRONLY | O_CREAT, 0666);
     write(fd, nbr_screenshoots.raw, 4);
     close(fd);
-    char name[] = "screenshoots/screenshoot_0000.png";
-    char *str = name + 28;
-
     while (nbr_screenshoots.value > 0) {
         *(str--) += nbr_screenshoots.value % 10;
         nbr_screenshoots.value /= 10;
@@ -38,11 +38,12 @@ void my_take_screenshoot(sfRenderWindow *window)
 {
     sfVector2u size = sfRenderWindow_getSize(window);
     sfTexture *texture = sfTexture_create(size.x, size.y);
+    sfImage *image;
 
     if (texture == NULL)
         return;
     sfTexture_updateFromRenderWindow(texture, window, 0, 0);
-    sfImage *image = sfTexture_copyToImage(texture);
+    image = sfTexture_copyToImage(texture);
 
     if (image == NULL) {
         sfTexture_destroy(texture);

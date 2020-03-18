@@ -8,8 +8,7 @@
 #ifndef ENTITYLIST_H_
 #define ENTITYLIST_H_
 
-void entitylist_pre_draw(entitylist_t *self, sfRenderWindow *window);
-char entitylist_update(entitylist_t *self, void *datas);
+void entitylist_update(entitylist_t *self, void *datas);
 entitylist_t *create_entitylist(void);
 void destroy_entitylist(entitylist_t *entitylist);
 

@@ -7,13 +7,12 @@
 #include <entity.h>
 #include <data_storage.h>
 
-char entitylist_update(entitylist_t *self, data_storage_t *datas)
+void entitylist_update(entitylist_t *self, data_storage_t *datas)
 {
     entity_t **entity = &(self->next);
     entity_t *tmp;
     sfTime time = sfClock_getElapsedTime(self->clock);
     long long delta_time = time.microseconds - self->last;
-    uchar_t killed_count = 0;
 
     self->last = time.microseconds;
     while (*entity) {
@@ -21,14 +20,12 @@ char entitylist_update(entitylist_t *self, data_storage_t *datas)
             tmp = (*entity)->next;
             (*entity)->destroy(*entity);
             *entity = tmp;
-            killed_count++;
         } else {
             (*entity)->update(*entity, datas->entitylists,
-                delta_time, datas->window);
+                delta_time);
             entity = &((*entity)->next);
         }
     }
-    return (killed_count);
 }
 
 entitylist_t *create_entitylist(void)
@@ -38,6 +35,7 @@ entitylist_t *create_entitylist(void)
     new->next = NULL;
     new->last = 0;
     new->clock = sfClock_create();
+    new->update = entitylist_update;
     return (new);
 }
 
