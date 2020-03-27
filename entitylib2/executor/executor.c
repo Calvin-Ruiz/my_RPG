@@ -59,6 +59,29 @@ static void execute_file(char *filename, executor_t *executor)
     close(fd);
 }
 
+void thread_cmd(char **arr, rdict_t *var)
+{
+    sfThread *thread = get_from_dict(tmpcat("thread.", arr[1]));
+
+    if (my_strcmp(arr[2], "create") == 0) {
+        thread = sfThread_create((void (*)(void *)) get_from_dict(
+            (dict_t *) get_executor()->cmd, arr[3]), get_data(var, arr[4]));
+        if (thread == NULL)
+            return;
+        append_to_dict((dict_t **) get_ptr_from_dict((dict_t *) var, "thread"),
+            arr[1], thread);
+        return;
+    }
+    if (thread == NULL)
+        return;
+    if (my_strcmp(arr[2], "run") == 0) {
+        sfThread_launch(thread);
+        return;
+    }
+    if (my_strcmp(arr[2], "destroy") == 0)
+        sfThread_destroy(thread);
+}
+
 void load_config(executor_t *executor)
 {
     DIR *dir = opendir("config");

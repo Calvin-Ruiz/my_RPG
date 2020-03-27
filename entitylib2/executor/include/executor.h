@@ -58,5 +58,6 @@ void call_function(char **arr, rdict_t *var);
 void build_function(char *filename, executor_t *executor);
 void set_value(char **arr, rdict_t *var);
 void create_variable(char **arr, rdict_t *var);
+void thread_cmd(char **arr, rdict_t *var);
 
 #endif /* EXECUTOR_H_ */
