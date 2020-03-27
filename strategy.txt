@@ -31,8 +31,8 @@ Particle system :
     - ponctuelle
     - axiale dirigée en X ou Y
     Trajectoire
-    - attraction par un point
-    - force d'éloignement dirigée aléatoirement
+    - attraction par un point et/ou directionnelle
+    - plage de force d'éloignement dirigée aléatoirement
     Constitution
     - sfVertex : triangles
     - plage de coloration (couleur aléatoire dans cette plage)
