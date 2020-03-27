@@ -9,23 +9,28 @@
 #include <entitybase.h>
 #include <data_storage.h>
 
-static void create_sizeof(dict_t **var)
+static void reference_sizeof_and_mouse(dict_t **var, my_mouse_t *mouse)
 {
-    dict_t *size = NULL;
-
-    append_to_dict(&size, "sfVector2f", (long) sizeof(sfVector2f));
-    append_to_dict(&size, "dict_t", (long) sizeof(dict_t));
-    append_to_dict(&size, "entity_t", (long) sizeof(entity_t));
-    append_to_dict(&size, "entitylist_t", (long) sizeof(entitylist_t));
-    append_to_dict(&size, "menu_t", (long) sizeof(menu_t));
-    append_to_dict(&size, "ptr", (long) sizeof(void *));
-    append_to_dict(&size, "char", (long) sizeof(char));
-    append_to_dict(&size, "double", (long) sizeof(double));
-    append_to_dict(&size, "float", (long) sizeof(float));
-    append_to_dict(&size, "short", (long) sizeof(short));
-    append_to_dict(&size, "long", (long) sizeof(long));
-    append_to_dict(&size, "int", (long) sizeof(int));
-    append_to_dict(var, "sizeof", size));
+    static dict_t dict[2] = {NULL, NULL};
+    append_to_dict(dict, "sfVector2f", (long) sizeof(sfVector2f));
+    append_to_dict(dict, "dict_t", (long) sizeof(dict_t));
+    append_to_dict(dict, "entity_t", (long) sizeof(entity_t));
+    append_to_dict(dict, "entitylist_t", (long) sizeof(entitylist_t));
+    append_to_dict(dict, "menu_t", (long) sizeof(menu_t));
+    append_to_dict(dict, "ptr", (long) sizeof(void *));
+    append_to_dict(dict, "char", (long) sizeof(char));
+    append_to_dict(dict, "double", (long) sizeof(double));
+    append_to_dict(dict, "float", (long) sizeof(float));
+    append_to_dict(dict, "short", (long) sizeof(short));
+    append_to_dict(dict, "long", (long) sizeof(long));
+    append_to_dict(dict, "int", (long) sizeof(int));
+    append_to_dict(var, "sizeof", dict);
+    append_to_dict(dict + 1, "x", &mouse->pos.x);
+    append_to_dict(dict + 1, "y", &mouse->pos.y);
+    append_to_dict(dict + 1, "left", &mouse->left);
+    append_to_dict(dict + 1, "wheel", &mouse->wheel);
+    append_to_dict(dict + 1, "right", &mouse->right);
+    append_to_dict(var, "mouse", dict + 1);
 }
 
 static void init_vars(dict_t **var)
@@ -41,7 +46,7 @@ static void init_vars(dict_t **var)
     append_to_dict(var, "textures", datas->textures);
     append_to_dict(var, "global", datas->global);
     append_to_dict(var, "local", NULL);
-    create_sizeof(var);
+    reference_sizeof_and_mouse(var, &datas->mouse);
 }
 
 static void init_cmd(dict_t **cmd)

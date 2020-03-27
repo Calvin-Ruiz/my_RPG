@@ -83,5 +83,5 @@ void build_function(char *filename, executor_t *executor)
     filename[i] = '\0';
     append_to_dict((dict_t **) get_ptr_from_dict((dict_t *) executor->var,
         "func"), filename, func);
-    append_to_dict(&executor->cmd, filename, call_function);
+    append_to_dict((dict_t **) &executor->cmd, filename, call_function);
 }
