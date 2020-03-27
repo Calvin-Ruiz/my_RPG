@@ -25,3 +25,18 @@ Fichiers configs : 3 extensions différentes :
 Fonctions : spécificités
 call filename arg1 arg2 arg3 - appelle la fonction avec des arguments
 $1 - remplacer par l'argument 1
+
+Particle system :
+    Apparition
+    - ponctuelle
+    - axiale dirigée en X ou Y
+    Trajectoire
+    - attraction par un point
+    - force d'éloignement dirigée aléatoirement
+    Constitution
+    - sfVertex : triangles
+    - plage de coloration (couleur aléatoire dans cette plage)
+    Effets
+    - aucun
+    Densité
+    - particules par tic
