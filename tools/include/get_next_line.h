@@ -17,9 +17,4 @@ char *get_next_line(int fd);
 #define READ_SIZE 512
 #endif /* READ_SIZE */
 
-typedef struct strchain {
-    char *data;
-    struct strchain *next;
-} strchain_t;
-
 #endif /* GET_NEXT_LINE_H_ */

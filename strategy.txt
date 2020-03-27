@@ -15,3 +15,13 @@ Peut-être aussi les menus (à voir)
 UTILISEZ DES COMMENTAIRES ET DES SAUT DE LIGNES DANS LES FICHIERS DE CONFIG
 (Une ligne vide ou une ligne commençant par '#' ne sera pas interprétée)
 (Les ':' sont des séparateurs)
+Fichiers .conf et .fonc - utilisez un espace comme séparateur
+
+Fichiers configs : 3 extensions différentes :
+.txt -> fichier de configuration interne (interprété spécifiquement)
+.conf -> fichier de configuration à exécuter
+.fonc -> fichier définissant une fonction pouvant être appellé ailleur
+
+Fonctions : spécificités
+call filename arg1 arg2 arg3 - appelle la fonction avec des arguments
+$1 - remplacer par l'argument 1

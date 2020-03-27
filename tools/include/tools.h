@@ -8,29 +8,14 @@
 #ifndef TOOLS_H_
 #define TOOLS_H_
 
+#include <stdlib.h>
+#include <unistd.h>
+#include <print_tools.h>
+
 void *my_malloc(size_t size);
 char **line_to_arr(char *str, const char sep);
-
-static inline void my_putchar(char c)
-{
-    write(1, &c, 1);
-}
-
-static inline void my_putstr(char *str)
-{
-    int len = -1;
-
-    while (str[++len] != '\0');
-    write(1, str, len);
-}
-
-static inline void my_puterr(char *str)
-{
-    int len = -1;
-
-    while (str[++len] != '\0');
-    write(2, str, len);
-}
+char *tmpcat(char *str1, char *str2);
+char **line_to_arr_mytmp(char *str, const char sep);
 
 static inline char my_strcmp(const char *s1, const char *s2)
 {

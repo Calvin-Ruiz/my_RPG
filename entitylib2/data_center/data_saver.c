@@ -39,7 +39,7 @@ static void save_entitylist(int fd, entitylist_t *elist, entity_t **entities)
 int save_all(const char *filename)
 {
     data_storage_t *datas = get_data_storage();
-    entity_t **entities = datas->entities;
+    entity_t **entities = (entity_t **) datas->entities;
     entitylist_t **elists = datas->entitylists;
     int fd = open(filename, O_WRONLY | O_CREAT, 0666);
 

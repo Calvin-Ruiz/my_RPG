@@ -47,6 +47,7 @@ data_storage_t *init_data_storage(int nb_entitylist)
     datas->nb_entitylist = nb_entitylist;
     datas->score = 0;
     datas->clock = sfClock_create();
+    datas->is_alive = 1;
     init_data_storage_2(datas);
     return (datas);
 }

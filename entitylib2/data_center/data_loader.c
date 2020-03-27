@@ -35,7 +35,7 @@ static int load_entitylist(int fd, entitylist_t *elist, data_storage_t *datas)
 {
     short_to_raw_t nb_alive_entities;
     short_to_raw_t id_master;
-    entity_t **entities = datas->entities;
+    entity_t **entities = (entity_t **) datas->entities;
     entity_t *tmp;
     int i = -1;
 

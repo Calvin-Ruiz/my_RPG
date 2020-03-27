@@ -4,8 +4,7 @@
 ** File description:
 ** tools.c
 */
-#include <stdlib.h>
-#include <unistd.h>
+#include <tools.h>
 
 void *my_malloc(size_t size)
 {
@@ -18,24 +17,67 @@ void *my_malloc(size_t size)
 
 char **line_to_arr(char *str, const char sep)
 {
-    int i = -1;
+    int i = 0;
     long int nargs = 3;
     char **arr;
     char **sav;
     if (str == NULL)
         return (NULL);
-    for (int i = -1; str[++i] != '\0';)
-        nargs += str[i] == sep;
+    for (int j = -1; str[++j] != '\0';)
+        nargs += str[j] == sep;
     arr = malloc(sizeof(char *) * nargs);
     if (arr == NULL)
         return (NULL);
-    sav = arr;
     *(arr++) = (char *) (nargs - 2);
+    sav = arr;
     while (str[i] != '\0') {
         *(arr++) = str + i;
         while (str[i] != '\0' && str[i++] != sep);
         str[i - (str[i] != '\0')] = '\0';
     }
     *arr = NULL;
-    return (sav + 1);
+    return (sav);
+}
+
+char **line_to_arr_mytmp(char *str, const char sep)
+{
+    int i = 0;
+    long int nargs = 3;
+    char **arr;
+    char **sav;
+
+    if (str == NULL)
+        return (NULL);
+    for (int j = -1; str[++j] != '\0';)
+        nargs += str[j] == sep;
+    arr = my_malloc(0);
+    *(arr++) = (char *) (nargs - 2);
+    sav = arr;
+    while (str[i] != '\0') {
+        *(arr++) = str + i;
+        while (str[i] != '\0' && str[i++] != sep);
+        str[i - (str[i] != '\0')] = '\0';
+    }
+    *arr = NULL;
+    return (sav);
+}
+
+void rec_putnbr(long nb)
+{
+    if (nb > 9)
+        rec_putnbr(nb / 10);
+    my_putchar('0' + nb % 10);
+}
+
+char *tmpcat(char *str1, char *str2)
+{
+    static char tmp[1024];
+    short len = 0;
+
+    while (*str1)
+        tmp[len++] = *(str1++);
+    while (*str2)
+        tmp[len++] = *(str2++);
+    tmp[len] = '\0';
+    return (tmp);
 }

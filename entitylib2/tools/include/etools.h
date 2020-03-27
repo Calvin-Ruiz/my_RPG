@@ -2,28 +2,16 @@
 ** EPITECH PROJECT, 2019
 ** entitylib2
 ** File description:
-** tools.h
+** etools.h
 */
 
-#ifndef TOOLS_H_
-#define TOOLS_H_
+#ifndef ETOOLS_H_
+#define ETOOLS_H_
+
+#include <tools.h>
 
 void no_update(void *ptr);
 void default_destroy(void *ptr);
-void my_putnbr(int nb);
-
-static inline void my_putchar(char c)
-{
-    write(1, &c, 1);
-}
-
-static inline void my_putstr(char *str)
-{
-    int i = -1;
-
-    while (str[++i]);
-    write(1, str, i);
-}
 
 static inline void fast_nbr_in_str(char *end_of_str, int nbr, int len)
 {
@@ -49,4 +37,4 @@ static inline void *my_cpy(void *data, short len)
     return (raw);
 }
 
-#endif /* TOOLS_H_ */
+#endif /* ETOOLS_H */

@@ -25,6 +25,7 @@ typedef struct pos {
 } pos_t;
 
 typedef struct entity {
+    struct entity *next;
     sfSprite **sprite;
     uint_t *size;
     int health;
@@ -40,13 +41,12 @@ typedef struct entity {
     void (*destroy)();
     void *(*load)();
     void (*save)();
-    struct entity *next;
 } entity_t;
 
 typedef struct entitylist {
+    entity_t *next;
     sfClock *clock;
     sfInt64 last;
-    entity_t *next;
     char (*collide)();
     void (*update)();
 } entitylist_t;

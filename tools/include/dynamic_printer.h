@@ -8,6 +8,8 @@
 #ifndef DYNAMIC_PRINTER_H_
 #define DYNAMIC_PRINTER_H_
 
+#include <dynamic_printer_tools.h>
+
 static inline void put_line(char line_id)
 {
     static char str[3] = {226, 148, 128};
@@ -16,14 +18,15 @@ static inline void put_line(char line_id)
     write(1, str, 3);
 }
 
-static inline void my_move(short x, short y)
+static inline void my_move(unsigned short x, unsigned short y)
 {
-    char str[3] = {27, '[', 'A'};
+    char str[3] = {27, '[', 'H'};
+    const char *moving = "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t";
 
-    write(1, "\r", 1);
-    for (short i = 50; i-- > 0;)
-        write(1, str, 3);
+    write(1, str, 3);
     str[2] = 'C';
+    write(1, moving, x >> 3);
+    x = x & 7;
     while (x-- > 0)
         write(1, str, 3);
     while (y-- > 0)
@@ -37,9 +40,9 @@ static inline void relative_move(short x, short y)
     while (x-- > 0)
         write(1, str, 3);
     while (++x < 0)
-        write(1, '\b', 1);
+        write(1, "\b", 1);
     while (y-- > 0)
-        write(1, '\v', 1);
+        write(1, "\v", 1);
     str[2] = 'A';
     while (++y < 0)
         write(1, str, 3);
@@ -60,7 +63,7 @@ static inline void draw_borders(const short x, const short y)
     str2[x + 4] = '\n';
     write(1, "\n", 1);
     for (short i = 1; ++i < y;)
-        write(1, str2, x);
+        write(1, str2, x + 5);
 }
 
 static inline void draw_cadre(short x, short y)
@@ -68,8 +71,6 @@ static inline void draw_cadre(short x, short y)
     const char clr[2] = {27, 'c'};
     char str[3] = {226, 148, 140};
 
-    for (short i = 1; ++i < y;)
-        write(1, str2, x + 5);
     write(1, clr, 2);
     write(1, str, 3);
     str[2] = 128;
@@ -77,7 +78,7 @@ static inline void draw_cadre(short x, short y)
         write(1, str, 3);
     str[2] = 144;
     write(1, str, 3);
-    draw_borders(x + 5, y);
+    draw_borders(x, y);
     str[2] = 148;
     write(1, str, 3);
     str[2] = 128;

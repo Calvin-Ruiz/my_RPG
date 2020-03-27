@@ -33,8 +33,8 @@ static strchain_t *my_reader(const int port, long *full, char *buff, int size)
 static void my_extractor(strchain_t *chain, char *buffer, long int len)
 {
     long int i = -1;
-
     strchain_t *temp;
+
     while (len > DATALEN) {
         while (++i < DATALEN)
             buffer[i] = chain->data[i];
@@ -55,17 +55,20 @@ static void my_extractor(strchain_t *chain, char *buffer, long int len)
 char *my_read(const int port, long int *full_size)
 {
     char *buff = malloc(DATALEN);
+    int size;
+    strchain_t *chain;
+    char *buffer;
 
     if (buff == NULL)
         return (NULL);
-    int size = read(port, buff, DATALEN);
+    size = read(port, buff, DATALEN);
     if (size == -1)
         return (NULL);
     *full_size = size;
-    strchain_t *chain = my_reader(port, full_size, buff, size);
+    chain = my_reader(port, full_size, buff, size);
     if (chain == NULL)
         return (NULL);
-    char *buffer = malloc(*full_size + 1);
+    buffer = malloc(*full_size + 1);
     if (buffer == NULL)
         return (NULL);
     my_extractor(chain, buffer, *full_size);

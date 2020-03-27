@@ -20,26 +20,32 @@ FILES = core/how_to_play.c \
 	entitylib2/display/window_manager.c \
 	entitylib2/entity.c \
 	entitylib2/entitylist.c \
+	entitylib2/executor/access.c \
+	entitylib2/executor/executor.c \
+	entitylib2/executor/function.c \
+	entitylib2/executor/trace.c \
 	entitylib2/menu/button.c \
 	entitylib2/menu/menu.c \
 	entitylib2/sounds/sound_manager.c \
+	entitylib2/tools/etools.c \
 	entitylib2/tools/fast_get_next_line.c \
-	entitylib2/tools/tools.c \
 	main.c \
 	tools/dict.c \
 	tools/get_next_line.c \
 	tools/my_read.c \
 	tools/tools.c
 
-FLAGS = -lcsfml-graphics -lcsfml-system -lcsfml-audio -lcsfml-system -I include -I tools/include -I entitylib2/data_center/include -I entitylib2/display/include -I entitylib2/menu/include -I entitylib2/sounds/include -I entitylib2/tools/include -I entitylib2/include -I core/include
+INCLUDES = -I core/include -I entitylib2/data_center/include -I entitylib2/display/include -I entitylib2/executor/include -I entitylib2/include -I entitylib2/menu/include -I entitylib2/sounds/include -I entitylib2/tools/include -I include -I tools/include 
+
+FLAGS = -lcsfml-graphics -lcsfml-system -lcsfml-audio -lcsfml-system
 
 all:	$(NAME)
 
 $(NAME):
-	gcc -o $(NAME) $(FILES) $(FLAGS)
+	gcc -o $(NAME) $(FILES) $(FLAGS) $(INCLUDES)
 
 fast:
-	gcc -Ofast -o $(NAME) $(FILES) $(FLAGS)
+	gcc -Ofast -o $(NAME) $(FILES) $(FLAGS) $(INCLUDES)
 
 clean:
 	rm -f *.o
@@ -68,11 +74,11 @@ sync:	pull	push
 
 debug:
 	clear
-	gcc -g3 -o $(NAME) $(FILES) -Wall -Wextra $(FLAGS)
+	gcc -g3 -o $(NAME) $(FILES) -Wall -Wextra $(FLAGS) $(INCLUDES)
 
 valgrind:
 	clear
-	gcc -g3 -o $(NAME) $(FILES) $(FLAGS)
+	gcc -g3 -o $(NAME) $(FILES) $(FLAGS) $(INCLUDES)
 
 update:
 	mmkfile $(NAME) "$(FLAGS)"

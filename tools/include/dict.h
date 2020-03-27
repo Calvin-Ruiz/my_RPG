@@ -9,9 +9,9 @@
 #define DICT_H_
 
 typedef struct my_dict {
-    char *name;
-    void *data;
     struct my_dict *next;
+    void *data;
+    char *name;
 } dict_t;
 
 void append_to_dict(dict_t **dict, char *name, void *data);

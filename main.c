@@ -11,6 +11,7 @@ void my_closure(data_storage_t *datas)
 {
     sfRenderWindow_close(datas->window);
     datas->on_mainloop = 0;
+    datas->is_alive = 0;
     free_storage_content(datas, 7);
 }
 

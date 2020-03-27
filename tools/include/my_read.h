@@ -16,8 +16,8 @@
 #define DATALEN 4096
 
 typedef struct strchain {
-    char *data;
     struct strchain *next;
+    char *data;
 } strchain_t;
 
 char *my_read(const int port, long int *full_size);
