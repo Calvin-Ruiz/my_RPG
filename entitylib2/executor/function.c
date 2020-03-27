@@ -79,5 +79,5 @@ void build_function(char *filename, executor_t *executor)
     while (filename[++i] != '.');
     filename[i] = '\0';
     append_to_dict((dict_t **) get_ptr_from_dict((dict_t *) executor->var,
-        "func"), my_strdup(filename), func);
+        "func"), filename, func);
 }

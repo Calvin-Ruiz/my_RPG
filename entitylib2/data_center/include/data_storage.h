@@ -43,7 +43,6 @@ typedef struct data_storage {
     dict_t *sounds;
     dict_t *textures;
     dict_t *entities;
-    dict_t *maker;
     entitylist_t **entitylists;
     int nb_entitylist;
     int score;
@@ -65,6 +64,5 @@ void free_storage_content(data_storage_t *datas, int mask);
 void update_all(data_storage_t *datas);
 void import_sound(data_storage_t *datas, char *filename);
 void save_higher_score(data_storage_t *datas);
-void execute_file_contents(data_storage_t *datas, const char *filename);
 
 #endif /* DATA_STORAGE_H_ */

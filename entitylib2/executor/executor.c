@@ -59,9 +59,8 @@ static void execute_file(char *filename, executor_t *executor)
     close(fd);
 }
 
-void load_config(void)
+void load_config(executor_t *executor)
 {
-    executor_t *executor = get_executor();
     DIR *dir = opendir("config");
     struct dirent *dirent;
     short i = -1;

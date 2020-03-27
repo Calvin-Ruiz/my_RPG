@@ -62,7 +62,6 @@ void free_storage_content(data_storage_t *datas, int mask)
     destroy_dict(datas->sound_buffs, sfSoundBuffer_destroy);
     destroy_dict(datas->textures, sfTexture_destroy);
     destroy_dict(datas->entities, auto_destroy);
-    destroy_dict(datas->maker, NULL);
     if (mask & 4) {
         while (++i < datas->nb_entitylist)
             destroy_entitylist(datas->entitylists[i]);

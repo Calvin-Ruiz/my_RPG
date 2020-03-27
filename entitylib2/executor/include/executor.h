@@ -48,7 +48,7 @@ executor_t *get_executor(void);
 void *get_data(char *name, rdict_t *var);
 void execute_line(char *line, executor_t *executor);
 void build_function(char *filename, executor_t *executor);
-void load_config(void);
+void load_config(executor_t *executor);
 trace_t **get_trace(void);
 void set_traced_var(char *name, void *var, long filter);
 void set_traced_var_cmd(char **arr, rdict_t *vars);
@@ -56,5 +56,7 @@ void trace_thread(void *ptr);
 rdict_t *get_from_rec_dict(rdict_t *dict, char *name);
 void call_function(char **arr, rdict_t *var);
 void build_function(char *filename, executor_t *executor);
+void set_value(char **arr, rdict_t *var);
+void create_variable(char **arr, rdict_t *var);
 
 #endif /* EXECUTOR_H_ */
