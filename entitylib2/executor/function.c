@@ -38,6 +38,10 @@ void call_function(char **arr, rdict_t *var)
     func_t *func = get_from_dict((dict_t *) get_from_rec_dict(var, "func"),
         arr[1]);
 
+    if (my_strcmp("call", *arr) == 0) {
+        arr[0] = arr[-1] - 1;
+        arr++;
+    }
     while (func) {
         exec_function(arr, var, func);
         func = func->next;
@@ -66,7 +70,6 @@ void build_function(char *filename, executor_t *executor)
     char **arr;
     short i = -1;
     func_t *func = NULL;
-
     if (str == NULL)
         return;
     str[len] = '\0';
@@ -80,4 +83,5 @@ void build_function(char *filename, executor_t *executor)
     filename[i] = '\0';
     append_to_dict((dict_t **) get_ptr_from_dict((dict_t *) executor->var,
         "func"), filename, func);
+    append_to_dict(&executor->cmd, filename, call_function);
 }
