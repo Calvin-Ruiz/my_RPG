@@ -16,15 +16,28 @@ UTILISEZ DES COMMENTAIRES ET DES SAUT DE LIGNES DANS LES FICHIERS DE CONFIG
 (Une ligne vide ou une ligne commençant par '#' ne sera pas interprétée)
 (Les ':' sont des séparateurs)
 Fichiers .conf et .func - utilisez un espace comme séparateur
+SEUL le fichier "init.conf" est exécuté AVANT les fichiers "*.func"
 
 Fichiers configs : 3 extensions différentes :
 .txt -> fichier de configuration interne (interprété spécifiquement)
 .conf -> fichier de configuration à exécuter
 .func -> fichier définissant une fonction pouvant être appellé ailleur
 
-Fonctions : spécificités
-call filename arg1 arg2 arg3 - appelle la fonction avec des arguments
-$1 - remplacer par l'argument 1
+Fonctions :
+- call filename arg1 arg2 arg3 - appelle la fonction avec des arguments
+- @1 sera remplacé par l'argument 1
+
+Arguments :
+- @ signifie remplacer par l'argument n° (uniquemend dans les fichiers ".func")
+- $ signifie parcourir si en début d'argument
+- = signifier évaluer l'argument (avec my_getnbr)
+- & signifie remplacer par la fonction
+
+Parcourir :
+- Utilisez '.' comme séparateur (exemple : entity.mob1.health)
+- '+' pour un décalage (exemple : player.pos.+16)
+- '[' pour un décalage avec déréférencement (exemple : entitylists.[2])
+- '$' pour une position dans la liste chainée (exemple : entity.$3)
 
 Particle system :
     Apparition
@@ -40,3 +53,6 @@ Particle system :
     - aucun
     Densité
     - particules par tic
+
+Display order :
+Si le point bas gauche (collider) est en bas à gauche du point haut droit (collider) du suivant : les inverser

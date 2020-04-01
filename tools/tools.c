@@ -33,7 +33,7 @@ char **line_to_arr(char *str, const char sep)
     while (str[i] != '\0') {
         *(arr++) = str + i;
         while (str[i] != '\0' && str[i++] != sep);
-        str[i - (str[i] != '\0')] = '\0';
+        str[i - (str[i] != '\0' || str[i - 1] == sep)] = '\0';
     }
     *arr = NULL;
     return (sav);
@@ -56,7 +56,7 @@ char **line_to_arr_mytmp(char *str, const char sep)
     while (str[i] != '\0') {
         *(arr++) = str + i;
         while (str[i] != '\0' && str[i++] != sep);
-        str[i - (str[i] != '\0')] = '\0';
+        str[i - (str[i] != '\0' || str[i - 1] == sep)] = '\0';
     }
     *arr = NULL;
     return (sav);

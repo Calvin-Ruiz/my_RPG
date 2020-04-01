@@ -6,7 +6,6 @@
 */
 
 #include <executor.h>
-#include <tools.h>
 #include <my_getnbr.h>
 
 rdict_t *get_from_rec_dict(rdict_t *dict, char *name)
@@ -50,32 +49,30 @@ void *get_data(char *name, rdict_t *var)
     return (var);
 }
 
-void set_value(char **arr, rdict_t *var)
+void set_value(char **arr)
 {
-    void *data = get_data(arr[2], var);
-
-    if (data == NULL)
+    if (arr[2] == NULL)
         return;
     if (my_strcmp("char", arr[1]) == 0)
-        *((char *) data) = my_getnbr(arr[3]);
+        *((char *) arr[2]) = (long) arr[3];
     if (my_strcmp("short", arr[1]) == 0)
-        *((short *) data) = my_getnbr(arr[3]);
+        *((short *) arr[2]) = (long) arr[3];
     if (my_strcmp("int", arr[1]) == 0)
-        *((int *) data) = my_getnbr(arr[3]);
+        *((int *) arr[2]) = (long) arr[3];
     if (my_strcmp("long", arr[1]) == 0)
-        *((long *) data) = my_getnbr(arr[3]);
+        *((long *) arr[2]) = (long) arr[3];
     if (my_strcmp("float", arr[1]) == 0)
-        *((float *) data) = my_getnbr(arr[3]);
+        *((float *) arr[2]) = (long) arr[3];
     if (my_strcmp("double", arr[1]) == 0)
-        *((double *) data) = my_getnbr(arr[3]);
+        *((double *) arr[2]) = (long) arr[3];
     if (my_strcmp("ptr", arr[1]) == 0)
-        *((void **) data) = get_data(arr[3], var);
+        *((void **) arr[2]) = arr[3];
 }
 
-void create_variable(char **arr, rdict_t *var)
+void create_variable(char **arr)
 {
-    dict_t **dict = (dict_t **) get_ptr_from_dict((dict_t *) var, "local");
+    dict_t **dict = (dict_t **) get_ptr_from_dict((dict_t *)
+        get_executor()->var, "local");
 
-    append_to_dict(dict, arr[2], my_malloc((long) get_data(
-        tmpcat("sizeof.", arr[1]), var)));
+    append_to_dict(dict, arr[2], my_malloc((long) arr[1]));
 }

@@ -6,44 +6,27 @@
 */
 
 #include <executor.h>
-#include <tools.h>
 #include <my_getnbr.h>
 #include <fcntl.h>
 #include <my_read.h>
 
-static void exec_function(char **arr, rdict_t *var, func_t *func)
+char **get_args(void)
 {
-    const unsigned char nb_args = (long) func->arr[-1];
-    unsigned char pos = -1;
-    char **exe = ((char **) malloc(sizeof(char *) * (nb_args + 2))) + 1;
-    unsigned char nb;
+    static char *args[32];
 
-    if (exe == (char **) sizeof(char *))
-        return;
-    exe[-1] = func->arr[-1];
-    while (func->arr[++pos] != NULL) {
-        if (*(func->arr[pos]) == '$') {
-            nb = my_getnbr(func->arr[pos] + 1) + 1;
-            exe[pos] = (nb < (long) arr[-1]) ? arr[nb] : NULL;
-        } else
-            exe[pos] = func->arr[pos];
-    }
-    exe[pos] = NULL;
-    func->cmd(exe, var);
-    free(exe - 1);
+    return (args);
 }
 
-void call_function(char **arr, rdict_t *var)
+void call_function(char **arr)
 {
-    func_t *func = get_from_dict((dict_t *) get_from_rec_dict(var, "func"),
-        arr[1]);
+    char **args = get_args() - 1;
+    func_t *func = get_from_dict((dict_t *)
+        get_from_rec_dict(get_executor()->var, "func"), arr[1]);
 
-    if (my_strcmp("call", *arr) == 0) {
-        arr[0] = arr[-1] - 1;
-        arr++;
-    }
+    for (u_char i = 0; ++i < (long) arr[-1];)
+        args[i] = arr[i];
     while (func) {
-        exec_function(arr, var, func);
+        ((void (*)(char **)) *func->arr)(func->arr);
         func = func->next;
     }
 }
@@ -56,9 +39,10 @@ static void build_func_line(func_t **func, char *line, executor_t *executor)
     if (new == NULL || arr == (char **) sizeof(char *))
         return;
     new->next = *func;
-    new->cmd = get_from_dict((dict_t *) executor->cmd, arr[0]);
+    *new->arr = get_from_dict((dict_t *) executor->cmd, *arr);
+    eval_args(arr, executor);
     new->arr = arr;
-    if (new->cmd)
+    if (*new->arr)
         *func = new;
 }
 
@@ -70,18 +54,18 @@ void build_function(char *filename, executor_t *executor)
     char **arr;
     short i = -1;
     func_t *func = NULL;
+
     if (str == NULL)
         return;
+    close(fd);
     str[len] = '\0';
     arr = line_to_arr(str, '\n');
     for (short i = (long) arr[-1]; i-- > 0;) {
         if (*(arr[i]) != '#' && *(arr[i]) != '\0')
             build_func_line(&func, arr[i], executor);
     }
-    close(fd);
     while (filename[++i] != '.');
     filename[i] = '\0';
     append_to_dict((dict_t **) get_ptr_from_dict((dict_t *) executor->var,
         "func"), filename, func);
-    append_to_dict((dict_t **) &executor->cmd, filename, call_function);
 }

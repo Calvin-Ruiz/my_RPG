@@ -7,7 +7,6 @@
 
 #include <entitybase.h>
 #include <executor.h>
-#include <tools.h>
 #include <dirent.h>
 #include <fcntl.h>
 #include <my_read.h>
@@ -34,7 +33,8 @@ void execute_line(char *line, executor_t *executor)
             dict = dict->next;
             continue;
         }
-        dict->cmd(arr, executor->var);
+        eval_args(arr, executor);
+        dict->cmd(arr);
         break;
     }
     free(arr - 1);
@@ -60,8 +60,9 @@ static void execute_file(char *filename, executor_t *executor)
     close(fd);
 }
 
-void thread_cmd(char **arr, rdict_t *var)
+void thread_cmd(char **arr)
 {
+    rdict_t *var = get_executor()->var;
     sfThread *thread = get_data(tmpcat("thread.", arr[1]), var);
 
     if (my_strcmp(arr[2], "create") == 0) {
@@ -89,6 +90,7 @@ void load_config(executor_t *executor)
 
     if (dir == NULL)
         return;
+    execute_file("config/init.conf", executor);
     for (dirent = readdir(dir); dirent; dirent = readdir(dir)) {
         for (i = -1; dirent->d_name[++i] != '.' && dirent->d_name[i] != '\0';);
         if (my_strcmp(dirent->d_name + i, ".func") == 0)

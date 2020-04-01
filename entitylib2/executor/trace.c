@@ -6,7 +6,6 @@
 */
 
 #include <executor.h>
-#include <tools.h>
 #include <dynamic_printer.h>
 #include <my_getnbr.h>
 #include <entitybase.h>
@@ -36,11 +35,11 @@ void set_traced_var(char *name, void *var, long filter)
     new->var = var;
 }
 
-void set_traced_var_cmd(char **arr, rdict_t *vars)
+void set_traced_var_cmd(char **arr)
 {
     if ((long) arr[-1] != 4)
         return;
-    set_traced_var(arr[1], get_data(arr[2], vars), my_getnbr(arr[3]));
+    set_traced_var(arr[1], arr[2], (long) arr[3]);
 }
 
 static void update_trace(trace_t *trace)

@@ -37,17 +37,19 @@ static void init_vars(dict_t **var)
 {
     data_storage_t *datas = get_data_storage();
 
-    append_to_dict(var, "func", NULL);
-    append_to_dict(var, "datas", datas);
-    append_to_dict(var, "elist", datas->entitylists);
-    append_to_dict(var, "entity", datas->entities);
-    append_to_dict(var, "sound", datas->sounds);
-    append_to_dict(var, "sbuff", datas->sound_buffs);
     append_to_dict(var, "textures", datas->textures);
-    append_to_dict(var, "global", datas->global);
     append_to_dict(var, "thread", datas->global);
+    append_to_dict(var, "datas", datas);
+    append_to_dict(var, "sbuff", datas->sound_buffs);
+    append_to_dict(var, "elist", datas->entitylists);
+    append_to_dict(var, "sound", datas->sounds);
+    append_to_dict(var, "global", datas->global);
+    append_to_dict(var, "entity", datas->entities);
+    append_to_dict(var, "entitylist", datas->entitylists);
     append_to_dict(var, "local", NULL);
     reference_sizeof_and_mouse(var, &datas->mouse);
+    append_to_dict(var, "func", NULL);
+    append_to_dict(var, "selected", NULL);
 }
 
 static void init_cmd(dict_t **cmd)
