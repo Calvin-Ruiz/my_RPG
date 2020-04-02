@@ -71,7 +71,7 @@ void destroy_window(data_storage_t *stor)
 void update_window(sfRenderWindow *window, internal_data_t *datas,
     data_storage_t *stor)
 {
-    sfVector2i pointer = sfMouse_getPositionRenderWindow(window);
+    sfVector2i mouse = sfMouse_getPositionRenderWindow(window);
     sfVector2u size = sfRenderWindow_getSize(window);
 
     if (size.x < 800 || size.x > 1920)
@@ -81,8 +81,8 @@ void update_window(sfRenderWindow *window, internal_data_t *datas,
     sfRenderWindow_setSize(window, size);
     stor->coef_x = stor->size.x / size.x;
     stor->coef_y = stor->size.y / size.y;
-    stor->mouse.pos.x = pointer.x * stor->coef_x + stor->pos.x - stor->size.x / 2;
-    stor->mouse.pos.y = pointer.y * stor->coef_y + stor->pos.y - stor->size.y / 2;
+    stor->mouse.pos.x = mouse.x * stor->coef_x + stor->pos.x - stor->size.x / 2;
+    stor->mouse.pos.y = mouse.y * stor->coef_y + stor->pos.y - stor->size.y / 2;
     sfSprite_setPosition(datas->cursor, stor->mouse.pos);
     sfRenderWindow_drawSprite(window, datas->cursor, NULL);
 }
