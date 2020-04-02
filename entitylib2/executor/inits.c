@@ -8,22 +8,23 @@
 #include <executor.h>
 #include <entitybase.h>
 #include <data_storage.h>
+#include <menu.h>
 
 static void reference_sizeof_and_mouse(dict_t **var, my_mouse_t *mouse)
 {
-    static dict_t dict[2] = {NULL, NULL};
-    append_to_dict(dict, "sfVector2f", (long) sizeof(sfVector2f));
-    append_to_dict(dict, "dict_t", (long) sizeof(dict_t));
-    append_to_dict(dict, "entity_t", (long) sizeof(entity_t));
-    append_to_dict(dict, "entitylist_t", (long) sizeof(entitylist_t));
-    append_to_dict(dict, "menu_t", (long) sizeof(menu_t));
-    append_to_dict(dict, "ptr", (long) sizeof(void *));
-    append_to_dict(dict, "char", (long) sizeof(char));
-    append_to_dict(dict, "double", (long) sizeof(double));
-    append_to_dict(dict, "float", (long) sizeof(float));
-    append_to_dict(dict, "short", (long) sizeof(short));
-    append_to_dict(dict, "long", (long) sizeof(long));
-    append_to_dict(dict, "int", (long) sizeof(int));
+    static dict_t *dict[2] = {NULL, NULL};
+    append_to_dict(dict, "sfVector2f", (void *) sizeof(sfVector2f));
+    append_to_dict(dict, "dict_t", (void *) sizeof(dict_t));
+    append_to_dict(dict, "entity_t", (void *) sizeof(entity_t));
+    append_to_dict(dict, "entitylist_t", (void *) sizeof(entitylist_t));
+    append_to_dict(dict, "menu_t", (void *) sizeof(menu_t));
+    append_to_dict(dict, "ptr", (void *) sizeof(void *));
+    append_to_dict(dict, "char", (void *) sizeof(char));
+    append_to_dict(dict, "double", (void *) sizeof(double));
+    append_to_dict(dict, "float", (void *) sizeof(float));
+    append_to_dict(dict, "short", (void *) sizeof(short));
+    append_to_dict(dict, "long", (void *) sizeof(long));
+    append_to_dict(dict, "int", (void *) sizeof(int));
     append_to_dict(var, "sizeof", dict);
     append_to_dict(dict + 1, "x", &mouse->pos.x);
     append_to_dict(dict + 1, "y", &mouse->pos.y);
@@ -45,11 +46,9 @@ static void init_vars(dict_t **var)
     append_to_dict(var, "sound", datas->sounds);
     append_to_dict(var, "global", datas->global);
     append_to_dict(var, "entity", datas->entities);
-    append_to_dict(var, "entitylist", datas->entitylists);
-    append_to_dict(var, "local", NULL);
     reference_sizeof_and_mouse(var, &datas->mouse);
     append_to_dict(var, "func", NULL);
-    append_to_dict(var, "selected", NULL);
+    append_to_dict(var, "local", NULL);
 }
 
 static void init_cmd(dict_t **cmd)

@@ -7,6 +7,7 @@
 
 #include <executor.h>
 #include <my_getnbr.h>
+#include <entitybase.h>
 
 rdict_t *get_from_rec_dict(rdict_t *dict, char *name)
 {
@@ -51,7 +52,9 @@ void *get_data(char *name, rdict_t *var)
 
 void set_value(char **arr)
 {
-    if (arr[2] == NULL)
+    if (my_strcmp("vec", arr[1]) == 0 && (long) arr[-1] == 5)
+        *((sfVector2f *) arr[2]) = (sfVector2f) {(long) arr[3], (long) arr[4]};
+    if ((long) arr[-1] != 4)
         return;
     if (my_strcmp("char", arr[1]) == 0)
         *((char *) arr[2]) = (long) arr[3];
@@ -65,8 +68,8 @@ void set_value(char **arr)
         *((float *) arr[2]) = (long) arr[3];
     if (my_strcmp("double", arr[1]) == 0)
         *((double *) arr[2]) = (long) arr[3];
-    if (my_strcmp("ptr", arr[1]) == 0)
-        *((void **) arr[2]) = arr[3];
+    if (my_strcmp("raw64", arr[1]) == 0)
+        *((void **) arr[2]) = (void *) arr[3];
 }
 
 void create_variable(char **arr)
