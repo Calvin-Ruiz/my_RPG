@@ -8,7 +8,6 @@
 NAME = my_rpg
 
 FILES = core/how_to_play.c \
-	core/loader.c \
 	core/pause.c \
 	entitylib2/data_center/data_loader.c \
 	entitylib2/data_center/data_saver.c \
@@ -30,6 +29,7 @@ FILES = core/how_to_play.c \
 	entitylib2/sounds/sound_manager.c \
 	entitylib2/tools/etools.c \
 	entitylib2/tools/fast_get_next_line.c \
+	entitylib2/tools/loader.c \
 	main.c \
 	tools/dict.c \
 	tools/get_next_line.c \

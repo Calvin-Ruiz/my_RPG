@@ -16,7 +16,7 @@ UTILISEZ DES COMMENTAIRES ET DES SAUT DE LIGNES DANS LES FICHIERS DE CONFIG
 (Une ligne vide ou une ligne commençant par '#' ne sera pas interprétée)
 (Les ':' sont des séparateurs)
 Fichiers .conf et .func - utilisez un espace comme séparateur
-SEUL le fichier "init.conf" est exécuté AVANT les fichiers "*.func"
+SEUL le fichier "config.init" est exécuté AVANT les fichiers "*.func"
 
 Fichiers configs : 3 extensions différentes :
 .txt -> fichier de configuration interne (interprété spécifiquement)

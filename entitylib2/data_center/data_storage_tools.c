@@ -6,11 +6,13 @@
 */
 #include <entitylib.h>
 #include <converters.h>
+#include <tools.h>
 
-void import_sound(data_storage_t *datas, char *filename)
+void import_sound(data_storage_t *datas, char *name)
 {
-    sfSoundBuffer *tmp = sfSoundBuffer_createFromFile(filename);
+    sfSoundBuffer *tmp = sfSoundBuffer_createFromFile(tmpcat("sounds/", name));
     sfSound *tmp2 = sfSound_create();
+    u_char i = 0;
 
     if (tmp == NULL)
         return;
@@ -20,8 +22,11 @@ void import_sound(data_storage_t *datas, char *filename)
     }
     sfSound_setBuffer(tmp2, tmp);
     sfSound_setVolume(tmp2, datas->volume);
-    append_to_dict(&datas->sound_buffs, filename + 7, tmp);
-    append_to_dict(&datas->sounds, filename + 7, tmp2);
+    for (i = 0; name[++i] != '.' &&
+        name[i] != '\0'; i++);
+    name[i] = '\0';
+    append_to_dict(&datas->sound_buffs, name, tmp);
+    append_to_dict(&datas->sounds, name, tmp2);
 }
 
 void update_all(data_storage_t *datas)

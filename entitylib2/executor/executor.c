@@ -90,7 +90,7 @@ void load_config(executor_t *executor)
 
     if (dir == NULL)
         return;
-    execute_file("config/init.conf", executor);
+    execute_file("config/config.init", executor);
     for (dirent = readdir(dir); dirent; dirent = readdir(dir)) {
         for (i = -1; dirent->d_name[++i] != '.' && dirent->d_name[i] != '\0';);
         if (my_strcmp(dirent->d_name + i, ".func") == 0)

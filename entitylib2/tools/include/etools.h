@@ -12,6 +12,7 @@
 
 void no_update(void *ptr);
 void default_destroy(void *ptr);
+char init_textures(data_storage_t *datas);
 
 static inline void fast_nbr_in_str(char *end_of_str, int nbr, int len)
 {
