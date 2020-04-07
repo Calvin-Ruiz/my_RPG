@@ -68,11 +68,24 @@ static void update_trace(trace_t *trace)
 
 void trace_thread(void *ptr)
 {
-    trace_t **trace = ptr;
-    char *is_alive = &get_data_storage()->is_alive;
+    trace_t **trace = get_trace();
+    char *is_alive = &((data_storage_t *) ptr)->is_alive;
+    char *ask_command = &((data_storage_t *) ptr)->ask_command;
+    executor_t *executor = get_executor();
+    char cmd[4096];
+    short size = 0;
 
     while (*is_alive) {
         update_trace(*trace);
         sfSleep((sfTime) {50000});
+        if (*ask_command == 0)
+            continue;
+        size = read(0, cmd, 4096);
+        if (size <= 0) {
+            *ask_command = 0;
+            continue;
+        }
+        cmd[size - 1] = '\0';
+        execute_line(cmd, executor);
     }
 }

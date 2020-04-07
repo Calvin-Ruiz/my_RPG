@@ -20,32 +20,30 @@ static inline void put_line(char line_id)
 
 static inline void my_move(unsigned short x, unsigned short y)
 {
-    char str[3] = {27, '[', 'H'};
-    const char *moving = "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t";
+    const char *mvx = "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t";
+    const char *mvy = "\v\v\v\v\v\v\v\v\v\v\v\v\v\v\v\v";
 
-    write(1, str, 3);
-    str[2] = 'C';
-    write(1, moving, x >> 3);
+    write(1, "\e[H", 3);
+    write(1, mvx, x >> 3);
     x = x & 7;
     while (x-- > 0)
-        write(1, str, 3);
+        write(1, "\e[C", 3);
+    write(1, mvy, y & 15);
+    y = y >> 4;
     while (y-- > 0)
-        write(1, "\v", 1);
+        write(1, mvy, 16);
 }
 
 static inline void relative_move(short x, short y)
 {
-    char str[3] = {27, '[', 'C'};
-
     while (x-- > 0)
-        write(1, str, 3);
+        write(1, "\e[C", 3);
     while (++x < 0)
         write(1, "\b", 1);
     while (y-- > 0)
         write(1, "\v", 1);
-    str[2] = 'A';
     while (++y < 0)
-        write(1, str, 3);
+        write(1, "\e[A", 3);
 }
 
 static inline void draw_borders(const short x, const short y)
