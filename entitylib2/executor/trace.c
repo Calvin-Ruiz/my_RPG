@@ -59,7 +59,7 @@ static void update_trace(trace_t *trace)
         my_set_color(FOREGROUND_DARK + WHITE);
         write(1, " = ", 3);
         my_set_color(FOREGROUND_LIGHT + GREEN);
-        my_putnbr(*trace->var & trace->filter);
+        put_traced_nbr(trace->var, trace->filter);
         write(1, "\n\e[C", 4);
         trace = trace->next;
     }

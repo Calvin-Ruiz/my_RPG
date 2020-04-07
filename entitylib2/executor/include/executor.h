@@ -12,6 +12,15 @@
 #include <tools.h>
 #include <my_getnbr.h>
 
+enum {
+    UCHAR,
+    SHORT,
+    INT,
+    LONG,
+    FLOAT,
+    DOUBLE,
+};
+
 typedef struct rec_dict {
     struct rec_dict *next;
     struct rec_dict *dict;
@@ -79,6 +88,30 @@ static inline void eval_args(char **arr, executor_t *executor)
                 *arr = get_args()[my_getnbr(*arr + 1)];
                 break;
         }
+    }
+}
+
+static inline void put_traced_nbr(void *nbr, char type)
+{
+    switch (type) {
+        case UCHAR:
+            my_putnbr(*(u_char *) nbr);
+            break;
+        case SHORT:
+            my_putnbr(*(short *) nbr);
+            break;
+        case INT:
+            my_putnbr(*(int *) nbr);
+            break;
+        case LONG:
+            my_putnbr(*(long *) nbr);
+            break;
+        case FLOAT:
+            my_putnbr(*(float *) nbr);
+            break;
+        case DOUBLE:
+            my_putnbr(*(double *) nbr);
+            break;
     }
 }
 
