@@ -15,11 +15,13 @@ FILES = core/how_to_play.c \
 	entitylib2/data_center/data_storage_tools.c \
 	entitylib2/data_center/internal_data.c \
 	entitylib2/display/displays.c \
+	entitylib2/display/entity_display.c \
 	entitylib2/display/window_action.c \
 	entitylib2/display/window_manager.c \
 	entitylib2/entity.c \
 	entitylib2/entitylist/entitylist.c \
 	entitylib2/executor/access.c \
+	entitylib2/executor/commands.c \
 	entitylib2/executor/executor.c \
 	entitylib2/executor/function.c \
 	entitylib2/executor/inits.c \

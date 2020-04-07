@@ -74,6 +74,7 @@ static void init_cmd(dict_t **cmd)
     append_to_dict(cmd, "set", set_value);
     append_to_dict(cmd, "create_variable", set_value);
     append_to_dict(cmd, "thread", thread_cmd);
+    append_to_dict(cmd, "append", append_to_list_cmd);
 }
 
 void init_executor(void)

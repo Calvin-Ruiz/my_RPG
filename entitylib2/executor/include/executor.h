@@ -70,6 +70,7 @@ void set_value(char **arr);
 void create_variable(char **arr);
 void thread_cmd(char **arr);
 char **get_args(void);
+void append_to_list_cmd(char **args);
 
 static inline void eval_args(char **arr, executor_t *executor)
 {
