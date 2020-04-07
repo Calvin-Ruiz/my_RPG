@@ -8,6 +8,7 @@
 #include <data_storage.h>
 #include <dirent.h>
 #include <tools.h>
+#include <fcntl.h>
 
 char init_textures(data_storage_t *datas)
 {

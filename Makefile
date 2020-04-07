@@ -18,7 +18,7 @@ FILES = core/how_to_play.c \
 	entitylib2/display/window_action.c \
 	entitylib2/display/window_manager.c \
 	entitylib2/entity.c \
-	entitylib2/entitylist.c \
+	entitylib2/entitylist/entitylist.c \
 	entitylib2/executor/access.c \
 	entitylib2/executor/executor.c \
 	entitylib2/executor/function.c \
@@ -36,7 +36,7 @@ FILES = core/how_to_play.c \
 	tools/my_read.c \
 	tools/tools.c
 
-INCLUDES = -I cmd/include -I core/include -I entitylib2/data_center/include -I entitylib2/display/include -I entitylib2/executor/include -I entitylib2/include -I entitylib2/menu/include -I entitylib2/sounds/include -I entitylib2/tools/include -I include -I tools/include 
+INCLUDES = -I cmd/include -I core/include -I entitylib2/data_center/include -I entitylib2/display/include -I entitylib2/entitylist/include -I entitylib2/executor/include -I entitylib2/include -I entitylib2/menu/include -I entitylib2/sounds/include -I entitylib2/tools/include -I include -I tools/include 
 
 FLAGS = -lcsfml-graphics -lcsfml-system -lcsfml-audio -lcsfml-system
 

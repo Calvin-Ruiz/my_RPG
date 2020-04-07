@@ -56,3 +56,10 @@ Particle system :
 
 Display order :
 Si le point bas gauche (collider) est en bas à gauche du point haut droit (collider) du suivant : les inverser
+
+Save/load :
+    entities.dat
+        (u_char) nb_entities
+            (u_short) entity_id
+            (u_short) sizeof_datas
+            (raw) datas

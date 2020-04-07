@@ -26,6 +26,8 @@ typedef struct pos {
 
 typedef struct entity {
     struct entity *next;
+    struct entity *prev;
+    struct entity *disp_next;
     sfSprite **sprite;
     uint_t *size;
     int health;
