@@ -22,7 +22,6 @@ static int create_window_2(internal_data_t *datas, data_storage_t *stor)
     datas->icon = sfImage_createFromFile("textures/icon.png");
     if (datas->icon == NULL)
         return (84);
-    sfVector2f vector;
     sfVector2u size = sfImage_getSize(datas->icon);
     const sfUint8 *icon = sfImage_getPixelsPtr(datas->icon);
     sfRenderWindow_setIcon(stor->window, size.x, size.y, icon);
@@ -31,10 +30,6 @@ static int create_window_2(internal_data_t *datas, data_storage_t *stor)
     datas->fullscreen = 0;
     if (create_backgrounds(datas))
         return (84);
-    sfVector2u pos = sfTexture_getSize(datas->cursor_skin);
-    vector.x = pos.x / 2;
-    vector.y = pos.y / 2;
-    sfSprite_setOrigin(datas->cursor, vector);
     return (0);
 }
 
@@ -44,13 +39,10 @@ int create_window(sfVideoMode mode, char *name, long int args, int fps)
     internal_data_t *datas = get_internal_data();
     stor->fps = fps;
     stor->window = sfRenderWindow_create(mode, name, args, NULL);
-    datas->cursor = sfSprite_create();
-    datas->cursor_skin = sfTexture_createFromFile("textures/cursor.png", NULL);
-    if (!stor->window || !datas->cursor || !datas->cursor_skin)
+    if (!stor->window)
         return (84);
     stor->view = sfView_copy(sfRenderWindow_getView(stor->window));
     sfRenderWindow_setFramerateLimit(stor->window, fps);
-    sfRenderWindow_setMouseCursorVisible(stor->window, sfFalse);
     sfRenderWindow_setView(stor->window, stor->view);
     sfSprite_setTexture(datas->cursor, datas->cursor_skin, sfTrue);
     return (create_window_2(datas, stor));
@@ -68,10 +60,8 @@ void destroy_window(data_storage_t *stor)
     sfRenderWindow_destroy(stor->window);
 }
 
-void update_window(sfRenderWindow *window, internal_data_t *datas,
-    data_storage_t *stor)
+void update_window(sfRenderWindow *window, data_storage_t *stor)
 {
-    sfVector2i mouse = sfMouse_getPositionRenderWindow(window);
     sfVector2u size = sfRenderWindow_getSize(window);
 
     if (size.x < 800 || size.x > 1920)
@@ -81,8 +71,4 @@ void update_window(sfRenderWindow *window, internal_data_t *datas,
     sfRenderWindow_setSize(window, size);
     stor->coef_x = stor->size.x / size.x;
     stor->coef_y = stor->size.y / size.y;
-    stor->mouse.pos.x = mouse.x * stor->coef_x + stor->pos.x - stor->size.x / 2;
-    stor->mouse.pos.y = mouse.y * stor->coef_y + stor->pos.y - stor->size.y / 2;
-    sfSprite_setPosition(datas->cursor, stor->mouse.pos);
-    sfRenderWindow_drawSprite(window, datas->cursor, NULL);
 }

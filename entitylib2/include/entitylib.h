@@ -13,9 +13,10 @@
 #include <data_storage.h>
 #include <internal_data.h>
 #include <window_manager.h>
+#include <executor.h>
+#include <menu.h>
 
 void apply_all(entitylist_t *self, void (*action)(), void *arg);
-void my_init_textures(data_storage_t *datas);
 uint_t *get_size(uint_t width, uint_t height, uint_t nbr_rows);
 sfVector2f *get_pos(float x, float y);
 float *get_vel(float x, float y);

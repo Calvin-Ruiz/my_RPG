@@ -22,7 +22,7 @@ void import_sound(data_storage_t *datas, char *name)
     }
     sfSound_setBuffer(tmp2, tmp);
     sfSound_setVolume(tmp2, datas->volume);
-    for (i = 0; name[++i] != '.' &&
+    for (i = 0; name[i] != '.' &&
         name[i] != '\0'; i++);
     name[i] = '\0';
     append_to_dict(&datas->sound_buffs, name, tmp);

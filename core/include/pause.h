@@ -9,6 +9,6 @@
 #define PAUSE_H_
 
 void reset_timers(data_storage_t *datas, long long *last);
-void init_pause_buttons(menu_t *menu, loader_t *loader);
+void init_pause_buttons(menu_t *menu);
 
 #endif /* PAUSE_H_ */

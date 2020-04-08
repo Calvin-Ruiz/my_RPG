@@ -22,7 +22,7 @@ char init_textures(data_storage_t *datas)
     for (dirent = readdir(d); dirent; dirent = readdir(d)) {
         if (*dirent->d_name == '.')
             continue;
-        for (i = 0; dirent->d_name[++i] != '.' &&
+        for (i = 0; dirent->d_name[i] != '.' &&
             dirent->d_name[i] != '\0'; i++);
         tmp = sfTexture_createFromFile(tmpcat("textures/", dirent->d_name), 0);
         dirent->d_name[i] = '\0';

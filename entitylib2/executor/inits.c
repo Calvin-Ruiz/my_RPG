@@ -52,6 +52,7 @@ static void reference_types_and_mouse(dict_t **var, my_mouse_t *mouse)
 static void init_vars(dict_t **var)
 {
     data_storage_t *datas = get_data_storage();
+    dict_t *tmp = NULL;
 
     append_to_dict(var, "textures", datas->textures);
     append_to_dict(var, "thread", datas->global);
@@ -63,6 +64,9 @@ static void init_vars(dict_t **var)
     append_to_dict(var, "global", datas->global);
     append_to_dict(var, "entity", datas->entities);
     reference_types_and_mouse(var, &datas->mouse);
+    append_to_dict(&tmp, "main", &datas->main_menu);
+    append_to_dict(&tmp, "pause", &datas->pause_menu);
+    append_to_dict(var, "menu", tmp);
     append_to_dict(var, "func", NULL);
     append_to_dict(var, "local", NULL);
 }

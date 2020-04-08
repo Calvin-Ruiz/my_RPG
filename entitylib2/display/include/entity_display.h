@@ -8,6 +8,8 @@
 #ifndef ENTITY_DISPLAY_H_
 #define ENTITY_DISPLAY_H_
 
+void display_entities(sfRenderWindow *window, entity_t **entity);
+
 static inline void conditionnal_permutation(entity_t **entity, entity_t *tmp)
 {
     if ((*entity)->pos.v1.x < tmp->pos.v2.x &&
