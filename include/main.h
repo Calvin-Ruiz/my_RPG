@@ -10,6 +10,14 @@
 
 #include <entitylib.h>
 
+enum {
+    DISPLAY_LIST,
+    NPC_LIST,
+    EVENT_LIST,
+    DECOR_LIST,
+    NB_ENTITYLIST,
+};
+
 void init_some_datas(data_storage_t *datas);
 void mainloop(data_storage_t *datas, sfRenderWindow *window);
 

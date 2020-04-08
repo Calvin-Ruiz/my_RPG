@@ -22,7 +22,6 @@ void entity_blit(entity_t *self, sfRenderWindow *window)
 void create_entity_base(entity_t *new, float fdelay, int hp, dict_t *entities)
 {
     new->health = hp;
-    new->max_health = hp;
     new->timer = 0;
     new->frame_delay = fdelay * 1000000;
     new->frame_dec = 0;

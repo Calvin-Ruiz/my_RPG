@@ -61,7 +61,7 @@ void mainloop(data_storage_t *datas, sfRenderWindow *window)
 
 int main(void)
 {
-    data_storage_t *datas = init_data_storage(1);
+    data_storage_t *datas = init_data_storage(NB_ENTITYLIST);
 
     if (init_textures(datas) || init_sounds(datas) ||
         create_window((sfVideoMode) {800, 600, 32}, "My RPG",

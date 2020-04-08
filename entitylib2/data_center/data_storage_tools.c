@@ -73,7 +73,6 @@ void free_storage_content(data_storage_t *datas, int mask)
     }
     if ((mask & 2) && datas->window != NULL)
         destroy_window(datas);
-    save_higher_score(datas);
     free(datas->entitylists);
     sfClock_destroy(datas->clock);
 }

@@ -32,8 +32,6 @@ typedef struct entity {
     sfSprite **sprite;
     ushort_t *size;
     int health;
-    int max_health;
-    int armor;
     long long timer;
     long long frame_delay;
     uchar_t frame_dec;

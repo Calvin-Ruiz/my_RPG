@@ -16,14 +16,17 @@ static void save_entitylist(int fd, entitylist_t *elist)
 
     nbr_alive_entities.value = 0;
     while (entity) {
-        nbr_alive_entities.value++;
+        if (entity->save)
+            nbr_alive_entities.value++;
         entity = entity->next;
     }
     write(fd, nbr_alive_entities.raw, 2);
     entity = elist->next;
     while (entity) {
-        write(fd, (char *) &entity->id, 2);
-        entity->save(entity, fd);
+        if (entity->save) {
+            write(fd, (char *) &entity->id, 2);
+            entity->save(entity, fd);
+        }
         entity = entity->next;
     }
 }

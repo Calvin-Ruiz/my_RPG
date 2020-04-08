@@ -73,6 +73,17 @@ char **get_args(void);
 void append_to_list_cmd(char **args);
 void init_executor(void);
 
+static inline void *get_in_args(char *line)
+{
+    u_char i = 0;
+    void *data = get_args()[my_getnbr(line)];
+
+    while (line[++i] != '\0' && line[i] != '.');
+    if (line[i++] == '.')
+        return (get_data(line + i, data));
+    return (data);
+}
+
 static inline void eval_args(char **arr, executor_t *executor)
 {
     while (*++arr != NULL) {
@@ -87,7 +98,7 @@ static inline void eval_args(char **arr, executor_t *executor)
                 *arr = get_from_dict((dict_t *) executor->cmd, *arr + 1);
                 break;
             case '@':
-                *arr = get_args()[my_getnbr(*arr + 1)];
+                *arr = get_in_args(*arr + 1);
                 break;
         }
     }
