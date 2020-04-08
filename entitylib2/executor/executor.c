@@ -67,7 +67,7 @@ void thread_cmd(char **arr)
 
     if (my_strcmp(arr[2], "create") == 0) {
         thread = sfThread_create((void (*)(void *)) get_from_dict(
-            (dict_t *) get_executor()->cmd, arr[3]), get_data(arr[4], var));
+            (dict_t *) get_executor()->cmd, arr[3]), arr[4]);
         if (thread == NULL)
             return;
         append_to_dict((dict_t **) get_ptr_from_dict((dict_t *) var, "thread"),

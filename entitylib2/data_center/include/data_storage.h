@@ -14,6 +14,12 @@ enum {
     NB_DATAS,
 };
 
+typedef struct saved_datas {
+    struct saved_datas *next;
+    void *data;
+    ushort_t id;
+} saved_t;
+
 typedef struct my_mouse {
     char left;
     char wheel;
@@ -34,6 +40,9 @@ typedef struct data_storage {
     sfView *view;
     sfVector2f pos;
     sfVector2f size;
+    char *path;
+    char *mapname;
+    saved_t *saved;
     void *main_menu;
     void *pause_menu;
     void *global[NB_DATAS];

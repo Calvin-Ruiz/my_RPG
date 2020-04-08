@@ -6,6 +6,7 @@
 */
 #include <entity.h>
 #include <tools.h>
+#include <dict.h>
 
 void default_destroy(void *self)
 {
@@ -18,9 +19,8 @@ void entity_blit(entity_t *self, sfRenderWindow *window)
     sfRenderWindow_drawSprite(window, self->sprite[self->frame], NULL);
 }
 
-void create_entity_base(entity_t *new, uint_t *size, float fdelay, int hp)
+void create_entity_base(entity_t *new, float fdelay, int hp, dict_t *entities)
 {
-    new->size = size;
     new->health = hp;
     new->max_health = hp;
     new->timer = 0;
@@ -30,9 +30,10 @@ void create_entity_base(entity_t *new, uint_t *size, float fdelay, int hp)
     new->destroy = default_destroy;
     new->load = NULL;
     new->save = NULL;
+    new->id = entities ? ((entity_t *) entities->data)->id + 1 : 0;
 }
 
-char create_sprite(sfSprite **sprite, sfTexture *texture, uint_t *size)
+char create_sprite(sfSprite **sprite, sfTexture *texture, ushort_t *size)
 {
     unsigned int i = -1;
     int j;
@@ -59,7 +60,7 @@ void free_entity(entity_t *entity)
     if (entity == NULL)
         return;
     int i = -1;
-    const int end = entity->size[2] * 4;
+    const int end = entity->size[2] * entity->size[3];
 
     while (++i < end)
         sfSprite_destroy(entity->sprite[i]);

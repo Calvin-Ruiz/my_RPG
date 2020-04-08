@@ -17,7 +17,8 @@
 #include <menu.h>
 
 void apply_all(entitylist_t *self, void (*action)(), void *arg);
-uint_t *get_size(uint_t width, uint_t height, uint_t nbr_rows);
+ushort_t *get_size(ushort_t width, ushort_t height, ushort_t nb_frames,
+    ushort_t nb_directions);
 sfVector2f *get_pos(float x, float y);
 float *get_vel(float x, float y);
 void my_game_over(sfRenderWindow *window, internal_data_t *datas,

@@ -5,17 +5,18 @@
 ** data_loader.c
 */
 #include <entity.h>
+#include <entitylist.h>
 #include <data_storage.h>
 #include <converters.h>
 #include <fast_get_next_line.h>
 #include <tools.h>
 
-static int load_entitylist(int fd, entitylist_t *elist, data_storage_t *datas)
+static char load_entitylist(int fd, entitylist_t *elist, data_storage_t *datas)
 {
     short_to_raw_t nb_alive_entities;
     short_to_raw_t id_master;
-    entity_t **entities = (entity_t **) datas->entities;
-    entity_t *tmp;
+    entitylist_t *display = *datas->entitylists;
+    dict_t *entity = NULL;
     int i = -1;
 
     if (read(fd, nb_alive_entities.raw, 2) != 2)
@@ -23,29 +24,51 @@ static int load_entitylist(int fd, entitylist_t *elist, data_storage_t *datas)
     while (++i < nb_alive_entities.value) {
         if (read(fd, id_master.raw, 2) != 2)
             return (84);
-        tmp = entities[id_master.value]->load(entities[id_master.value], fd);
-        tmp->next = elist->next;
-        elist->next = tmp;
+        for (entity = datas->entities; entity && ((entity_t *) entity->data)->id
+            != id_master.value; entity = entity->next);
+        if (entity == NULL)
+            return (84);
+        append_to_entitylist(display, elist,
+            ((entity_t *) entity->data)->load(entity->data, fd));
     }
     return (0);
 }
 
-int load_all(char const *filename)
+char load_tags(char *path)
+{
+    int fd = open(tmpcat(path, "tags.dat"), O_RDONLY);
+    saved_t **saved = &get_data_storage()->saved;
+    char buf[2048];
+    saved_t *new = NULL;
+    char *data = NULL;
+
+    for (short size = read(fd, buf, 4); size == 4; size = read(fd, buf, 4)) {
+        data = malloc((*(short *) (buf + 2)) + 2);
+        size += read(fd, data + 2, *(short *) (buf + 2));
+        if (size != (*(short *) (buf + 2)) + 4) {
+            my_puterr("CorruptionError : tags file is corrupted\n");
+            return (84);
+        }
+        new = malloc(sizeof(saved_t));
+        *(short *) data = *(short *) (buf + 2);
+        *new = (saved_t) {NULL, data, *(short *) buf};
+        *saved = new;
+        saved = &new;
+    }
+    return (0);
+}
+
+char load_entities(char *path, char *map)
 {
     data_storage_t *datas = get_data_storage();
-    int fd = open(filename, O_RDONLY);
+    char ret = 0;
+    int fd = open(tmpcat(tmpcat(path, map), ".dat"), O_RDONLY);
+    int i = 0;
+
     if (fd == -1) {
-        write(2, "Failed to open save (read mode)\n", 36);
+        my_puterr("Failed to open map file (read mode)\n");
         return (84);
     }
-    data_storage_to_raw_t datas_raw;
-    if (read(fd, datas_raw.raw, 4) != 4) {
-        close(fd);
-        return (84);
-    }
-    datas->score = datas_raw.data.score;
-    int ret = 0;
-    int i = -1;
     while (++i < datas->nb_entitylist)
         ret = ret | load_entitylist(fd, datas->entitylists[i], datas);
     close(fd);

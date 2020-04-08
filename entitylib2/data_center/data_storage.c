@@ -66,3 +66,15 @@ int check_data_storage_content(data_storage_t *datas)
         check = check | ((datas->entitylists[i] == NULL) << 2);
     return (check);
 }
+
+short append_saved(data_storage_t *datas, void *data)
+{
+    saved_t *saved = malloc(sizeof(saved_t));
+
+    if (saved == NULL)
+        return (-1);
+    *saved = (saved_t) {datas->saved, data, datas->saved ? datas->saved->id + 1
+        : 0};
+    datas->saved = saved;
+    return (saved->id);
+}

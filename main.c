@@ -16,7 +16,7 @@ void my_closure(data_storage_t *datas)
     ((menu_t *) datas->main_menu)->opened = 0;
     ((menu_t *) datas->pause_menu)->opened = 0;
     datas->is_alive = 0;
-    free_storage_content(datas, 31);
+    free_storage_content(datas, 7);
 }
 
 void my_event(data_storage_t *datas)

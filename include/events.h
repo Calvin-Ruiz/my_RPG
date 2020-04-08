@@ -10,14 +10,34 @@
 
 static inline void event_press(data_storage_t *datas, sfKeyCode code)
 {
-    (void) datas;
-    (void) code;
+    if (code == sfKeyF10)
+        datas->ask_command = 1;
+    if (code == sfKeyF12)
+        my_take_screenshoot(datas->window);
+    if (code == sfKeyLeft)
+        datas->key.left = 1;
+    if (code == sfKeyRight)
+        datas->key.right = 1;
+    if (code == sfKeyUp)
+        datas->key.up = 1;
+    if (code == sfKeyDown)
+        datas->key.down = 1;
+    if (code == sfKeySpace)
+        datas->key.space = 1;
 }
 
 static inline void event_release(data_storage_t *datas, sfKeyCode code)
 {
-    (void) datas;
-    (void) code;
+    if (code == sfKeyLeft)
+        datas->key.left = 0;
+    if (code == sfKeyRight)
+        datas->key.right = 0;
+    if (code == sfKeyUp)
+        datas->key.up = 0;
+    if (code == sfKeyDown)
+        datas->key.down = 0;
+    if (code == sfKeySpace)
+        datas->key.space = 0;
 }
 
 static inline void mouse_clic(data_storage_t *datas, sfMouseButtonEvent *mouse)

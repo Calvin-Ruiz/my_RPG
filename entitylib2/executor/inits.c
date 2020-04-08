@@ -55,7 +55,7 @@ static void init_vars(dict_t **var)
     dict_t *tmp = NULL;
 
     append_to_dict(var, "textures", datas->textures);
-    append_to_dict(var, "thread", datas->global);
+    append_to_dict(var, "thread", NULL);
     append_to_dict(var, "datas", datas);
     reference_sizeof(var);
     append_to_dict(var, "sbuff", datas->sound_buffs);
@@ -75,6 +75,7 @@ static void init_cmd(dict_t **cmd)
 {
     append_to_dict(cmd, "call", call_function);
     append_to_dict(cmd, "trace", set_traced_var_cmd);
+    append_to_dict(cmd, "tracer", trace_thread);
     append_to_dict(cmd, "set", set_value);
     append_to_dict(cmd, "create_variable", set_value);
     append_to_dict(cmd, "thread", thread_cmd);

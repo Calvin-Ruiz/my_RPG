@@ -7,18 +7,9 @@
 #include <entitybase.h>
 #include <data_storage.h>
 #include <converters.h>
+#include <tools.h>
 
-static void save_entity(int fd, entity_t *entity, entity_t **entities)
-{
-    short_to_raw_t id_master;
-
-    id_master.value = -1;
-    while (entity->size != entities[++id_master.value]->size);
-    write(fd, id_master.raw, 2);
-    entity->save(entity, fd);
-}
-
-static void save_entitylist(int fd, entitylist_t *elist, entity_t **entities)
+static void save_entitylist(int fd, entitylist_t *elist)
 {
     entity_t *entity = elist->next;
     short_to_raw_t nbr_alive_entities;
@@ -31,28 +22,45 @@ static void save_entitylist(int fd, entitylist_t *elist, entity_t **entities)
     write(fd, nbr_alive_entities.raw, 2);
     entity = elist->next;
     while (entity) {
-        save_entity(fd, entity, entities);
+        write(fd, (char *) &entity->id, 2);
+        entity->save(entity, fd);
         entity = entity->next;
     }
 }
 
-int save_all(const char *filename)
+char save_tags(char *path)
 {
-    data_storage_t *datas = get_data_storage();
-    entity_t **entities = (entity_t **) datas->entities;
-    entitylist_t **elists = datas->entitylists;
-    int fd = open(filename, O_WRONLY | O_CREAT, 0666);
+    int fd = open(tmpcat(path, "tags.dat"), O_WRONLY | O_CREAT, 0666);
+    saved_t *saved = get_data_storage()->saved;
+    ushort_t size = 0;
 
     if (fd == -1) {
-        write(2, "Failed to open save (write mode)\n", 37);
+        my_puterr("Failed to open tags file (write mode)\n");
         return (84);
     }
-    data_storage_to_raw_t datas_raw;
-    datas_raw.data.score = datas->score;
-    write(fd, datas_raw.raw, 4);
-    int i = -1;
+    while (saved) {
+        write(fd, (char *) &saved->id, 2);
+        size = *(ushort_t *) saved->data;
+        write(fd, (char *) saved->data, size + 2);
+        saved = saved->next;
+    }
+    close(fd);
+    return (0);
+}
+
+char save_entities(char *path, char *map)
+{
+    data_storage_t *datas = get_data_storage();
+    entitylist_t **elists = datas->entitylists;
+    int fd = open(tmpcat(tmpcat(path, map), ".dat"), O_WRONLY | O_CREAT, 0666);
+    int i = 0;
+
+    if (fd == -1) {
+        my_puterr("Failed to open map file (write mode)\n");
+        return (84);
+    }
     while (++i < datas->nb_entitylist)
-        save_entitylist(fd, elists[i], entities);
+        save_entitylist(fd, elists[i]);
     close(fd);
     return (0);
 }

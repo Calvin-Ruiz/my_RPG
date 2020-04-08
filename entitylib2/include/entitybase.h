@@ -28,8 +28,9 @@ typedef struct entity {
     struct entity *next;
     struct entity *prev;
     struct entity *disp_next;
+    ushort_t id;
     sfSprite **sprite;
-    uint_t *size;
+    ushort_t *size;
     int health;
     int max_health;
     int armor;

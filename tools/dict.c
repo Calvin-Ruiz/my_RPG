@@ -36,8 +36,10 @@ void *get_from_dict(dict_t *dict, char *name)
 void **get_ptr_from_dict(dict_t *dict, char *name)
 {
     while (dict) {
-        if (my_strcmp(name, dict->name))
+        if (my_strcmp(name, dict->name)) {
             dict = dict->next;
+            continue;
+        }
         return (&dict->data);
     }
     return (NULL);
