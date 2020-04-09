@@ -49,15 +49,19 @@ static void execute_file(char *filename, executor_t *executor)
 
     if (str == NULL)
         return;
+    close(fd);
     str[len] = '\0';
     arr = line_to_arr(str, '\n');
     if (arr == (char **) sizeof(char *))
         return;
+    my_puterr("====== Execute file '");
+    my_puterr(filename);
+    my_puterr("' ======\n");
     for (short i = -1; arr[++i] != NULL;)
         execute_line(arr[i], executor);
     free(str);
     free(arr - 1);
-    close(fd);
+    my_puterr("=============================================\n\n");
 }
 
 void thread_cmd(char **arr)
