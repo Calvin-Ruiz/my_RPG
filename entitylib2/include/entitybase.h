@@ -28,14 +28,14 @@ typedef struct entity {
     struct entity *next;
     struct entity *prev;
     struct entity *disp_next;
-    ushort_t id;
     sfSprite **sprite;
     ushort_t *size;
-    int health;
     long long timer;
     long long frame_delay;
-    uchar_t frame_dec;
     uchar_t frame;
+    uchar_t frame_dec;
+    ushort_t id;
+    int health;
     pos_t pos;
     void (*update)();
     void *(*new)();

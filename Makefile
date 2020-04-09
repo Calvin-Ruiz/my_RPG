@@ -8,6 +8,7 @@
 NAME = my_rpg
 
 FILES = cmd/inits.c \
+	cmd/structs.c \
 	core/how_to_play.c \
 	core/menu.c \
 	core/pause.c \

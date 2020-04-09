@@ -74,6 +74,7 @@ void append_to_list_cmd(char **args);
 void init_executor(void);
 void init_external_cmds(dict_t **cmd);
 dict_t *get_internal_func(void);
+dict_t *define_structs(void);
 
 static inline void *get_in_args(char *line)
 {
@@ -128,6 +129,19 @@ static inline void put_traced_nbr(void *nbr, char type)
             my_putnbr(*(double *) nbr);
             break;
     }
+}
+
+static inline u_char get_in_struct(char **arr)
+{
+    dict_t *dict = get_from_dict(get_from_dict((dict_t *)
+        get_executor()->var, "struct"), (*arr) + 1);
+
+    if (dict == NULL) {
+        my_puterr("\e[95mCastError : Structure '");
+        my_puterr((*arr) + 1);
+        my_puterr("' is unreferenced.\n\e[0m");
+    }
+    return ((long) get_from_dict(dict, arr[1]));
 }
 
 #endif /* EXECUTOR_H_ */

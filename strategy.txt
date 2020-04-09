@@ -38,6 +38,7 @@ Parcourir :
 - '+' pour un décalage (exemple : player.pos.+16)
 - '[' pour un décalage avec déréférencement (exemple : entitylists.[2]) (ptr-only)
 - '$' pour une position dans la liste chainée (exemple : entity.$3)
+- '@struct_type.key' pour caster en une structure et chercher un argument (sans le déréférencer)
 
 Particle system :
     Apparition

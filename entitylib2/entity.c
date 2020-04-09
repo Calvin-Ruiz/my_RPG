@@ -24,9 +24,10 @@ char **create_entity_base(entity_t *new, dict_t **entities, char **arr)
 {
     if ((long) arr[-1] < 14 || new == NULL)
         return (NULL);
-    *new = (entity_t) {0, 0, 0, *entities ? ((entity_t *) (*entities)->data)->id
-        + 1 : 0, malloc(sizeof(void *) * (long) arr[5] * (long) arr[6]),
-        get_size((long *) arr + 3), (long) arr[7], 0, (long) arr[8] * 10000, 0, 0, (pos_t) {(sfVector2f) {0, 0}, (sfVector2f) {0, 0}},
+    *new = (entity_t) {0, 0, 0, malloc(sizeof(void *) * (long) arr[5] *
+        (long) arr[6]), get_size((long *) arr + 3), 0, (long) arr[8] * 10000,
+        0, 0, *entities ? ((entity_t *) (*entities)->data)->id + 1 : 0,
+        (long) arr[7], (pos_t) {(sfVector2f) {0, 0}, (sfVector2f) {0, 0}},
         (void (*)()) arr[9], (void *(*)()) arr[10], (void (*)()) arr[11],
         (void *(*)()) arr[12], (void (*)()) arr[13]};
     if (create_sprite(new->sprite, (sfTexture *) arr[2], new->size))

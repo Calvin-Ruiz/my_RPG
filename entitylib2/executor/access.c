@@ -34,22 +34,24 @@ static void *get_chain(walk_t *walker, int nb)
 
 void *get_data(char *name, rdict_t *var)
 {
-    char **arr = line_to_arr_mytmp(name, '.');
-
-    while (*arr != NULL && var != NULL) {
+    char **arr = line_to_arr_mytmp(name, '.') - 1;
+    while (*++arr != NULL && var != NULL) {
         if (**arr == '+') {
-            var = (rdict_t *) (((char *) var) + my_getnbr(*(arr++) + 1));
+            var = (rdict_t *) (((char *) var) + my_getnbr(*arr + 1));
             continue;
         }
         if (**arr == '[') {
-            var = ((rdict_t **) var)[my_getnbr(*(arr++) + 1)];
+            var = ((rdict_t **) var)[my_getnbr(*arr + 1)];
             continue;
         }
         if (**arr == '$') {
-            var = get_chain((walk_t *) var, my_getnbr(*(arr++) + 1));
+            var = get_chain((walk_t *) var, my_getnbr(*arr + 1));
             continue;
         }
-        var = get_from_rec_dict(var, *(arr++));
+        if (**arr == '@')
+            var = (rdict_t *) (((char *) var) + get_in_struct(arr++));
+        else
+            var = get_from_rec_dict(var, *arr);
     }
     return (var);
 }
