@@ -71,4 +71,5 @@ void update_window(sfRenderWindow *window, data_storage_t *stor)
     sfRenderWindow_setSize(window, size);
     stor->coef_x = stor->size.x / size.x;
     stor->coef_y = stor->size.y / size.y;
+    sfRenderWindow_display(window);
 }

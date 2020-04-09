@@ -48,3 +48,12 @@ void update_player(player_t *self, u_int frame_dec, my_keys_t *keys)
         self->frame = (self->frame + 1) % self->size[2];
     }
 }
+
+void update_player_attributes(data_storage_t *datas)
+{
+    datas->player->update(datas->player, (u_int) 25000, &datas->key);
+    datas->pos.x = datas->player->pos.v1.x + (*datas->player->size >> 1);
+    datas->pos.y = datas->player->pos.v1.y + (datas->player->size[1] >> 1);
+    sfView_setCenter(datas->view, datas->pos);
+    sfRenderWindow_setView(datas->window, datas->view);
+}

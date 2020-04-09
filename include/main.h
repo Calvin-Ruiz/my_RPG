@@ -9,6 +9,7 @@
 #define MAIN_H_
 
 #include <entitylib.h>
+#include <player_func.h>
 
 enum {
     DISPLAY_LIST,

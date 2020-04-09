@@ -52,7 +52,8 @@ char create_sprite(sfSprite **sprite, sfTexture *texture, ushort_t *size)
         while (++j < 4) {
             *sprite = sfSprite_create();
             sfSprite_setTexture(*sprite, texture, sfFalse);
-            sfSprite_setOrigin(*sprite, (sfVector2f) {0, real.y - size[1]});
+            sfSprite_setOrigin(*sprite,
+                (sfVector2f) {0, rect.height - size[1]});
             sfSprite_setTextureRect(*(sprite++), rect);
             rect.left += rect.width;
         }
