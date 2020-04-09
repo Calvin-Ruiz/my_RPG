@@ -20,17 +20,16 @@ void apply_all(entitylist_t *self, void (*action)(), void *args)
     }
 }
 
-ushort_t *get_size(ushort_t width, ushort_t height, ushort_t nb_frames,
-    ushort_t nb_directions)
+ushort_t *get_size(long *arr)
 {
-    ushort_t *size = malloc(sizeof(uint_t) * 3);
+    ushort_t *size = malloc(sizeof(uint_t) * 4);
 
     if (size == NULL)
         return (NULL);
-    size[0] = width;
-    size[1] = height;
-    size[2] = nb_frames;
-    size[2] = nb_directions;
+    size[0] = arr[0];
+    size[1] = arr[1];
+    size[2] = arr[2];
+    size[3] = arr[3];
     return (size);
 }
 

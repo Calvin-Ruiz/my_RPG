@@ -61,7 +61,7 @@ static void auto_destroy(entity_t *self)
 
 void free_storage_content(data_storage_t *datas, int mask)
 {
-    int i = -1;
+    int i = 0;
 
     destroy_dict(datas->sounds, sfSound_destroy);
     destroy_dict(datas->sound_buffs, sfSoundBuffer_destroy);

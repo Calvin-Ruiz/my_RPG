@@ -9,6 +9,7 @@
 #define DATA_STORAGE_H_
 
 #include <dict.h>
+#include <player.h>
 
 enum {
     ITEMS,
@@ -55,6 +56,7 @@ typedef struct data_storage {
     dict_t *sounds;
     dict_t *textures;
     dict_t *entities;
+    player_t *player;
     entitylist_t **entitylists;
     int nb_entitylist;
     int score;

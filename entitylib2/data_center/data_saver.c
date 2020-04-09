@@ -38,7 +38,7 @@ char save_tags(char *path)
     ushort_t size = 0;
 
     if (fd == -1) {
-        my_puterr("Failed to open tags file (write mode)\n");
+        my_puterr("\e[95mFailed to open tags file (write mode)\n\e[0m");
         return (84);
     }
     while (saved) {
@@ -59,7 +59,7 @@ char save_entities(char *path, char *map)
     int i = 0;
 
     if (fd == -1) {
-        my_puterr("Failed to open map file (write mode)\n");
+        my_puterr("\e[95mFailed to open map file (write mode)\n\e[0m");
         return (84);
     }
     while (++i < datas->nb_entitylist)

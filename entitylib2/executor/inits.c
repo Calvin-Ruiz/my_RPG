@@ -54,7 +54,7 @@ static void init_vars(dict_t **var)
     data_storage_t *datas = get_data_storage();
     dict_t *tmp = NULL;
 
-    append_to_dict(var, "textures", datas->textures);
+    append_to_dict(var, "texture", datas->textures);
     append_to_dict(var, "thread", NULL);
     append_to_dict(var, "datas", datas);
     reference_sizeof(var);
@@ -62,11 +62,13 @@ static void init_vars(dict_t **var)
     append_to_dict(var, "elist", datas->entitylists);
     append_to_dict(var, "sound", datas->sounds);
     append_to_dict(var, "global", datas->global);
-    append_to_dict(var, "entity", datas->entities);
+    append_to_dict(var, "entity", &datas->entities);
+    append_to_dict(var, "internal", get_internal_func());
     reference_types_and_mouse(var, &datas->mouse);
     append_to_dict(&tmp, "main", &datas->main_menu);
     append_to_dict(&tmp, "pause", &datas->pause_menu);
     append_to_dict(var, "menu", tmp);
+    append_to_dict(var, "player", &datas->player);
     append_to_dict(var, "func", NULL);
     append_to_dict(var, "local", NULL);
 }
@@ -80,6 +82,7 @@ static void init_cmd(dict_t **cmd)
     append_to_dict(cmd, "create_variable", set_value);
     append_to_dict(cmd, "thread", thread_cmd);
     append_to_dict(cmd, "append", append_to_list_cmd);
+    init_external_cmds(cmd);
 }
 
 void init_executor(void)

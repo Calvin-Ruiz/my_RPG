@@ -12,6 +12,7 @@
 
 void no_update(void *ptr);
 void default_destroy(void *ptr);
+ushort_t *get_size(long *arr);
 char init_textures(data_storage_t *datas);
 char init_sounds(data_storage_t *datas);
 

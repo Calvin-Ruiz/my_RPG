@@ -7,9 +7,11 @@
 
 NAME = my_rpg
 
-FILES = core/how_to_play.c \
+FILES = cmd/inits.c \
+	core/how_to_play.c \
 	core/menu.c \
 	core/pause.c \
+	core/player/player.c \
 	entitylib2/data_center/data_loader.c \
 	entitylib2/data_center/data_saver.c \
 	entitylib2/data_center/data_storage.c \

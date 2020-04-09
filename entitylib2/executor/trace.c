@@ -24,15 +24,16 @@ void set_traced_var(char *name, void *var, long filter)
     trace_t *new = my_malloc(sizeof(trace_t));
 
     if (var == NULL) {
-        my_puterr("TraceError : faild to find pointer of trace '");
+        my_puterr("\e[94mTraceError : nullptr received for trace '");
         my_puterr(name);
-        my_puterr("'\n");
+        my_puterr("'\n\e[0m");
         return;
     }
     new->next = *trace;
-    new->name = name;
+    new->name = my_strdup(name);
     new->filter = filter;
     new->var = var;
+    *trace = new;
 }
 
 void set_traced_var_cmd(char **arr)
@@ -52,15 +53,15 @@ static void update_trace(trace_t *trace)
         tmp = tmp->next;
     }
     draw_cadre(48, heigh);
-    my_move(1, 1);
+    my_move(2, 1);
     while (trace) {
-        my_set_color(FOREGROUND_DARK + BLUE);
+        my_set_color(FOREGROUND_LIGHT + BLUE);
         my_putstr(trace->name);
         my_set_color(FOREGROUND_DARK + WHITE);
         write(1, " = ", 3);
         my_set_color(FOREGROUND_LIGHT + GREEN);
         put_traced_nbr(trace->var, trace->filter);
-        write(1, "\n\e[C", 4);
+        write(1, "\n\e[C ", 5);
         trace = trace->next;
     }
     my_set_color(FOREGROUND_LIGHT + WHITE);

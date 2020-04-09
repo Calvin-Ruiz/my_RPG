@@ -36,7 +36,7 @@ Arguments :
 Parcourir :
 - Utilisez '.' comme séparateur (exemple : entity.mob1.health)
 - '+' pour un décalage (exemple : player.pos.+16)
-- '[' pour un décalage avec déréférencement (exemple : entitylists.[2])
+- '[' pour un décalage avec déréférencement (exemple : entitylists.[2]) (ptr-only)
 - '$' pour une position dans la liste chainée (exemple : entity.$3)
 
 Particle system :
@@ -64,4 +64,11 @@ Save/load :
             (u_short) sizeof_datas
             (raw) datas
     tags.dat
-        
+        (u_short) tag_id
+        (u_short) tag_size
+        (raw) datas
+    player.dat
+        # Undefined now
+
+Entities :
+    name texture size_x size_y frames_x frames_y health frame_delay_cs func_update func_new func_destroy func_load func_save

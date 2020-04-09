@@ -18,6 +18,9 @@ rdict_t *get_from_rec_dict(rdict_t *dict, char *name)
         }
         return (dict->dict);
     }
+    my_puterr("\e[95mDictError : Faild to find '");
+    my_puterr(name);
+    my_puterr("'\n\e[0m");
     return (NULL);
 }
 
@@ -27,6 +30,7 @@ static void *get_chain(walk_t *walker, int nb)
         walker = walker->next;
     return (walker);
 }
+#include <stdio.h>
 
 void *get_data(char *name, rdict_t *var)
 {
@@ -34,11 +38,11 @@ void *get_data(char *name, rdict_t *var)
 
     while (*arr != NULL && var != NULL) {
         if (**arr == '+') {
-            var = (rdict_t *) (((char *) var) + my_getnbr(*arr + 1));
+            var = (rdict_t *) (((char *) var) + my_getnbr(*(arr++) + 1));
             continue;
         }
         if (**arr == '[') {
-            var = *((rdict_t **) (((char *) var) + my_getnbr(*arr + 1)));
+            var = ((rdict_t **) var)[my_getnbr(*(arr++) + 1)];
             continue;
         }
         if (**arr == '$') {

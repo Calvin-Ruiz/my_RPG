@@ -46,7 +46,7 @@ char load_tags(char *path)
         data = malloc((*(short *) (buf + 2)) + 2);
         size += read(fd, data + 2, *(short *) (buf + 2));
         if (size != (*(short *) (buf + 2)) + 4) {
-            my_puterr("CorruptionError : tags file is corrupted\n");
+            my_puterr("\e[91mCorruptionError : tags file is corrupted\n\e[0m");
             return (84);
         }
         new = malloc(sizeof(saved_t));
@@ -66,7 +66,7 @@ char load_entities(char *path, char *map)
     int i = 0;
 
     if (fd == -1) {
-        my_puterr("Failed to open map file (read mode)\n");
+        my_puterr("\e[95mFailed to open map file (read mode)\n\e[0m");
         return (84);
     }
     while (++i < datas->nb_entitylist)

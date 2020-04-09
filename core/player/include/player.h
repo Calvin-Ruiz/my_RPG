@@ -23,10 +23,7 @@ enum {
     ALLIES,
     ENNEMIES,
     EVERYONE,
-    struct capacity *next;
-};  char target
-void *animation;
-
+};
 
 typedef struct item {
     struct item *next;
@@ -87,5 +84,7 @@ typedef struct player {
     inventory_t *inventory;
     capacity_t *capacity;
 } player_t;
+
+void create_player_cmd(char **arr);
 
 #endif /* PLAYER_H_ */

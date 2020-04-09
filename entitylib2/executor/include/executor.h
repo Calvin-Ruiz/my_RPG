@@ -72,6 +72,8 @@ void thread_cmd(char **arr);
 char **get_args(void);
 void append_to_list_cmd(char **args);
 void init_executor(void);
+void init_external_cmds(dict_t **cmd);
+dict_t *get_internal_func(void);
 
 static inline void *get_in_args(char *line)
 {
