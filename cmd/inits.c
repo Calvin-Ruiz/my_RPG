@@ -20,5 +20,6 @@ dict_t *get_internal_func(void)
     dict_t *new = NULL;
 
     append_to_dict(&new, "def_destroy", default_destroy);
+    append_to_dict(&new, "pupdate", update_player);
     return (new);
 }

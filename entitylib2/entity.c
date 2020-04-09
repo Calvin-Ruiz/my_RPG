@@ -27,20 +27,22 @@ char **create_entity_base(entity_t *new, dict_t **entities, char **arr)
     *new = (entity_t) {0, 0, 0, malloc(sizeof(void *) * (long) arr[5] *
         (long) arr[6]), get_size((long *) arr + 3), 0, (long) arr[8] * 10000,
         0, 0, *entities ? ((entity_t *) (*entities)->data)->id + 1 : 0,
-        (long) arr[7], (pos_t) {(sfVector2f) {0, 0}, (sfVector2f) {0, 0}},
-        (void (*)()) arr[9], (void *(*)()) arr[10], (void (*)()) arr[11],
-        (void *(*)()) arr[12], (void (*)()) arr[13]};
+        (long) arr[7], ((float) (long) arr[9]) / 40.f,
+        (pos_t) {(sfVector2f) {0, 0}, (sfVector2f) {0, 0}},
+        (void (*)()) arr[10], (void *(*)()) arr[11], (void (*)()) arr[12],
+        (void *(*)()) arr[13], (void (*)()) arr[14]};
     if (create_sprite(new->sprite, (sfTexture *) arr[2], new->size))
         return (NULL);
     append_to_dict(entities, arr[1], new);
-    return (arr + 14);
+    return (arr + 15);
 }
 
 char create_sprite(sfSprite **sprite, sfTexture *texture, ushort_t *size)
 {
     unsigned int i = -1;
     int j;
-    sfIntRect rect = {0, 0, size[0], size[1]};
+    sfVector2u real = sfTexture_getSize(texture);
+    sfIntRect rect = {0, 0, real.x / size[2], real.y / size[3]};
 
     if (sprite == NULL || size == NULL)
         return (1);
@@ -50,10 +52,11 @@ char create_sprite(sfSprite **sprite, sfTexture *texture, ushort_t *size)
         while (++j < 4) {
             *sprite = sfSprite_create();
             sfSprite_setTexture(*sprite, texture, sfFalse);
+            sfSprite_setOrigin(*sprite, (sfVector2f) {0, real.y - size[1]});
             sfSprite_setTextureRect(*(sprite++), rect);
-            rect.left += size[0];
+            rect.left += rect.width;
         }
-        rect.top += size[1];
+        rect.top += rect.height;
     }
     return (0);
 }

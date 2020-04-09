@@ -9,5 +9,6 @@
 #define CMDS_H_
 
 void create_player_cmd(char **arr);
+void update_player(player_t *self, u_int frame_dec, void *keys);
 
 #endif /* CMDS_H_ */

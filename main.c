@@ -49,6 +49,7 @@ void mainloop(data_storage_t *datas, sfRenderWindow *window)
 
     while (datas->on_mainloop) {
         actual = sfClock_getElapsedTime(datas->clock).microseconds;
+        datas->player->update(datas->player, (u_int) 25000, &datas->key);
         srand(actual);
         last += 25000;
         if (actual < last)

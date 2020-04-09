@@ -24,3 +24,27 @@ void create_player_cmd(char **arr)
     player->disp_next = datas->entitylists[0]->next;
     datas->entitylists[0]->next = (entity_t *) player;
 }
+
+void update_player(player_t *self, u_int frame_dec, my_keys_t *keys)
+{
+    const char coef = (keys->left || keys->right) && (keys->up || keys->down);
+    if (keys->right) {
+        self->pos.v1.x += coef ? self->speed * 0.7 : self->speed;
+        self->pos.v2.x = self->pos.v1.x + self->size[0];
+    } else if (keys->left) {
+        self->pos.v1.x -= coef ? self->speed * 0.7 : self->speed;
+        self->pos.v2.x = self->pos.v1.x + self->size[0];
+    }
+    if (keys->down) {
+        self->pos.v1.y += coef ? self->speed * 0.7 : self->speed;
+        self->pos.v2.y = self->pos.v1.y + self->size[1];
+    } else if (keys->up) {
+        self->pos.v1.y -= coef ? self->speed * 0.7 : self->speed;
+        self->pos.v2.y = self->pos.v1.y + self->size[1];
+    }
+    self->timer += frame_dec;
+    if (self->timer > self->frame_delay) {
+        self->timer -= self->frame_delay;
+        self->frame = (self->frame + 1) % self->size[2];
+    }
+}

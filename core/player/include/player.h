@@ -75,10 +75,11 @@ typedef struct player {
     uchar_t frame_dec;
     ushort_t id;
     int health;
+    float speed;
     pos_t pos;
-    void (*update)();
+    void (*update)(struct player *self, u_int frame_dec, void *keys);
     void *(*new)();
-    void (*destroy)();
+    void (*destroy)(struct player *self);
     void *(*load)();
     void (*save)();
     inventory_t *inventory;

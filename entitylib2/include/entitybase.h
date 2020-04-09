@@ -36,6 +36,7 @@ typedef struct entity {
     uchar_t frame_dec;
     ushort_t id;
     int health;
+    float speed;
     pos_t pos;
     void (*update)();
     void *(*new)();

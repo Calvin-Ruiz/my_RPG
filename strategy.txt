@@ -72,4 +72,4 @@ Save/load :
         # Undefined now
 
 Entities :
-    name texture size_x size_y frames_x frames_y health frame_delay_cs func_update func_new func_destroy func_load func_save
+    name texture size_x size_y frames_x frames_y health frame_delay_cs speed_pps func_update func_new func_destroy func_load func_save

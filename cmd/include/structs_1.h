@@ -30,7 +30,7 @@ static inline dict_t *define_entity(entity_t * const ref)
     append_to_dict(&new, "pos_y2", &ref->pos.v2.y);
     append_to_dict(&new, "update", &ref->update);
     append_to_dict(&new, "new", &ref->new);
-    append_to_dict(&new, "destroy", &ref->destroy);
+    append_to_dict(&new, "speed", &ref->speed);
     return (new);
 }
 
