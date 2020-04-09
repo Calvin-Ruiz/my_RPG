@@ -6,6 +6,9 @@
 */
 
 #include <executor.h>
+#include <entitybase.h>
+#include <entitylist.h>
+#include <data_storage.h>
 #include <my_getnbr.h>
 #include <fcntl.h>
 #include <my_read.h>
@@ -29,6 +32,16 @@ void call_function(char **arr)
         ((void (*)(char **)) *func->arr)(func->arr);
         func = func->next;
     }
+}
+
+void new_entity(char **arr)
+{
+    if (arr[1] == NULL || arr[2] == NULL) {
+        my_puterr("\e[35mInstanciateError : nullptr in arguments.\n\e[0m");
+        return;
+    }
+    append_to_entitylist(*get_data_storage()->entitylists, (entitylist_t *)
+        arr[1], ((entity_t *) arr[2])->new(arr + 2));
 }
 
 static void build_func_line(func_t **func, char *line, executor_t *executor)

@@ -60,7 +60,8 @@ static inline void append_to_entitylist(entitylist_t *display_list,
     entity->disp_next = display_list->next;
     display_list->next = entity;
     entity->next = self->next;
-    self->next->prev = entity;
+    if (self->next)
+        self->next->prev = entity;
     self->next = entity;
 }
 

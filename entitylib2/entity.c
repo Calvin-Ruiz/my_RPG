@@ -46,10 +46,10 @@ char create_sprite(sfSprite **sprite, sfTexture *texture, ushort_t *size)
 
     if (sprite == NULL || size == NULL)
         return (1);
-    while (++i < size[2]) {
+    while (++i < size[3]) {
         j = -1;
         rect.left = 0;
-        while (++j < 4) {
+        while (++j < size[2]) {
             *sprite = sfSprite_create();
             sfSprite_setTexture(*sprite, texture, sfFalse);
             sfSprite_setOrigin(*sprite,

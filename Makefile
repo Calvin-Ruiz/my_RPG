@@ -7,13 +7,7 @@
 
 NAME = my_rpg
 
-FILES = cmd/inits.c \
-	cmd/structs.c \
-	core/how_to_play.c \
-	core/menu.c \
-	core/pause.c \
-	core/player/player.c \
-	entitylib2/data_center/data_loader.c \
+FILES = entitylib2/data_center/data_loader.c \
 	entitylib2/data_center/data_saver.c \
 	entitylib2/data_center/data_storage.c \
 	entitylib2/data_center/data_storage_tools.c \
@@ -36,13 +30,20 @@ FILES = cmd/inits.c \
 	entitylib2/tools/etools.c \
 	entitylib2/tools/fast_get_next_line.c \
 	entitylib2/tools/loader.c \
-	main.c \
+	rpg/cmd/inits.c \
+	rpg/cmd/structs.c \
+	rpg/entity_types/solid_decor.c \
+	rpg/how_to_play.c \
+	rpg/main.c \
+	rpg/menu.c \
+	rpg/pause.c \
+	rpg/player/player.c \
 	tools/dict.c \
 	tools/get_next_line.c \
 	tools/my_read.c \
 	tools/tools.c
 
-INCLUDES = -I cmd/include -I core/include -I core/player/include -I entitylib2/data_center/include -I entitylib2/display/include -I entitylib2/entitylist/include -I entitylib2/executor/include -I entitylib2/include -I entitylib2/menu/include -I entitylib2/sounds/include -I entitylib2/tools/include -I include -I tools/include 
+INCLUDES = -I entitylib2/data_center/include -I entitylib2/display/include -I entitylib2/entitylist/include -I entitylib2/executor/include -I entitylib2/include -I entitylib2/menu/include -I entitylib2/sounds/include -I entitylib2/tools/include -I rpg/cmd/include -I rpg/entity_types/include -I rpg/include -I rpg/player/include -I tools/include 
 
 FLAGS = -lcsfml-graphics -lcsfml-system -lcsfml-audio -lcsfml-system
 

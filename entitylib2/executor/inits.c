@@ -59,7 +59,7 @@ static void init_vars(dict_t **var)
     append_to_dict(var, "struct", define_structs());
     reference_sizeof(var);
     append_to_dict(var, "sbuff", datas->sound_buffs);
-    append_to_dict(var, "elist", datas->entitylists);
+    append_to_dict(var, "entitylist", datas->entitylists);
     append_to_dict(var, "sound", datas->sounds);
     append_to_dict(var, "global", datas->global);
     append_to_dict(var, "entity", &datas->entities);
@@ -82,6 +82,7 @@ static void init_cmd(dict_t **cmd)
     append_to_dict(cmd, "create_variable", set_value);
     append_to_dict(cmd, "thread", thread_cmd);
     append_to_dict(cmd, "append", append_to_list_cmd);
+    append_to_dict(cmd, "new", new_entity);
     init_external_cmds(cmd);
 }
 
