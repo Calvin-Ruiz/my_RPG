@@ -14,8 +14,8 @@ static inline void conditionnal_permutation(entity_t **entity, entity_t *tmp)
 {
     if ((*entity)->pos.v1.x < tmp->pos.v2.x &&
         (*entity)->pos.v2.y > tmp->pos.v1.y) {
-        (*entity)->next = tmp->next;
-        tmp->next = *entity;
+        (*entity)->disp_next = tmp->disp_next;
+        tmp->disp_next = *entity;
         *entity = tmp;
     }
 }

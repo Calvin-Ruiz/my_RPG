@@ -10,19 +10,19 @@
 
 void display_entities(sfRenderWindow *window, entity_t **entity)
 {
-    entity_t *tmp = (*entity)->next;
+    entity_t *tmp = (*entity)->disp_next;
 
     while (tmp) {
         if ((*entity)->health <= 0) {
             destroy_this_entity(*entity);
             *entity = tmp;
-            tmp = tmp->next;
+            tmp = tmp->disp_next;
             continue;
         }
         conditionnal_permutation(entity, tmp);
         draw_this_entity(*entity, window);
-        entity = &(*entity)->next;
-        tmp = (*entity)->next;
+        entity = &(*entity)->disp_next;
+        tmp = (*entity)->disp_next;
     }
     if ((*entity)->health <= 0) {
         destroy_this_entity(*entity);

@@ -27,12 +27,13 @@ void call_function(char **arr)
     func_t *func = get_from_dict((dict_t *)
         get_from_rec_dict(get_executor()->var, "func"), arr[1]);
     char *farg[64] = {0};
-
     for (u_char i = 0; ++i < (long) arr[-1];)
         args[i] = arr[i];
     my_puterr("\e[92m>---- START ");
     my_puterr(arr[1]);
     my_puterr(" ----<\n\e[0m");
+    if (func == NULL)
+        my_puterr("\e[31mCallError : This function is not defined.\n");
     while (func) {
         farg[0] = (char *) (long) func->data->is_complete;
         for (short i = -1; ++i < func->data->is_complete;)
@@ -42,6 +43,15 @@ void call_function(char **arr)
         func = func->next;
     }
     my_puterr("\e[92m<---- END ---->\n\e[0m");
+}
+
+void put_in_log(char **arr)
+{
+    while (++*arr) {
+        my_puterr(*arr);
+        write(2, " ", 1);
+    }
+    write(2, "\n", 1);
 }
 
 void new_entity(char **arr)
