@@ -33,9 +33,14 @@ typedef struct command_dict {
     char *name;
 } cdict_t;
 
+typedef struct function_data {
+    void *data;
+    char is_complete;
+} fdata_t;
+
 typedef struct func {
     struct func *next;
-    char **arr;
+    fdata_t *data;
 } func_t;
 
 typedef struct my_trace {
@@ -77,17 +82,6 @@ dict_t *get_internal_func(void);
 dict_t *define_structs(void);
 void new_entity(char **arr);
 
-static inline void *get_in_args(char *line)
-{
-    u_char i = 0;
-    void *data = get_args()[my_getnbr(line)];
-
-    while (line[++i] != '\0' && line[i] != '.');
-    if (line[i++] == '.')
-        return (get_data(line + i, data));
-    return (data);
-}
-
 static inline void eval_args(char **arr, executor_t *executor)
 {
     while (*++arr != NULL) {
@@ -102,7 +96,7 @@ static inline void eval_args(char **arr, executor_t *executor)
                 *arr = get_from_dict((dict_t *) executor->cmd, *arr + 1);
                 break;
             case '@':
-                *arr = get_in_args(*arr + 1);
+                *arr = (char *) (get_args() + my_getnbr(*arr + 1));
                 break;
         }
     }

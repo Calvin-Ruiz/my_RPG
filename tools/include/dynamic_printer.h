@@ -21,13 +21,12 @@ static inline void put_line(char line_id)
 static inline void my_move(unsigned short x, unsigned short y)
 {
     const char *mvx = "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t";
+    const char *longx = "\e[C\e[C\e[C\e[C\e[C\e[C\e[C";
     const char *mvy = "\v\v\v\v\v\v\v\v\v\v\v\v\v\v\v\v";
 
     write(1, "\e[H", 3);
     write(1, mvx, x >> 3);
-    x = x & 7;
-    while (x-- > 0)
-        write(1, "\e[C", 3);
+    write(1, longx, (x & 7) * 3);
     write(1, mvy, y & 15);
     y = y >> 4;
     while (y-- > 0)

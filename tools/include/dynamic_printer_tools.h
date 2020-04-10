@@ -66,4 +66,12 @@ static inline void my_unset_effect(char effect)
     write(1, str, 5);
 }
 
+static inline void move_in_line(unsigned short x)
+{
+    const char *mvx = "\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t";
+    const char *longx = "\e[C\e[C\e[C\e[C\e[C\e[C\e[C";
+    write(1, mvx, (x >> 3) + 1);
+    write(1, longx, (x & 7) * 3);
+}
+
 #endif /* DYNAMIC_PRINTER_TOOLS_H_ */

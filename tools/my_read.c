@@ -72,6 +72,6 @@ char *my_read(const int port, long int *full_size)
     if (buffer == NULL)
         return (NULL);
     my_extractor(chain, buffer, *full_size);
-    buffer[*full_size] = '\n';
+    buffer[*full_size] = '\0';
     return (buffer);
 }

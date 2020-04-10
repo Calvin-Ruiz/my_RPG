@@ -1,1 +1,1 @@
-make debug && ./my_rpg 2> log && echo -e "\n" && cat log
+make debug && ./my_rpg 2> log && echo -e "\n" && cat log || (gdb ./my_rpg; ./run)

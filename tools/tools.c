@@ -24,7 +24,7 @@ char **line_to_arr(char *str, const char sep)
     if (str == NULL)
         return (NULL);
     for (int j = -1; str[++j] != '\0';)
-        nargs += str[j] == sep;
+        nargs += (str[j] == sep && str[j + 1] != '\0');
     arr = malloc(sizeof(char *) * nargs);
     if (arr == NULL)
         return (NULL);

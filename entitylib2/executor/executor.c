@@ -45,15 +45,11 @@ static void execute_file(char *filename, executor_t *executor)
     int fd = open(filename, O_RDONLY);
     long len = 0;
     char *str = my_read(fd, &len);
-    char **arr;
+    char **arr = line_to_arr(str, '\n');
 
-    if (str == NULL)
+    if (arr == NULL)
         return;
     close(fd);
-    str[len] = '\0';
-    arr = line_to_arr(str, '\n');
-    if (arr == (char **) sizeof(char *))
-        return;
     my_puterr("====== Execute file '");
     my_puterr(filename);
     my_puterr("' ======\n");

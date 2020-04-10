@@ -24,13 +24,13 @@ static inline dict_t *define_entity(entity_t * const ref)
     append_to_dict(&new, "frame", &ref->frame);
     append_to_dict(&new, "id", &ref->id);
     append_to_dict(&new, "health", &ref->health);
+    append_to_dict(&new, "speed", &ref->speed);
     append_to_dict(&new, "pos_x1", &ref->pos.v1.x);
     append_to_dict(&new, "pos_y1", &ref->pos.v1.y);
     append_to_dict(&new, "pos_x2", &ref->pos.v2.x);
     append_to_dict(&new, "pos_y2", &ref->pos.v2.y);
     append_to_dict(&new, "update", &ref->update);
     append_to_dict(&new, "new", &ref->new);
-    append_to_dict(&new, "speed", &ref->speed);
     return (new);
 }
 
