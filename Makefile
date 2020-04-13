@@ -26,6 +26,7 @@ FILES = entitylib2/data_center/data_loader.c \
 	entitylib2/executor/trace.c \
 	entitylib2/menu/button.c \
 	entitylib2/menu/menu.c \
+	entitylib2/particle/particle.c \
 	entitylib2/sounds/sound_manager.c \
 	entitylib2/tools/etools.c \
 	entitylib2/tools/fast_get_next_line.c \
@@ -46,7 +47,7 @@ FILES = entitylib2/data_center/data_loader.c \
 	tools/my_read.c \
 	tools/tools.c
 
-INCLUDES = -I entitylib2/data_center/include -I entitylib2/display/include -I entitylib2/entitylist/include -I entitylib2/executor/include -I entitylib2/include -I entitylib2/menu/include -I entitylib2/sounds/include -I entitylib2/tools/include -I rpg/cmd/include -I rpg/entity_groups/include -I rpg/entity_types/include -I rpg/include -I rpg/player/include -I tools/include 
+INCLUDES = -I entitylib2/data_center/include -I entitylib2/display/include -I entitylib2/entitylist/include -I entitylib2/executor/include -I entitylib2/include -I entitylib2/menu/include -I entitylib2/particle/include -I entitylib2/sounds/include -I entitylib2/tools/include -I rpg/cmd/include -I rpg/entity_groups/include -I rpg/entity_types/include -I rpg/include -I rpg/player/include -I tools/include 
 
 FLAGS = -lcsfml-graphics -lcsfml-system -lcsfml-audio -lcsfml-system
 
