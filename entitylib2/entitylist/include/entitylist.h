@@ -9,6 +9,7 @@
 #define ENTITYLIST_H_
 
 #include <dict.h>
+#include <entity_display.h>
 
 void entitylist_update(entitylist_t *self, void *datas);
 entitylist_t *create_entitylist(void);
@@ -57,8 +58,7 @@ static inline void append_to_entitylist(entitylist_t *display_list,
 {
     if (entity == NULL)
         return;
-    entity->disp_next = display_list->next;
-    display_list->next = entity;
+    conditionnal_insertion(&display_list->next, entity);
     entity->next = self->next;
     if (self->next)
         self->next->prev = entity;

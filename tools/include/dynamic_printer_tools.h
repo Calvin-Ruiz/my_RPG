@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2019
-** MUL_my_defender_2019
+** Global Tools
 ** File description:
 ** dynamic_printer_tools.h
 */

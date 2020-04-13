@@ -82,6 +82,7 @@ dict_t *get_internal_func(void);
 dict_t *define_structs(void);
 void new_entity(char **arr);
 void put_in_log(char **arr);
+void sleep_cmd(char **arr);
 
 static inline void eval_args(char **arr, executor_t *executor)
 {

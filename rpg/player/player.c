@@ -9,6 +9,7 @@
 #include <data_storage.h>
 #include <tools.h>
 #include <player.h>
+#include <entity_display.h>
 
 void create_player_cmd(char **arr)
 {
@@ -21,8 +22,8 @@ void create_player_cmd(char **arr)
         return;
     }
     datas->player = player;
-    player->disp_next = datas->entitylists[0]->next;
-    datas->entitylists[0]->next = (entity_t *) player;
+    //player->disp_next = datas->entitylists[0]->next;
+    //datas->entitylists[0]->next = (entity_t *) player;
 }
 
 void update_player(player_t *self, u_int frame_dec, my_keys_t *keys)
@@ -51,9 +52,12 @@ void update_player(player_t *self, u_int frame_dec, my_keys_t *keys)
 
 void update_player_attributes(data_storage_t *datas)
 {
-    datas->player->update(datas->player, (u_int) 25000, &datas->key);
-    datas->pos.x = datas->player->pos.v1.x + (*datas->player->size >> 1);
-    datas->pos.y = datas->player->pos.v1.y + (datas->player->size[1] >> 1);
+    player_t *player = datas->player;
+
+    conditionnal_insertion(&datas->entitylists[0]->next, (entity_t *) player);
+    player->update(player, (u_int) 25000, &datas->key);
+    datas->pos.x = player->pos.v1.x + (*player->size >> 1);
+    datas->pos.y = player->pos.v1.y + (player->size[1] >> 1);
     sfView_setCenter(datas->view, datas->pos);
     sfRenderWindow_setView(datas->window, datas->view);
 }

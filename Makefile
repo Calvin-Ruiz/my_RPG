@@ -32,6 +32,9 @@ FILES = entitylib2/data_center/data_loader.c \
 	entitylib2/tools/loader.c \
 	rpg/cmd/inits.c \
 	rpg/cmd/structs.c \
+	rpg/entity_groups/decor.c \
+	rpg/entity_groups/event.c \
+	rpg/entity_groups/npc.c \
 	rpg/entity_types/solid_decor.c \
 	rpg/how_to_play.c \
 	rpg/main.c \
@@ -43,7 +46,7 @@ FILES = entitylib2/data_center/data_loader.c \
 	tools/my_read.c \
 	tools/tools.c
 
-INCLUDES = -I entitylib2/data_center/include -I entitylib2/display/include -I entitylib2/entitylist/include -I entitylib2/executor/include -I entitylib2/include -I entitylib2/menu/include -I entitylib2/sounds/include -I entitylib2/tools/include -I rpg/cmd/include -I rpg/entity_types/include -I rpg/include -I rpg/player/include -I tools/include 
+INCLUDES = -I entitylib2/data_center/include -I entitylib2/display/include -I entitylib2/entitylist/include -I entitylib2/executor/include -I entitylib2/include -I entitylib2/menu/include -I entitylib2/sounds/include -I entitylib2/tools/include -I rpg/cmd/include -I rpg/entity_groups/include -I rpg/entity_types/include -I rpg/include -I rpg/player/include -I tools/include 
 
 FLAGS = -lcsfml-graphics -lcsfml-system -lcsfml-audio -lcsfml-system
 

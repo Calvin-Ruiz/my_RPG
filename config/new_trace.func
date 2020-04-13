@@ -1,14 +1,14 @@
 # Instanciate and trace entity
 new @2 @3 @4 @5
-trace timer @2.[0].@entity.timer $type.long
-trace health @2.[0].@entity.health $type.int
-trace speed @2.[0].@entity.speed $type.float
-trace pos_y2 @2.[0].@entity.pos_y2 $type.float
-trace pos_x2 @2.[0].@entity.pos_x2 $type.float
-trace pos_y1 @2.[0].@entity.pos_y1 $type.float
-trace pos_x1 @2.[0].@entity.pos_x1 $type.float
-trace id @2.[0].@entity.id $type.short
-trace disp_next @2.[0].@entity.disp_next $type.long
-trace prev @2.[0].@entity.prev $type.long
-trace next @2.[0].@entity.next $type.long
+trace __timer @2.[0].@entity.timer $type.long
+trace __health @2.[0].@entity.health $type.int
+trace __speed @2.[0].@entity.speed $type.float
+trace __pos_y2 @2.[0].@entity.pos_y2 $type.float
+trace __pos_x2 @2.[0].@entity.pos_x2 $type.float
+trace __pos_y1 @2.[0].@entity.pos_y1 $type.float
+trace __pos_x1 @2.[0].@entity.pos_x1 $type.float
+trace __id @2.[0].@entity.id $type.short
+trace __disp_next @2.[0].@entity.disp_next $type.long
+trace __prev @2.[0].@entity.prev $type.long
+trace __next @2.[0].@entity.next $type.long
 trace @1 @2 $type.long

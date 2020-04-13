@@ -8,6 +8,7 @@
 #include <events.h>
 #include <entity_display.h>
 #include <etools.h>
+#include <decor.h>
 
 void my_closure(data_storage_t *datas)
 {
@@ -50,6 +51,7 @@ void mainloop(data_storage_t *datas, sfRenderWindow *window)
     while (datas->on_mainloop) {
         actual = sfClock_getElapsedTime(datas->clock).microseconds;
         update_player_attributes(datas);
+        decor_update(datas->entitylists[DECOR_LIST], datas->player);
         srand(actual);
         last += 25000;
         if (actual < last)

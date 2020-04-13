@@ -6,6 +6,7 @@
 */
 
 #include <executor.h>
+#include <SFML/System.h>
 
 void append_to_list_cmd(char **args)
 {
@@ -13,4 +14,9 @@ void append_to_list_cmd(char **args)
         return;
     ((walk_t *) args[2])->next = *(walk_t **) args[1];
     *(walk_t **) args[1] = (walk_t *) args[2];
+}
+
+void sleep_cmd(char **args)
+{
+    sfSleep((sfTime) {(long) args[1]});
 }

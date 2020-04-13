@@ -84,6 +84,7 @@ static void init_cmd(dict_t **cmd)
     append_to_dict(cmd, "append", append_to_list_cmd);
     append_to_dict(cmd, "new", new_entity);
     append_to_dict(cmd, "log", put_in_log);
+    append_to_dict(cmd, "sleep", sleep_cmd);
     init_external_cmds(cmd);
 }
 

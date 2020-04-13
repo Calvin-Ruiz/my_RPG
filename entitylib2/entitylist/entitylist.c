@@ -11,10 +11,10 @@ void entitylist_update(entitylist_t *self, data_storage_t *datas)
 {
     entity_t **entity = &(self->next);
     entity_t *tmp;
-    sfTime time = sfClock_getElapsedTime(self->clock);
-    long long delta_time = time.microseconds - self->last;
+    long long time = sfClock_getElapsedTime(self->clock).microseconds;
+    long long delta_time = time - self->last;
 
-    self->last = time.microseconds;
+    self->last = time;
     while (*entity) {
         if ((*entity)->health <= 0) {
             tmp = (*entity)->next;
