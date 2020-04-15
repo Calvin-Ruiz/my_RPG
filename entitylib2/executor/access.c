@@ -74,7 +74,7 @@ void set_value(char **arr)
         *((float *) arr[2]) = (long) arr[3];
     if (my_strcmp("double", arr[1]) == 0)
         *((double *) arr[2]) = (long) arr[3];
-    if (my_strcmp("raw64", arr[1]) == 0)
+    if (my_strcmp("ptr", arr[1]) == 0)
         *((void **) arr[2]) = (void *) arr[3];
 }
 

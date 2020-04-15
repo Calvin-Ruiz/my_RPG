@@ -9,6 +9,7 @@
 #define STRUCTS_1_H_
 
 #include <menu.h>
+#include <particle.h>
 
 static inline dict_t *define_entity(entity_t * const ref)
 {
@@ -74,6 +75,26 @@ static inline dict_t *define_menu(menu_t * const ref)
     append_to_dict(&new, "dtext", &ref->dtext);
     append_to_dict(&new, "selected_write_box", &ref->selected_write_box);
     append_to_dict(&new, "opened", &ref->opened);
+    return (new);
+}
+
+static inline dict_t *define_particle_param(particle_param_t * const ref)
+{
+    dict_t *new = NULL;
+
+    append_to_dict(&new, "vel_x", &ref->attr.velocity.x);
+    append_to_dict(&new, "vel_y", &ref->attr.velocity.y);
+    append_to_dict(&new, "force_x", &ref->attr.force.x);
+    append_to_dict(&new, "force_y", &ref->attr.force.y);
+    append_to_dict(&new, "acceleration", &ref->attr.acceleration);
+    append_to_dict(&new, "coloring", &ref->attr.coloring);
+    append_to_dict(&new, "lifetime", &ref->attr.lifetime);
+    append_to_dict(&new, "fading", &ref->attr.fading);
+    append_to_dict(&new, "x1", &ref->pos.v1.x);
+    append_to_dict(&new, "y1", &ref->pos.v1.y);
+    append_to_dict(&new, "x2", &ref->pos.v2.x);
+    append_to_dict(&new, "y2", &ref->pos.v2.y);
+    append_to_dict(&new, "color", &ref->color);
     return (new);
 }
 

@@ -83,6 +83,7 @@ dict_t *define_structs(void);
 void new_entity(char **arr);
 void put_in_log(char **arr);
 void sleep_cmd(char **arr);
+void *build_struct(char *str);
 
 static inline void eval_args(char **arr, executor_t *executor)
 {
@@ -99,6 +100,9 @@ static inline void eval_args(char **arr, executor_t *executor)
                 break;
             case '@':
                 *arr = (char *) (get_args() + my_getnbr(*arr + 1));
+                break;
+            case '{':
+                *arr = (char *) build_struct(*arr + 1);
                 break;
         }
     }

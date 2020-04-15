@@ -20,12 +20,14 @@ FILES = entitylib2/data_center/data_loader.c \
 	entitylib2/entitylist/entitylist.c \
 	entitylib2/executor/access.c \
 	entitylib2/executor/commands.c \
+	entitylib2/executor/dynamic_structures.c \
 	entitylib2/executor/executor.c \
 	entitylib2/executor/function.c \
 	entitylib2/executor/inits.c \
 	entitylib2/executor/trace.c \
 	entitylib2/menu/button.c \
 	entitylib2/menu/menu.c \
+	entitylib2/particle/cmds.c \
 	entitylib2/particle/particle.c \
 	entitylib2/sounds/sound_manager.c \
 	entitylib2/tools/etools.c \

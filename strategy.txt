@@ -32,6 +32,7 @@ Arguments :
 - $ signifie parcourir si en début d'argument
 - = signifier évaluer l'argument (avec my_getnbr)
 - & signifie remplacer par la fonction
+- { signifie remplacer par un pointeur vers une psuedo-structure (voir section Dynamic structures)
 
 Parcourir :
 - Utilisez '.' comme séparateur (exemple : entity.mob1.health)
@@ -73,3 +74,15 @@ Save/load :
 
 Entities :
     name texture size_x size_y frames_x frames_y health frame_delay_cs speed_pps func_update func_new func_destroy func_load func_save
+
+Dynamic structures :
+    Permet de créer une structure et de renvoyer un pointeur vers celle-ci.
+    Le format des structures dynamiques est une succession type:valeur séparée par '|'.
+    Exemple : {long:=32|ptr:$textures.player|float:~f3.0|double:~d-3.14159}
+    Tous les flags disponible pour les arguments sont aussi disponibles ici, à l'exception des structures dynamiques.
+    Flags supplémentaires :
+    ~f : float
+    ~d : double
+    ATTENTION : les structures dynamiques ne sont pas disponibles dans les fonctions
+    ATTENTION : ne pas utiliser plus d'une structure dynamique par ligne
+    ATTENTION : pour qu'une structure soit persistante, rajoutez '!' après '}', suivi de la taille de la structure dynamique en octects

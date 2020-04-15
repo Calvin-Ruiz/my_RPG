@@ -14,6 +14,7 @@ dict_t *define_structs(void)
 
     append_to_dict(&structs, "entity", define_entity(NULL));
     append_to_dict(&structs, "data", define_data_storage(NULL));
-    append_to_dict(&structs, "meny", define_menu(NULL));
+    append_to_dict(&structs, "menu", define_menu(NULL));
+    append_to_dict(&structs, "particle_param_t", define_particle_param(NULL));
     return (structs);
 }

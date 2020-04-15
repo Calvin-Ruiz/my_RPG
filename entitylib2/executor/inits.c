@@ -7,6 +7,7 @@
 
 #include <executor.h>
 #include <entitybase.h>
+#include <particle.h>
 #include <data_storage.h>
 #include <menu.h>
 
@@ -26,6 +27,8 @@ static void reference_sizeof(dict_t **var)
     append_to_dict(&dict, "short", (void *) sizeof(short));
     append_to_dict(&dict, "long", (void *) sizeof(long));
     append_to_dict(&dict, "int", (void *) sizeof(int));
+    append_to_dict(&dict, "particle_param", (void *) sizeof(particle_param_t));
+    append_to_dict(&dict, "particle_attr_t", (void *) sizeof(particle_attr_t));
     append_to_dict(var, "sizeof", dict);
 }
 
