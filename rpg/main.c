@@ -49,15 +49,17 @@ void mainloop(data_storage_t *datas, sfRenderWindow *window)
     long long actual = last;
 
     while (datas->on_mainloop) {
-        actual = sfClock_getElapsedTime(datas->clock).microseconds;
+        srand(actual);
+        sfRenderWindow_clear(window, sfBlack);
         update_player_attributes(datas);
         decor_update(datas->entitylists[DECOR_LIST], datas->player);
-        srand(actual);
+        display_entities(window, &(*datas->entitylists)->next);
+        update_particle_list(datas->particle_lists->data, window);
+        update_window(window, datas);
+        actual = sfClock_getElapsedTime(datas->clock).microseconds;
         last += 25000;
         if (actual < last)
             sfSleep((sfTime) {last - actual});
-        display_entities(window, &(*datas->entitylists)->next);
-        update_window(window, datas);
         my_event(datas);
     }
 }
@@ -71,6 +73,8 @@ int main(void)
         sfResize | sfClose, 60))
         return (84);
     init_some_datas(datas);
+    append_to_dict(&datas->particle_lists, "main", create_particle_list(
+        get_from_dict(datas->textures, "particle"), 100));
     init_executor();
     open_menu(datas->main_menu);
     return (0);

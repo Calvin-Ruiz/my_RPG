@@ -25,13 +25,14 @@ typedef struct particle_attributes {
         char b;
         char a;
     } coloring;
-    u_char lifetime;
-    u_char fading;
+    u_short lifetime;
+    u_short fading;
 } particle_attr_t;
 
 typedef struct particle_properties {
     particle_attr_t attr;
     pos_t pos;
+    pos_t rect;
     sfColor color;
 } particle_param_t;
 
@@ -59,6 +60,12 @@ static inline void append_particle(particle_list_t *plist,
     self->vertex->p1.color = params->color;
     self->vertex->p1.position = params->pos.v1;
     self->vertex->p3.position = params->pos.v2;
+    self->vertex->p1.texCoords = params->rect.v1;
+    self->vertex->p2.texCoords = (sfVector2f) {params->rect.v2.x,
+        params->rect.v1.y};
+    self->vertex->p3.texCoords = params->rect.v2;
+    self->vertex->p4.texCoords = (sfVector2f) {params->rect.v1.x,
+        params->rect.v2.y};
 }
 
 static inline void update_particle_movement(particle_t *particle)
@@ -97,5 +104,9 @@ static inline void update_particle(particle_t *particle)
     particle->vertex->p4.color = color;
     update_particle_movement(particle);
 }
+
+void append_particle_cmd(char **arr);
+void update_particle_list(particle_list_t *plist, sfRenderWindow *window);
+particle_list_t *create_particle_list(sfTexture *texture, u_short length);
 
 #endif /* PARTICLE_H_ */

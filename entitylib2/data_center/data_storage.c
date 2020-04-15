@@ -43,6 +43,7 @@ data_storage_t *init_data_storage(int nb_entitylist)
     datas->sounds = NULL;
     datas->textures = NULL;
     datas->entities = NULL;
+    datas->particle_lists = NULL;
     datas->entitylists = malloc(sizeof(*(datas->entitylists)) * nb_entitylist);
     datas->nb_entitylist = nb_entitylist;
     datas->score = 0;

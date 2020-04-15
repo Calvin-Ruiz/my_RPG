@@ -32,7 +32,7 @@ static void reference_sizeof(dict_t **var)
     append_to_dict(var, "sizeof", dict);
 }
 
-static void reference_types_and_mouse(dict_t **var, my_mouse_t *mouse)
+static void reference_types_mouse_menu(dict_t **var, data_storage_t *datas)
 {
     dict_t *new = NULL;
 
@@ -44,18 +44,22 @@ static void reference_types_and_mouse(dict_t **var, my_mouse_t *mouse)
     append_to_dict(&new, "double", (void *) DOUBLE);
     append_to_dict(var, "type", new);
     new = NULL;
-    append_to_dict(&new, "x", &mouse->pos.x);
-    append_to_dict(&new, "y", &mouse->pos.y);
-    append_to_dict(&new, "left", &mouse->left);
-    append_to_dict(&new, "wheel", &mouse->wheel);
-    append_to_dict(&new, "right", &mouse->right);
+    append_to_dict(&new, "x", &datas->mouse.pos.x);
+    append_to_dict(&new, "y", &datas->mouse.pos.y);
+    append_to_dict(&new, "left", &datas->mouse.left);
+    append_to_dict(&new, "wheel", &datas->mouse.wheel);
+    append_to_dict(&new, "right", &datas->mouse.right);
     append_to_dict(var, "mouse", new);
+    new = NULL;
+    append_to_dict(&new, "main", &datas->main_menu);
+    append_to_dict(&new, "pause", &datas->pause_menu);
+    append_to_dict(var, "menu", new);
 }
 
 static void init_vars(dict_t **var)
 {
     data_storage_t *datas = get_data_storage();
-    dict_t *tmp = NULL;
+
     append_to_dict(var, "texture", datas->textures);
     append_to_dict(var, "thread", NULL);
     append_to_dict(var, "datas", datas);
@@ -67,10 +71,9 @@ static void init_vars(dict_t **var)
     append_to_dict(var, "global", datas->global);
     append_to_dict(var, "entity", &datas->entities);
     append_to_dict(var, "internal", get_internal_func());
-    reference_types_and_mouse(var, &datas->mouse);
-    append_to_dict(&tmp, "main", &datas->main_menu);
-    append_to_dict(&tmp, "pause", &datas->pause_menu);
-    append_to_dict(var, "menu", tmp);
+    reference_types_mouse_menu(var, datas);
+    append_to_dict(var, "particle_list", datas->particle_lists);
+    append_to_dict(var, "color", get_sf_colors());
     append_to_dict(var, "player", &datas->player);
     append_to_dict(var, "func", NULL);
     append_to_dict(var, "local", NULL);
@@ -88,6 +91,7 @@ static void init_cmd(dict_t **cmd)
     append_to_dict(cmd, "new", new_entity);
     append_to_dict(cmd, "log", put_in_log);
     append_to_dict(cmd, "sleep", sleep_cmd);
+    append_to_dict(cmd, "append_particle", append_particle_cmd);
     init_external_cmds(cmd);
 }
 

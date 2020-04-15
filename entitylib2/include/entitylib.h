@@ -15,6 +15,7 @@
 #include <window_manager.h>
 #include <executor.h>
 #include <menu.h>
+#include <particle.h>
 
 void apply_all(entitylist_t *self, void (*action)(), void *arg);
 ushort_t *get_size(long *arr);

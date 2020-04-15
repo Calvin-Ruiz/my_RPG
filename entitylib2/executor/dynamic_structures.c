@@ -15,8 +15,8 @@ void *build_struct(char *str)
     char *ptr = target;
     char **arr = line_to_arr(str, '|');
     executor_t *executor = get_executor();
-    u_char i = 0;
-    for (i = -1; str[++i] != '}' && str[i] != '\0';);
+    short i = 0;
+    for (i = -1; str[++i] != '}';);
     if (str[i] == '}' && str[i + 1] == '!') {
         target = my_malloc(my_getnbr(str + i + 2));
         ptr = target;
@@ -45,7 +45,7 @@ float get_float(char *str)
     while (*str) {
         if (*str == '.' || decremential)
             str += (decremential++ == 0);
-        val = val * 10.f + (*str - '0');
+        val = val * 10.f + (*(str++) - '0');
     }
     while (decremential-- > 0)
         val /= 10.f;
@@ -65,7 +65,7 @@ double get_double(char *str)
     while (*str) {
         if (*str == '.' || decremential)
             str += (decremential++ == 0);
-        val = val * 10. + (*str - '0');
+        val = val * 10. + (*(str++) - '0');
     }
     while (decremential-- > 0)
         val /= 10.;

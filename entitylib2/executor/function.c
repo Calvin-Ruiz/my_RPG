@@ -47,7 +47,7 @@ void call_function(char **arr)
 
 void put_in_log(char **arr)
 {
-    while (++*arr) {
+    while (*++arr) {
         my_puterr(*arr);
         write(2, " ", 1);
     }

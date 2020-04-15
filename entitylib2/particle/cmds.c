@@ -6,13 +6,9 @@
 */
 #include <entitybase.h>
 #include <particle.h>
+#include <tools.h>
 
-void create_particle_attr_cmd(void **arr)
+void append_particle_cmd(char **arr)
 {
-    
-}
-
-void create_particle_param_cmd(void **arr)
-{
-
+    append_particle((particle_list_t *) arr[1], (particle_param_t *) arr[2]);
 }

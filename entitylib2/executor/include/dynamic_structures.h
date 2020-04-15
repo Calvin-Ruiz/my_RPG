@@ -42,24 +42,26 @@ static inline void *get_float_or_double(char *str)
 
 static inline void *eval_arg(char *str, executor_t *executor)
 {
+    static void *out = NULL;
+
     switch (*str) {
         case '$':
-            str = get_data(str + 1, executor->var);
+            out = get_data(str + 1, executor->var);
             break;
         case '=':
-            str = (char *) my_getnbr(str + 1);
+            out = (char *) my_getnbr(str + 1);
             break;
         case '&':
-            str = get_from_dict((dict_t *) executor->cmd, str + 1);
+            out = get_from_dict((dict_t *) executor->cmd, str + 1);
             break;
         case '@':
-            str = (char *) (get_args() + my_getnbr(str + 1));
+            out = (char *) (get_args() + my_getnbr(str + 1));
             break;
         case '~':
-            str = get_float_or_double(str + 1);
+            out = get_float_or_double(str + 1);
             break;
     }
-    return (str);
+    return (&out);
 }
 
 static inline short get_data_len(char *str, dict_t *var)
@@ -69,7 +71,8 @@ static inline short get_data_len(char *str, dict_t *var)
     if (str[0] == 'r' && str[1] == 'a' && str[2] == 'w')
         dlen = my_getnbr(str + 3);
     else
-        dlen = (long) get_from_dict((dict_t *) get_from_dict(var, "type"), str);
+        dlen = (long) get_from_dict((dict_t *) get_from_dict(var, "sizeof"),
+            str);
     if (dlen == 0) {
         my_puterr("\e[35mNullComponentLength : ");
         my_puterr("One component of dynamic struct have a lenght of 0.\e[0m\n");
