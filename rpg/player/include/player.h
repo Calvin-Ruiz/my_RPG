@@ -84,6 +84,13 @@ typedef struct player {
     void (*save)();
     inventory_t *inventory;
     capacity_t *capacity;
+    int money;
+    int xp;
+    char level;
+    int atk;
+    int def;
+    int hp;
+    int max_hp;
 } player_t;
 
 void create_player_cmd(char **arr);

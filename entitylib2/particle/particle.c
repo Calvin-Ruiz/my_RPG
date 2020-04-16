@@ -5,6 +5,7 @@
 ** particle.c
 */
 #include <entitybase.h>
+#include <data_storage.h>
 #include <particle.h>
 #include <string.h>
 
@@ -28,13 +29,16 @@ particle_list_t *create_particle_list(sfTexture *texture, u_short length)
     return (plist);
 }
 
-void update_particle_list(particle_list_t *plist, sfRenderWindow *window)
+void update_particle_list(particle_list_t *plist, sfRenderWindow *window,
+    sfVector2f *pos)
 {
     particle_t *particle = plist->particles;
     u_short length = plist->length;
 
     while (length-- > 0)
         update_particle(particle++);
-    sfRenderWindow_drawPrimitives(window, plist->vertex, plist->length << 2,
-        sfQuads, (sfRenderStates *) plist);
+    plist->state.transform.matrix[2] = pos->x;
+    plist->state.transform.matrix[5] = pos->y;
+    sfRenderWindow_drawPrimitives(window, plist->vertex,
+        plist->length << 2, sfQuads, (sfRenderStates *) plist);
 }

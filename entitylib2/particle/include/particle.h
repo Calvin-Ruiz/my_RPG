@@ -106,7 +106,8 @@ static inline void update_particle(particle_t *particle)
 }
 
 void append_particle_cmd(char **arr);
-void update_particle_list(particle_list_t *plist, sfRenderWindow *window);
+void update_particle_list(particle_list_t *plist, sfRenderWindow *window,
+    sfVector2f *pos);
 particle_list_t *create_particle_list(sfTexture *texture, u_short length);
 
 #endif /* PARTICLE_H_ */

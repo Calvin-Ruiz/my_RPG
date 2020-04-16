@@ -54,7 +54,7 @@ void mainloop(data_storage_t *datas, sfRenderWindow *window)
         update_player_attributes(datas);
         decor_update(datas->entitylists[DECOR_LIST], datas->player);
         display_entities(window, &(*datas->entitylists)->next);
-        update_particle_list(datas->particle_lists->data, window);
+        update_particle_list(datas->particle_lists->data, window, &datas->pos);
         update_window(window, datas);
         actual = sfClock_getElapsedTime(datas->clock).microseconds;
         last += 25000;

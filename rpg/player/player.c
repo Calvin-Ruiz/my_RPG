@@ -22,8 +22,6 @@ void create_player_cmd(char **arr)
         return;
     }
     datas->player = player;
-    //player->disp_next = datas->entitylists[0]->next;
-    //datas->entitylists[0]->next = (entity_t *) player;
 }
 
 void update_player(player_t *self, u_int frame_dec, my_keys_t *keys)

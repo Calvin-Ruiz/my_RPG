@@ -38,7 +38,7 @@ typedef struct entity {
     int health;
     float speed;
     pos_t pos;
-    void (*update)();
+    void (*update)(struct entity *self, int delta_time);
     void *(*new)();
     void (*destroy)();
     void *(*load)();

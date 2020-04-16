@@ -7,7 +7,7 @@
 #include <entity.h>
 #include <data_storage.h>
 
-void entitylist_update(entitylist_t *self, data_storage_t *datas)
+void entitylist_update(entitylist_t *self)
 {
     entity_t **entity = &(self->next);
     entity_t *tmp;
@@ -21,8 +21,7 @@ void entitylist_update(entitylist_t *self, data_storage_t *datas)
             (*entity)->destroy(*entity);
             *entity = tmp;
         } else {
-            (*entity)->update(*entity, datas->entitylists,
-                delta_time);
+            (*entity)->update(*entity, delta_time);
             entity = &((*entity)->next);
         }
     }
