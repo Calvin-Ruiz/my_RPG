@@ -5,6 +5,7 @@
 ** main.c
 */
 #include <main.h>
+#include <pause.h>
 #include <events.h>
 #include <entity_display.h>
 #include <etools.h>
@@ -17,10 +18,9 @@ void my_closure(data_storage_t *datas)
     ((menu_t *) datas->main_menu)->opened = 0;
     ((menu_t *) datas->pause_menu)->opened = 0;
     datas->is_alive = 0;
-    free_storage_content(datas, 7);
 }
 
-void my_event(data_storage_t *datas)
+void my_event(data_storage_t *datas, long long *last)
 {
     sfEvent event;
 
@@ -31,7 +31,7 @@ void my_event(data_storage_t *datas)
             return;
         }
         if (event.type == sfEvtKeyPressed)
-            event_press(datas, event.key.code);
+            event_press(datas, event.key.code, last);
         if (event.type == sfEvtKeyReleased)
             event_release(datas, event.key.code);
         if (event.type == sfEvtMouseButtonPressed)
@@ -60,7 +60,7 @@ void mainloop(data_storage_t *datas, sfRenderWindow *window)
         last += 25000;
         if (actual < last)
             sfSleep((sfTime) {last - actual});
-        my_event(datas);
+        my_event(datas, &last);
     }
 }
 
@@ -72,10 +72,13 @@ int main(void)
         create_window((sfVideoMode) {800, 600, 32}, "My RPG",
         sfResize | sfClose, 60))
         return (84);
+    get_internal_data()->text_font = sfFont_createFromFile("text_font.ttf");
     init_some_datas(datas);
+    init_pause_buttons(datas->pause_menu);
     append_to_dict(&datas->particle_lists, "main", create_particle_list(
         get_from_dict(datas->textures, "particle"), 100));
     init_executor();
     open_menu(datas->main_menu);
+    free_storage_content(datas, 7);
     return (0);
 }

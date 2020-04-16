@@ -34,13 +34,13 @@ void init_pause_buttons(menu_t *menu)
     data_storage_t *datas = get_data_storage();
 
     menu->button = create_button(get_from_dict(datas->textures,
-        "button.png"), get_internal_data()->text_font, (pos_t) {(sfVector2f)
+        "button"), get_internal_data()->text_font, (pos_t) {(sfVector2f)
         {272, 200}, (sfVector2f) {256, 64}}, (void (*)(void *)) exit_pause);
     menu->button->next = create_button(get_from_dict(datas->textures,
-        "button.png"), get_internal_data()->text_font, (pos_t) {(sfVector2f)
+        "button"), get_internal_data()->text_font, (pos_t) {(sfVector2f)
         {272, 300}, (sfVector2f) {256, 64}}, (void (*)(void *)) exit_mainloop);
     menu->button->next->next = create_button(get_from_dict(datas->textures,
-        "button.png"), get_internal_data()->text_font, (pos_t) {(sfVector2f)
+        "button"), get_internal_data()->text_font, (pos_t) {(sfVector2f)
         {272, 400}, (sfVector2f) {256, 64}}, (void (*)(void *)) my_closure);
     menu->button->next->next->next = NULL;
     menu->button->data = datas;

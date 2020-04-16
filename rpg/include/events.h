@@ -8,7 +8,8 @@
 #ifndef EVENTS_H_
 #define EVENTS_H_
 
-static inline void event_press(data_storage_t *datas, sfKeyCode code)
+static inline void event_press(data_storage_t *datas, sfKeyCode code,
+    long long *last)
 {
     if (code == sfKeyF10)
         datas->ask_command = 1;
@@ -24,6 +25,10 @@ static inline void event_press(data_storage_t *datas, sfKeyCode code)
         datas->key.down = 1;
     if (code == sfKeySpace)
         datas->key.space = 1;
+    if (code == sfKeyEscape) {
+        open_menu(datas->pause_menu);
+        reset_timers(datas, last);
+    }
 }
 
 static inline void event_release(data_storage_t *datas, sfKeyCode code)
