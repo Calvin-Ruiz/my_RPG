@@ -54,7 +54,9 @@ void mainloop(data_storage_t *datas, sfRenderWindow *window)
         update_player_attributes(datas);
         decor_update(datas->entitylists[DECOR_LIST], datas->player);
         display_entities(window, &(*datas->entitylists)->next);
-        update_particle_list(datas->particle_lists->data, window, &datas->pos);
+        update_particle_emitter(datas->particle_lists->data,
+            datas->particle_emitters->data);
+        update_particle_list(datas->particle_lists->data, window, NULL);
         update_window(window, datas);
         actual = sfClock_getElapsedTime(datas->clock).microseconds;
         last += 25000;
@@ -76,7 +78,7 @@ int main(void)
     init_some_datas(datas);
     init_pause_buttons(datas->pause_menu);
     append_to_dict(&datas->particle_lists, "main", create_particle_list(
-        get_from_dict(datas->textures, "particle"), 100));
+        get_from_dict(datas->textures, "particle"), 3000));
     init_executor();
     open_menu(datas->main_menu);
     free_storage_content(datas, 7);

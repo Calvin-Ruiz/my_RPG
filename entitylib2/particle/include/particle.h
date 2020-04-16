@@ -49,6 +49,19 @@ typedef struct particle_list {
     u_short length;
 } particle_list_t;
 
+typedef struct emitter {
+    short min_particle;
+    short variation;
+    short spawn_waiting;
+    char spawn_holding;
+    short waiting;
+    char holding;
+    sfIntRect area;
+    particle_param_t *particle;
+    pos_t *rect;
+    char nb_rect;
+} emitter_t;
+
 static inline void append_particle(particle_list_t *plist,
     particle_param_t *params)
 {
@@ -72,10 +85,15 @@ static inline void update_particle_movement(particle_t *particle)
 {
     vertex4_t *v = particle->vertex;
 
-    particle->attr.velocity.x = (particle->attr.velocity.x +
-        particle->attr.force.x) * particle->attr.acceleration;
-    particle->attr.velocity.y = (particle->attr.velocity.y +
-        particle->attr.force.y) * particle->attr.acceleration;
+    if (particle->attr.lifetime) {
+        particle->attr.velocity.x = (particle->attr.velocity.x +
+            particle->attr.force.x) * particle->attr.acceleration;
+        particle->attr.velocity.y = (particle->attr.velocity.y +
+            particle->attr.force.y) * particle->attr.acceleration;
+    } else {
+        particle->attr.velocity.x *= particle->attr.acceleration;
+        particle->attr.velocity.y *= particle->attr.acceleration;
+    }
     v->p1.position.x += particle->attr.velocity.x;
     v->p1.position.y += particle->attr.velocity.y;
     v->p3.position.x += particle->attr.velocity.x;
@@ -105,9 +123,11 @@ static inline void update_particle(particle_t *particle)
     update_particle_movement(particle);
 }
 
-void append_particle_cmd(char **arr);
+particle_list_t *create_particle_list(sfTexture *texture, u_short length);
 void update_particle_list(particle_list_t *plist, sfRenderWindow *window,
     sfVector2f *pos);
-particle_list_t *create_particle_list(sfTexture *texture, u_short length);
+void append_particle_cmd(char **arr);
+void create_particle_emitter_cmd(char **arr);
+void update_particle_emitter(particle_list_t *plist, emitter_t *emitter);
 
 #endif /* PARTICLE_H_ */

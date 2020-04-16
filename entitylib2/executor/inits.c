@@ -67,14 +67,15 @@ static void init_vars(dict_t **var)
     reference_sizeof(var);
     append_to_dict(var, "sbuff", datas->sound_buffs);
     append_to_dict(var, "entitylist", datas->entitylists);
-    append_to_dict(var, "sound", datas->sounds);
+    append_to_dict(var, "Sound", &datas->sounds);
     append_to_dict(var, "global", datas->global);
-    append_to_dict(var, "entity", &datas->entities);
+    append_to_dict(var, "Entity", &datas->entities);
     append_to_dict(var, "internal", get_internal_func());
     reference_types_mouse_menu(var, datas);
     append_to_dict(var, "particle_list", datas->particle_lists);
+    append_to_dict(var, "Particle_emitter", &datas->particle_emitters);
     append_to_dict(var, "color", get_sf_colors());
-    append_to_dict(var, "player", &datas->player);
+    append_to_dict(var, "Player", &datas->player);
     append_to_dict(var, "func", NULL);
     append_to_dict(var, "local", NULL);
 }
@@ -85,13 +86,14 @@ static void init_cmd(dict_t **cmd)
     append_to_dict(cmd, "trace", set_traced_var_cmd);
     append_to_dict(cmd, "tracer", trace_thread);
     append_to_dict(cmd, "set", set_value);
-    append_to_dict(cmd, "create_variable", set_value);
+    append_to_dict(cmd, "create_variable", create_variable);
     append_to_dict(cmd, "thread", thread_cmd);
     append_to_dict(cmd, "append", append_to_list_cmd);
     append_to_dict(cmd, "new", new_entity);
     append_to_dict(cmd, "log", put_in_log);
     append_to_dict(cmd, "sleep", sleep_cmd);
     append_to_dict(cmd, "append_particle", append_particle_cmd);
+    append_to_dict(cmd, "create_particle_emitter", create_particle_emitter_cmd);
     init_external_cmds(cmd);
 }
 

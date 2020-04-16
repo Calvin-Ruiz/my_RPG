@@ -57,6 +57,7 @@ typedef struct data_storage {
     dict_t *textures;
     dict_t *entities;
     dict_t *particle_lists;
+    dict_t *particle_emitters;
     player_t *player;
     entitylist_t **entitylists;
     int nb_entitylist;

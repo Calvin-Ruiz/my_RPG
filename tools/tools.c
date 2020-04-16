@@ -12,6 +12,12 @@ void *my_malloc(size_t size)
     static long int pos = 0;
 
     pos += size;
+    if (pos >= 1024*64) {
+        my_puterr("\e[31mMyMallocOverflow : my_malloc area is full.\n\e[91mS");
+        my_puterr("afetyMalloc : Using malloc to return valid pointer.\n\e[0m");
+        pos -= size;
+        return (malloc(size));
+    }
     return (buffer + pos - size);
 }
 
