@@ -26,7 +26,7 @@ static inline void event_press(data_storage_t *datas, sfKeyCode code,
     if (code == sfKeySpace)
         datas->key.space = 1;
     if (code == sfKeyEscape) {
-        open_menu(datas->pause_menu);
+        open_sub_menu(datas->pause_menu);
         reset_timers(datas, last);
     }
 }

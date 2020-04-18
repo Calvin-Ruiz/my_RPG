@@ -53,18 +53,23 @@ char menu_clic(menu_t *menu, sfMouseButtonEvent *mouse)
     return (0);
 }
 
-void menu_events(menu_t *menu)
+void menu_events(menu_t *menu, data_storage_t *datas)
 {
     sfEvent event;
 
     while (menu->opened && sfRenderWindow_pollEvent(menu->window, &event)) {
         if (event.type == sfEvtClosed) {
-            my_closure(get_data_storage());
+            my_closure(datas);
             return;
+        }
+        if (event.type == sfEvtMouseButtonReleased
+            && event.mouseButton.button == sfMouseLeft) {
+            datas->mouse.left = 0;
+            menu_clic(menu, &event.mouseButton);
         }
         if (event.type == sfEvtMouseButtonPressed
             && event.mouseButton.button == sfMouseLeft)
-            menu_clic(menu, &event.mouseButton);
+            datas->mouse.left = 1;
     }
 }
 
@@ -76,6 +81,6 @@ void open_menu(menu_t *menu)
     while (menu->opened) {
         sfRenderWindow_drawSprite(menu->window, menu->background, NULL);
         menu_update(menu, datas);
-        menu_events(menu);
+        menu_events(menu, datas);
     }
 }

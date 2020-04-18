@@ -91,5 +91,7 @@ void menu_update(menu_t *menu, data_storage_t *datas);
 char menu_clic(menu_t *menu, sfMouseButtonEvent *mouse);
 void open_menu(menu_t *menu);
 void my_closure(data_storage_t *datas);
+void open_sub_menu(menu_t *menu);
+void menu_events(menu_t *menu, data_storage_t *datas);
 
 #endif /* MENU_H_ */

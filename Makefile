@@ -27,6 +27,7 @@ FILES = entitylib2/data_center/data_loader.c \
 	entitylib2/executor/trace.c \
 	entitylib2/menu/button.c \
 	entitylib2/menu/menu.c \
+	entitylib2/menu/sub_menu.c \
 	entitylib2/particle/cmds.c \
 	entitylib2/particle/particle.c \
 	entitylib2/sounds/sound_manager.c \
