@@ -59,9 +59,9 @@ static void reference_types_mouse_menu(dict_t **var, data_storage_t *datas)
 static void init_vars(dict_t **var)
 {
     data_storage_t *datas = get_data_storage();
-
     append_to_dict(var, "texture", datas->textures);
     append_to_dict(var, "thread", NULL);
+    append_to_dict(var, "sys", NULL);
     append_to_dict(var, "datas", datas);
     append_to_dict(var, "struct", define_structs());
     reference_sizeof(var);

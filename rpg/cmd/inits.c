@@ -32,6 +32,7 @@ void init_external_cmds(dict_t **cmd)
     append_to_dict(cmd, "create_item", create_item_cmd);
     append_to_dict(cmd, "create_player", create_player_cmd);
     append_to_dict(cmd, "create_decor", create_solid_decor_cmd);
+    append_to_dict(cmd, "give_item", give_item_cmd);
 }
 
 dict_t *get_internal_func(void)

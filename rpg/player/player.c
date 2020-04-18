@@ -15,13 +15,17 @@ void create_player_cmd(char **arr)
 {
     player_t *player = malloc(sizeof(player_t));
     data_storage_t *datas = get_data_storage();
+    short *size = malloc(sizeof(short));
 
     arr = create_entity_base((entity_t *) player, &datas->entities, arr);
-    if (arr == NULL) {
+    if (arr == NULL || size == NULL) {
         my_puterr("\e[91mFatal : Faild to create player\n\e[0m");
         return;
     }
     datas->player = player;
+    player->inventory = malloc(sizeof(inventory_t));
+    *size = 0;
+    *(player->inventory) = (inventory_t) {NULL, append_saved(datas, size)};
 }
 
 void update_player(player_t *self, u_int frame_dec, my_keys_t *keys)

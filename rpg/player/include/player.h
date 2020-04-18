@@ -32,6 +32,7 @@ typedef struct item {
     char *name;
     int cost;
     sfSprite *icon;
+    void (*action)();
 } item_t;
 
 typedef struct stored_item {
@@ -95,5 +96,6 @@ typedef struct player {
 
 void create_item_cmd(char **arr);
 void create_player_cmd(char **arr);
+void give_item_cmd(char **arr);
 
 #endif /* PLAYER_H_ */
