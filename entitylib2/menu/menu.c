@@ -76,8 +76,8 @@ void menu_events(menu_t *menu, data_storage_t *datas)
 void open_menu(menu_t *menu)
 {
     data_storage_t *datas = get_data_storage();
-    menu->opened = 1;
 
+    menu->opened = 1;
     while (menu->opened) {
         sfRenderWindow_drawSprite(menu->window, menu->background, NULL);
         menu_update(menu, datas);

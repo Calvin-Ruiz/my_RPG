@@ -93,6 +93,7 @@ typedef struct player {
     int max_hp;
 } player_t;
 
+void create_item_cmd(char **arr);
 void create_player_cmd(char **arr);
 
 #endif /* PLAYER_H_ */
