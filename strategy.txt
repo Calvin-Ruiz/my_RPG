@@ -41,6 +41,13 @@ Parcourir :
 - '$' pour une position dans la liste chainée (exemple : entity.$3)
 - '@struct_type.key' pour caster en une structure et chercher un argument (sans le déréférencer)
 
+Conditions :
+- if (long *) <operation> (long *) &<command_name> <command_args>
+- operation : '<', '>' ou '=', pouvant être suivi de '!' pour inverser le résultat du test (exemple : <! équivaut à >= en C)
+- (long *) : pointeur vers un long, le long pointé sera utilisé pour le test
+- command_name : nom de la commande a exécuter si le test est vrai
+- command_args : arguments à envoyer à la commande
+
 Particle system :
     Apparition
     - ponctuelle

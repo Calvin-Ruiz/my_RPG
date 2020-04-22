@@ -45,13 +45,22 @@ void call_function(char **arr)
     my_puterr("\e[92m<---- END ---->\n\e[0m");
 }
 
-void put_in_log(char **arr)
+void execute_if_true(char **arr)
 {
-    while (*++arr) {
-        my_puterr(*arr);
-        write(2, " ", 1);
+    char result = 0;
+
+    if (arr[1] == NULL || arr[3] == NULL) {
+        my_puterr("\e[94mIfError : nullptr received for variables\n\e[0m");
+        return;
     }
-    write(2, "\n", 1);
+    if (arr[2][0] == '<')
+        result = ((long *) arr)[1] < ((long *) arr)[3];
+    if (arr[2][0] == '>')
+        result = ((long *) arr)[1] > ((long *) arr)[3];
+    if (arr[2][0] == '=')
+        result = ((long *) arr)[1] == ((long *) arr)[3];
+    if (result ^ (arr[2][1] == '!'))
+        ((void (*)(char **arr)) arr[4])(arr + 4);
 }
 
 void new_entity(char **arr)

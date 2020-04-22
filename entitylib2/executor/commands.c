@@ -20,3 +20,12 @@ void sleep_cmd(char **args)
 {
     sfSleep((sfTime) {(long) args[1]});
 }
+
+void put_in_log(char **arr)
+{
+    while (*++arr) {
+        my_puterr(*arr);
+        write(2, " ", 1);
+    }
+    write(2, "\n", 1);
+}

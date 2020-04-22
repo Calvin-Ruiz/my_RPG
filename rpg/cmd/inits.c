@@ -32,6 +32,7 @@ void init_external_cmds(dict_t **cmd)
     append_to_dict(cmd, "create_item", create_item_cmd);
     append_to_dict(cmd, "create_player", create_player_cmd);
     append_to_dict(cmd, "create_decor", create_solid_decor_cmd);
+    append_to_dict(cmd, "create_decor", create_solid_decor_cmd);
     append_to_dict(cmd, "give_item", give_item_cmd);
 }
 
@@ -42,5 +43,7 @@ dict_t *get_internal_func(void)
     append_to_dict(&new, "def_destroy", default_destroy);
     append_to_dict(&new, "pupdate", update_player);
     append_to_dict(&new, "new_decor", new_solid_decor);
+    append_to_dict(&new, "deco_load", load_solid_decor);
+    append_to_dict(&new, "deco_save", save_solid_decor);
     return (new);
 }

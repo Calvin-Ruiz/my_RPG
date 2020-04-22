@@ -39,7 +39,9 @@ FILES = entitylib2/data_center/data_loader.c \
 	rpg/entity_groups/decor.c \
 	rpg/entity_groups/event.c \
 	rpg/entity_groups/npc.c \
+	rpg/entity_types/dynamic_npc.c \
 	rpg/entity_types/solid_decor.c \
+	rpg/entity_types/solid_event.c \
 	rpg/how_to_play.c \
 	rpg/main.c \
 	rpg/menu.c \
@@ -69,6 +71,12 @@ clean:
 
 fclean:	clean
 	rm -f $(NAME)
+
+full:	update
+	make re
+
+fulld:	update
+	make debug
 
 re:	fclean all
 

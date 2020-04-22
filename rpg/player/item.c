@@ -44,6 +44,30 @@ void give_item(player_t *player, item_t *item, char *name)
     player->inventory->next = tmp;
 }
 
+void buy_item(player_t *player, item_t *item, char *name)
+{
+    sitem_t *tmp = player->inventory->next;
+
+    while (item && my_strcmp(item->name, name))
+        item = item->next;
+    if (item == NULL)
+        return;
+    if (player->money < item->cost)
+        return;
+    player->money -= item->cost;
+    while (tmp && tmp->item != item)
+        tmp = tmp->next;
+    if (tmp) {
+        tmp->amount++;
+        return;
+    }
+    tmp = malloc(sizeof(sitem_t));
+    if (tmp == NULL)
+        return;
+    *tmp = (sitem_t) {player->inventory->next, item, 1};
+    player->inventory->next = tmp;
+}
+
 void give_item_cmd(char **arr)
 {
     give_item(*(player_t **) arr[1], (item_t *) arr[2], arr[3]);

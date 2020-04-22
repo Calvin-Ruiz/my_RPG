@@ -16,6 +16,7 @@ typedef struct enemy {
     int def;
     int xp_drop;
     int money_drop;
+    capacity_t *capacity;
 } enemy_t;
 
 #endif /* ENEMY_H_ */

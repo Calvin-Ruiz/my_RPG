@@ -28,6 +28,8 @@ typedef struct event {
     void *(*load)();
     void (*save)();
     void (*event)(struct event *self, player_t *player);
+    ushort_t tag_id;
+    void *tag;
 } event_t;
 
 void event_update(entitylist_t *self, player_t *player);

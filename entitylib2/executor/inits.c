@@ -94,6 +94,7 @@ static void init_cmd(dict_t **cmd)
     append_to_dict(cmd, "sleep", sleep_cmd);
     append_to_dict(cmd, "append_particle", append_particle_cmd);
     append_to_dict(cmd, "create_particle_emitter", create_particle_emitter_cmd);
+    append_to_dict(cmd, "if", execute_if_true);
     init_external_cmds(cmd);
 }
 

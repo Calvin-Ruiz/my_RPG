@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2019
-** entitylib2
+** MUL_my_rpg_2019
 ** File description:
 ** solid_decor.c
 */
@@ -35,4 +35,22 @@ decor_t *new_solid_decor(char **arr)
     decor->pos.v2 = (sfVector2f) {decor->pos.v1.x + decor->size[0],
         decor->pos.v1.y + decor->size[1]};
     return (decor);
+}
+
+decor_t *load_solid_decor(decor_t *self, decor_save_t *save)
+{
+    decor_t *new = malloc(sizeof(*self));
+
+    *new = *self;
+    new->pos.v1 = save->pos;
+    new->pos.v2 = (sfVector2f) {save->pos.x + new->size[0],
+        save->pos.y + new->size[1]};
+    return (new);
+}
+
+void save_solid_decor(decor_t *self)
+{
+    decor_save_t decor_save = {sizeof(sfVector2f), self->pos.v1};
+
+    write(1, (char *) &decor_save, sizeof(short) + sizeof(sfVector2f));
 }

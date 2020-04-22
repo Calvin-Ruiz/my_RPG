@@ -7,6 +7,7 @@
 
 #include <entitybase.h>
 #include <entitylist.h>
+#include <data_storage.h>
 #include <player.h>
 #include <npc.h>
 
@@ -15,6 +16,7 @@ void npc_update(entitylist_t *self, player_t *ent)
     entity_t *tmp = self->next;
     long long time = sfClock_getElapsedTime(self->clock).microseconds;
     int delta_time = time - self->last;
+    data_storage_t *datas = get_data_storage();
 
     while (tmp) {
         tmp->update(tmp, delta_time);
@@ -22,6 +24,9 @@ void npc_update(entitylist_t *self, player_t *ent)
             ent->pos.v1.y < tmp->pos.v2.y && ent->pos.v2.y > tmp->pos.v1.y) {
             npc_collision(tmp, ent);
         }
+        if (tmp->speed > 0)
+            conditionnal_insertion(&datas->entitylists[0]->next,
+                (entity_t *) tmp);
         tmp = tmp->next;
     }
 }
