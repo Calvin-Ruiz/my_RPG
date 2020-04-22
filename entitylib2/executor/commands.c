@@ -37,13 +37,13 @@ void operate(char **arr)
         return;
     }
     if (*(arr[3]) == '+')
-        *(long *) arr[1] = *(long *) arr[2] + *(long *) arr[4];
+        *(int *) arr[1] = *(int *) arr[2] + *(int *) arr[4];
     if (*(arr[3]) == '-')
-        *(long *) arr[1] = *(long *) arr[2] - *(long *) arr[4];
+        *(int *) arr[1] = *(int *) arr[2] - *(int *) arr[4];
     if (*(arr[3]) == '*')
-        *(long *) arr[1] = *(long *) arr[2] * *(long *) arr[4];
+        *(int *) arr[1] = *(int *) arr[2] * *(int *) arr[4];
     if (*(arr[3]) == '/')
-        *(long *) arr[1] = *(long *) arr[2] / *(long *) arr[4];
+        *(int *) arr[1] = *(int *) arr[2] / *(int *) arr[4];
     if (*(arr[3]) == '%')
-        *(long *) arr[1] = *(long *) arr[2] % *(long *) arr[4];
+        *(int *) arr[1] = *(int *) arr[2] % *(int *) arr[4];
 }

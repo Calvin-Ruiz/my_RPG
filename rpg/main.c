@@ -54,6 +54,7 @@ void mainloop(data_storage_t *datas, sfRenderWindow *window)
         update_player_attributes(datas);
         decor_update(datas->entitylists[DECOR_LIST], datas->player);
         display_entities(window, &(*datas->entitylists)->next);
+        npc_update(datas->entitylists[NPC_LIST], datas->player);
         update_particle_emitter(datas->particle_lists->data,
             datas->particle_emitters->data);
         update_particle_list(datas->particle_lists->data, window, NULL);

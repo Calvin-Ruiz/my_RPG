@@ -1,0 +1,5 @@
+# Just npc interaction test
+#log Hello !
+#if $key.space b  &log Interaction with npc :)
+# It work
+

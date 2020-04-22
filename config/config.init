@@ -1,5 +1,6 @@
 # Define local variables
 create_variable $sizeof.ptr particle_pattern_1
+create_variable $sizeof.ptr way1
 
 # Define player
 # attributes : name texture size_x size_y frames_x frames_y health frame_delay_cs speed_pps func_update func_new func_destroy func_load func_save

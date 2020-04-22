@@ -49,16 +49,18 @@ void execute_if_true(char **arr)
 {
     char result = 0;
 
-    if (arr[1] == NULL || arr[3] == NULL) {
+    if (arr[1] == NULL || (arr[3] == NULL)) {
         my_puterr("\e[94mIfError : nullptr received for variables\n\e[0m");
         return;
     }
     if (arr[2][0] == '<')
-        result = *(long *) arr[1] < *(long *) arr[3];
+        result = *(int *) arr[1] < *(int *) arr[3];
     if (arr[2][0] == '>')
-        result = *(long *) arr[1] > *(long *) arr[3];
+        result = *(int *) arr[1] > *(int *) arr[3];
     if (arr[2][0] == '=')
-        result = *(long *) arr[1] == *(long *) arr[3];
+        result = *(int *) arr[1] == *(int *) arr[3];
+    if (arr[2][0] == 'b')
+        result = *(arr[1]);
     if (result ^ (arr[2][1] == '!'))
         ((void (*)(char **arr)) arr[4])(arr + 4);
 }

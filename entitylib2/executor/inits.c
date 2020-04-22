@@ -10,27 +10,7 @@
 #include <particle.h>
 #include <data_storage.h>
 #include <menu.h>
-
-static void reference_sizeof(dict_t **var)
-{
-    dict_t *dict = NULL;
-
-    append_to_dict(&dict, "sfVector2f", (void *) sizeof(sfVector2f));
-    append_to_dict(&dict, "dict_t", (void *) sizeof(dict_t));
-    append_to_dict(&dict, "entity_t", (void *) sizeof(entity_t));
-    append_to_dict(&dict, "entitylist_t", (void *) sizeof(entitylist_t));
-    append_to_dict(&dict, "menu_t", (void *) sizeof(menu_t));
-    append_to_dict(&dict, "ptr", (void *) sizeof(void *));
-    append_to_dict(&dict, "char", (void *) sizeof(char));
-    append_to_dict(&dict, "double", (void *) sizeof(double));
-    append_to_dict(&dict, "float", (void *) sizeof(float));
-    append_to_dict(&dict, "short", (void *) sizeof(short));
-    append_to_dict(&dict, "long", (void *) sizeof(long));
-    append_to_dict(&dict, "int", (void *) sizeof(int));
-    append_to_dict(&dict, "particle_param", (void *) sizeof(particle_param_t));
-    append_to_dict(&dict, "particle_attr_t", (void *) sizeof(particle_attr_t));
-    append_to_dict(var, "sizeof", dict);
-}
+#include <cmd_inits.h>
 
 static void reference_types_mouse_menu(dict_t **var, data_storage_t *datas)
 {
@@ -59,19 +39,10 @@ static void reference_types_mouse_menu(dict_t **var, data_storage_t *datas)
 static void init_vars(dict_t **var)
 {
     data_storage_t *datas = get_data_storage();
-    append_to_dict(var, "texture", datas->textures);
-    append_to_dict(var, "thread", NULL);
-    append_to_dict(var, "sys", NULL);
-    append_to_dict(var, "datas", datas);
-    append_to_dict(var, "struct", define_structs());
-    reference_sizeof(var);
-    append_to_dict(var, "sbuff", datas->sound_buffs);
-    append_to_dict(var, "entitylist", datas->entitylists);
-    append_to_dict(var, "Sound", &datas->sounds);
-    append_to_dict(var, "global", datas->global);
-    append_to_dict(var, "Entity", &datas->entities);
-    append_to_dict(var, "internal", get_internal_func());
+
+    sub_init_vars(var, datas);
     reference_types_mouse_menu(var, datas);
+    reference_keys(var, datas);
     append_to_dict(var, "particle_list", datas->particle_lists);
     append_to_dict(var, "Particle_emitter", &datas->particle_emitters);
     append_to_dict(var, "color", get_sf_colors());

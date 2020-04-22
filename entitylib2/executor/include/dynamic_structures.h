@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2019
-** MUL_my_rpg_2019
+** entitylib2
 ** File description:
 ** dynamic_structures.h
 */
