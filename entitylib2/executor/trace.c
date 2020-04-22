@@ -80,7 +80,7 @@ void trace_thread(void *ptr)
         sfSleep((sfTime) {50000});
         if (*ask_command == 0)
             continue;
-        write(1, "> ", 2);
+        write(1, "\e[33m>>> \e[0m", 13);
         size = read(0, cmd, 4096);
         if (size <= 0) {
             *ask_command = 0;
