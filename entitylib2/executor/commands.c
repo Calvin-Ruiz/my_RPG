@@ -29,3 +29,21 @@ void put_in_log(char **arr)
     }
     write(2, "\n", 1);
 }
+
+void operate(char **arr)
+{
+    if (arr[1] == NULL || arr[2] == NULL || arr[4] == NULL) {
+        my_puterr("\e[94mIfError : nullptr received for variables\n\e[0m");
+        return;
+    }
+    if (*(arr[3]) == '+')
+        *(long *) arr[1] = *(long *) arr[2] + *(long *) arr[4];
+    if (*(arr[3]) == '-')
+        *(long *) arr[1] = *(long *) arr[2] - *(long *) arr[4];
+    if (*(arr[3]) == '*')
+        *(long *) arr[1] = *(long *) arr[2] * *(long *) arr[4];
+    if (*(arr[3]) == '/')
+        *(long *) arr[1] = *(long *) arr[2] / *(long *) arr[4];
+    if (*(arr[3]) == '%')
+        *(long *) arr[1] = *(long *) arr[2] % *(long *) arr[4];
+}

@@ -54,11 +54,11 @@ void execute_if_true(char **arr)
         return;
     }
     if (arr[2][0] == '<')
-        result = ((long *) arr)[1] < ((long *) arr)[3];
+        result = *(long *) arr[1] < *(long *) arr[3];
     if (arr[2][0] == '>')
-        result = ((long *) arr)[1] > ((long *) arr)[3];
+        result = *(long *) arr[1] > *(long *) arr[3];
     if (arr[2][0] == '=')
-        result = ((long *) arr)[1] == ((long *) arr)[3];
+        result = *(long *) arr[1] == *(long *) arr[3];
     if (result ^ (arr[2][1] == '!'))
         ((void (*)(char **arr)) arr[4])(arr + 4);
 }
