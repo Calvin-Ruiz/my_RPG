@@ -8,6 +8,8 @@
 #ifndef EVENT_H_
 #define EVENT_H_
 
+#include <executor.h>
+
 typedef struct event {
     struct event *next;
     struct event *prev;
@@ -24,14 +26,35 @@ typedef struct event {
     pos_t pos;
     void (*update)(struct event *self, int delta_time);
     void *(*new)();
-    void (*destroy)();
+    void (*destroy)(struct event *self);
     void *(*load)();
     void (*save)();
     void (*event)(struct event *self, player_t *player);
+    char *command_name;
     ushort_t tag_id;
     void *tag;
 } event_t;
 
+#ifndef CALLER
+#define CALLER
+    typedef struct caller {
+        long nb_args;
+        void (*caller)(char **);
+        char *function_name;
+        void *self;
+        player_t *player;
+    } caller_t;
+#endif /* CALLER */
+
 void event_update(entitylist_t *self, player_t *player);
+
+static inline void event_event(event_t *self, player_t *player)
+{
+    if (self->event)
+        self->event(self, player);
+    else
+        call_function(((char **) &(caller_t) {4, call_function,
+            self->command_name, self, player}) + 1);
+}
 
 #endif /* EVENT_H_ */

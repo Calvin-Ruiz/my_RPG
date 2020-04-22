@@ -33,7 +33,7 @@ typedef struct npc {
     pos_t pos;
     void (*update)(struct npc *self, int delta_time);
     void *(*new)();
-    void (*destroy)();
+    void (*destroy)(struct npc *self);
     void *(*load)();
     void (*save)();
     void (*event)(struct npc *self, player_t *player);
@@ -44,13 +44,18 @@ typedef struct npc {
     short wait_time;
 } npc_t;
 
-typedef struct caller {
-    void *null;
-    void (*caller)(char **);
-    char *function_name;
-    npc_t *self;
-    player_t *player;
-} caller_t;
+#ifndef CALLER
+#define CALLER
+    typedef struct caller {
+        long nb_args;
+        void (*caller)(char **);
+        char *function_name;
+        void *self;
+        player_t *player;
+    } caller_t;
+#endif /* CALLER */
+
+void npc_update(entitylist_t *self, player_t *player);
 
 static inline void npc_collision(npc_t *self, player_t *player)
 {
@@ -58,7 +63,7 @@ static inline void npc_collision(npc_t *self, player_t *player)
     if (self->event)
         self->event(self, player);
     else
-        call_function(((char **) &(caller_t) {NULL, call_function,
+        call_function(((char **) &(caller_t) {4, call_function,
             self->command_name, self, player}) + 1);
 }
 

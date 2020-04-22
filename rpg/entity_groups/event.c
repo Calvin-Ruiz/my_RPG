@@ -17,12 +17,13 @@ void event_update(entitylist_t *self, player_t *ent)
     long long time = sfClock_getElapsedTime(self->clock).microseconds;
     int delta_time = time - self->last;
 
+    self->last = time;
     while (tmp) {
         tmp->update(tmp, delta_time);
         if (ent->pos.v1.x < tmp->pos.v2.x && ent->pos.v2.x > tmp->pos.v1.x &&
             ent->pos.v1.y < tmp->pos.v2.y && ent->pos.v2.y > tmp->pos.v1.y) {
             static_collide((entity_t *) tmp, (entity_t *) ent);
-            tmp->event(tmp, ent);
+            event_event(tmp, ent);
         }
         tmp = tmp->next;
     }

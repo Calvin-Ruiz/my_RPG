@@ -39,7 +39,7 @@ void create_npc_cmd(char **arr)
         my_puterr("' npc.\n\e[0m");
         return;
     }
-    npc->event = (void (*)(struct npc *self, player_t *player)) arr[0];
+    npc->event = (void (*)(npc_t *self, player_t *player)) arr[0];
     npc->command_name = my_strdup(arr[1]);
 }
 

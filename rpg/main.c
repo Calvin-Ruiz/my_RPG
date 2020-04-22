@@ -6,10 +6,11 @@
 */
 #include <main.h>
 #include <pause.h>
-#include <events.h>
 #include <entity_display.h>
 #include <etools.h>
 #include <decor.h>
+#include <events.h>
+#include <npc.h>
 
 void my_closure(data_storage_t *datas)
 {
