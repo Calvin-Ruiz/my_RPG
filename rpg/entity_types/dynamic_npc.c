@@ -69,7 +69,11 @@ void default_npc_update(npc_t *self, int delta_time)
         self->timer -= self->frame_delay;
         self->frame = (self->frame + 1) % self->size[2];
     }
+    self->sprite -= self->frame_dec;
     move_npc(self);
+    self->sprite += self->frame_dec;
+    self->pos.v2.x = self->pos.v1.x + *self->size;
+    self->pos.v2.y = self->pos.v1.y + self->size[1];
     if (self->pos.v1.x != self->way->pos.x
         || self->pos.v1.y != self->way->pos.y || self->wait_time-- > 0)
         return;

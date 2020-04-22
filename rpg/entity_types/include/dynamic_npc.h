@@ -21,13 +21,15 @@ static inline void move_npc(npc_t *self)
     sfVector2f mv = {self->way->pos.x - self->pos.v1.x,
         self->way->pos.y - self->pos.v1.y};
     sfVector2f length = {mv.x * mv.x, mv.y * mv.y};
-    if (length.x < length.y) {
+    if (length.x <= length.y) {
+        self->frame_dec = (mv.y >= 0) ? self->size[2] : self->size[2] * 3;
         if (length.x * 12 > length.y) {
             self->pos.v1.x += ((mv.x < 0) ? -self->speed : self->speed) * 0.7f;
             self->pos.v1.y += ((mv.y < 0) ? -self->speed : self->speed) * 0.7f;
         } else
             self->pos.v1.y += (mv.y < 0) ? -self->speed : self->speed;
     } else {
+        self->frame_dec = (mv.x > 0) ? 0 : self->size[2] << 1;
         if (length.y * 12 > length.x) {
             self->pos.v1.x += ((mv.x < 0) ? -self->speed : self->speed) * 0.7f;
             self->pos.v1.y += ((mv.y < 0) ? -self->speed : self->speed) * 0.7f;
@@ -36,8 +38,6 @@ static inline void move_npc(npc_t *self)
     }
     if (length.x + length.y <= self->speed)
         self->pos.v1 = self->way->pos;
-    self->pos.v2.x = self->pos.v1.x + *self->size;
-    self->pos.v2.y = self->pos.v1.y + self->size[1];
 }
 
 #endif /* DYNAMIC_NPC_H_ */
