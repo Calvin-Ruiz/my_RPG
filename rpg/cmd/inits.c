@@ -34,6 +34,7 @@ void init_external_cmds(dict_t **cmd)
     append_to_dict(cmd, "create_item", create_item_cmd);
     append_to_dict(cmd, "create_player", create_player_cmd);
     append_to_dict(cmd, "create_decor", create_solid_decor_cmd);
+    append_to_dict(cmd, "create_event", create_event_cmd);
     append_to_dict(cmd, "create_npc", create_npc_cmd);
     append_to_dict(cmd, "create_way", create_way_cmd);
     append_to_dict(cmd, "give_item", give_item_cmd);
@@ -51,5 +52,8 @@ dict_t *get_internal_func(void)
     append_to_dict(&new, "npc_update", default_npc_update);
     append_to_dict(&new, "destroy_npc", destroy_npc);
     append_to_dict(&new, "new_npc", new_npc);
+    append_to_dict(&new, "event_update", default_event_update);
+    append_to_dict(&new, "destroy_event", destroy_event);
+    append_to_dict(&new, "new_event", new_solid_event);
     return (new);
 }

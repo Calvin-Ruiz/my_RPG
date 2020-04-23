@@ -6,10 +6,11 @@
 */
 #include <main.h>
 #include <pause.h>
+#include <events.h>
 #include <entity_display.h>
 #include <etools.h>
 #include <decor.h>
-#include <events.h>
+#include <event.h>
 #include <npc.h>
 
 void my_closure(data_storage_t *datas)
@@ -54,6 +55,7 @@ void mainloop(data_storage_t *datas, sfRenderWindow *window)
         sfRenderWindow_clear(window, sfBlack);
         update_player_attributes(datas);
         decor_update(datas->entitylists[DECOR_LIST], datas->player);
+        event_update(datas->entitylists[EVENT_LIST], datas->player);
         display_entities(window, &(*datas->entitylists)->next);
         npc_update(datas->entitylists[NPC_LIST], datas->player);
         update_particle_emitter(datas->particle_lists->data,
