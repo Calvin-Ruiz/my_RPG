@@ -55,5 +55,9 @@ dict_t *get_internal_func(void)
     append_to_dict(&new, "event_update", default_event_update);
     append_to_dict(&new, "destroy_event", destroy_event);
     append_to_dict(&new, "new_event", new_solid_event);
+    append_to_dict(&new, "npc_load", load_dynamic_npc);
+    append_to_dict(&new, "npc_save", save_dynamic_npc);
+    append_to_dict(&new, "event_load", load_solid_event);
+    append_to_dict(&new, "event_save", save_solid_event);
     return (new);
 }

@@ -34,7 +34,7 @@ typedef struct npc {
     void (*update)(struct npc *self, int delta_time);
     void *(*new)();
     void (*destroy)(struct npc *self);
-    void *(*load)();
+    void *(*load)(struct npc *self, int fd);
     void (*save)();
     void (*event)(struct npc *self, player_t *player);
     char *command_name;

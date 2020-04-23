@@ -10,11 +10,23 @@
 
 #include <npc.h>
 
+typedef struct solid_npc_save {
+    sfVector2f pos;
+    uchar_t frame_dec;
+    uchar_t frame;
+    ushort_t tag_id;
+    float speed;
+    short wait_time;
+    uchar_t nb_ways;
+} npc_save_t;
+
 void create_way_cmd(char **arr);
 void create_npc_cmd(char **arr);
 void default_npc_update(npc_t *self, int delta_time);
 void destroy_npc(npc_t *self);
 npc_t *new_npc(char **arr);
+npc_t *load_dynamic_npc(npc_t *self, int fd);
+void save_dynamic_npc(npc_t *self, int fd);
 
 static inline void move_npc(npc_t *self)
 {

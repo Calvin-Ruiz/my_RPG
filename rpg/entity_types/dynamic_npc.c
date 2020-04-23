@@ -41,6 +41,8 @@ void create_npc_cmd(char **arr)
     }
     npc->event = (void (*)(npc_t *self, player_t *player)) arr[0];
     npc->command_name = my_strdup(arr[1]);
+    npc->tag_id = -1;
+    npc->tag = NULL;
 }
 
 npc_t *new_npc(char **arr)
@@ -59,6 +61,7 @@ npc_t *new_npc(char **arr)
     npc->pos.v1 = npc->way->pos;
     npc->pos.v2 = (sfVector2f) {npc->pos.v1.x + npc->size[0],
         npc->pos.v1.y + npc->size[1]};
+    npc->tag_id = -1;
     return (npc);
 }
 

@@ -27,7 +27,7 @@ typedef struct event {
     void (*update)(struct event *self, int delta_time);
     void *(*new)();
     void (*destroy)(struct event *self);
-    void *(*load)();
+    void *(*load)(struct event *self, int fd);
     void (*save)();
     void (*event)(struct event *self, player_t *player);
     char *command_name;

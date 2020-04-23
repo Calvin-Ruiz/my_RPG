@@ -81,7 +81,7 @@ void free_storage_content(data_storage_t *datas, int mask);
 void update_all(data_storage_t *datas);
 void import_sound(data_storage_t *datas, char *filename);
 void save_higher_score(data_storage_t *datas);
-short append_saved(data_storage_t *datas, void *data);
+short append_tag(data_storage_t *datas, void *data);
 
 static inline void **get_tag_from_id(saved_t *saved, short id)
 {

@@ -68,7 +68,7 @@ int check_data_storage_content(data_storage_t *datas)
     return (check);
 }
 
-short append_saved(data_storage_t *datas, void *data)
+short append_tag(data_storage_t *datas, void *data)
 {
     saved_t *saved = malloc(sizeof(saved_t));
 

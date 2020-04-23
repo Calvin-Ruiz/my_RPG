@@ -12,6 +12,7 @@
 #include <decor.h>
 #include <event.h>
 #include <npc.h>
+#include <data_io.h>
 
 void my_closure(data_storage_t *datas)
 {
@@ -73,7 +74,8 @@ void mainloop(data_storage_t *datas, sfRenderWindow *window)
 int main(void)
 {
     data_storage_t *datas = init_data_storage(NB_ENTITYLIST);
-
+    datas->path = "saves/model/";
+    datas->mapname = "origin";
     if (init_textures(datas) || init_sounds(datas) ||
         create_window((sfVideoMode) {800, 600, 32}, "My RPG",
         sfResize | sfClose, 60))
@@ -84,7 +86,11 @@ int main(void)
     append_to_dict(&datas->particle_lists, "main", create_particle_list(
         get_from_dict(datas->textures, "particle"), 3000));
     init_executor();
+    load_tags(datas->path);
+    load_entities(datas->path, datas->mapname);
     open_menu(datas->main_menu);
+    save_entities(datas->path, datas->mapname);
+    save_tags(datas->path);
     free_storage_content(datas, 7);
     return (0);
 }

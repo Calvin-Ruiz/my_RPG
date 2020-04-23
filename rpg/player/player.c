@@ -24,8 +24,7 @@ void create_player_cmd(char **arr)
     }
     datas->player = player;
     player->inventory = malloc(sizeof(inventory_t));
-    *size = 0;
-    *(player->inventory) = (inventory_t) {NULL, append_saved(datas, size)};
+    *(player->inventory) = (inventory_t) {NULL, -1};
 }
 
 void update_player(player_t *self, u_int frame_dec, my_keys_t *keys)

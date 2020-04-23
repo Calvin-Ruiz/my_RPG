@@ -37,20 +37,19 @@ decor_t *new_solid_decor(char **arr)
     return (decor);
 }
 
-decor_t *load_solid_decor(decor_t *self, decor_save_t *save)
+decor_t *load_solid_decor(decor_t *self, int fd)
 {
     decor_t *new = malloc(sizeof(*self));
+    sfVector2f pos;
 
+    read(fd, (char *) &pos, sizeof(pos));
     *new = *self;
-    new->pos.v1 = save->pos;
-    new->pos.v2 = (sfVector2f) {save->pos.x + new->size[0],
-        save->pos.y + new->size[1]};
+    new->pos.v1 = pos;
+    new->pos.v2 = (sfVector2f) {pos.x + new->size[0], pos.y + new->size[1]};
     return (new);
 }
 
-void save_solid_decor(decor_t *self)
+void save_solid_decor(decor_t *self, int fd)
 {
-    decor_save_t decor_save = {sizeof(sfVector2f), self->pos.v1};
-
-    write(1, (char *) &decor_save, sizeof(short) + sizeof(sfVector2f));
+    write(fd, (char *) &self->pos.v1, sizeof(sfVector2f));
 }

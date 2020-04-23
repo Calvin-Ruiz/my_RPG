@@ -41,7 +41,6 @@ char load_tags(char *path)
     char buf[2048];
     saved_t *new = NULL;
     char *data = NULL;
-
     for (short size = read(fd, buf, 4); size == 4; size = read(fd, buf, 4)) {
         data = malloc((*(short *) (buf + 2)) + 2);
         size += read(fd, data + 2, *(short *) (buf + 2));
@@ -55,6 +54,7 @@ char load_tags(char *path)
         *saved = new;
         saved = &new;
     }
+    close(fd);
     return (0);
 }
 

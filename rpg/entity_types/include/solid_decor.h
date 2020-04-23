@@ -25,18 +25,13 @@ typedef struct solid_decor {
     void (*update)();
     void *(*new)();
     void (*destroy)();
-    void *(*load)();
+    void *(*load)(struct solid_decor *self, int fd);
     void (*save)();
 } decor_t;
 
-typedef struct solid_decor_save {
-    short sizeof_self;
-    sfVector2f pos;
-} decor_save_t;
-
 void create_solid_decor_cmd(char **arr);
 decor_t *new_solid_decor(char **arr);
-void save_solid_decor(decor_t *self);
-decor_t *load_solid_decor(decor_t *self, decor_save_t *save);
+void save_solid_decor(decor_t *self, int fd);
+decor_t *load_solid_decor(decor_t *self, int fd);
 
 #endif /* SOLID_DECOR_H_ */

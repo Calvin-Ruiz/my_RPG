@@ -98,4 +98,6 @@ static inline dict_t *define_particle_param(particle_param_t * const ref)
     return (new);
 }
 
+void define_external_structs(dict_t **structs);
+
 #endif /* STRUCTS_1_H_ */

@@ -36,10 +36,12 @@ FILES = entitylib2/data_center/data_loader.c \
 	entitylib2/tools/fast_get_next_line.c \
 	entitylib2/tools/loader.c \
 	rpg/cmd/inits.c \
+	rpg/cmd/structs.c \
 	rpg/entity_groups/decor.c \
 	rpg/entity_groups/event.c \
 	rpg/entity_groups/npc.c \
 	rpg/entity_types/dynamic_npc.c \
+	rpg/entity_types/npc_event_io.c \
 	rpg/entity_types/solid_decor.c \
 	rpg/entity_types/solid_event.c \
 	rpg/how_to_play.c \

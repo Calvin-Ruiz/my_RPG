@@ -24,6 +24,8 @@ void create_event_cmd(char **arr)
     }
     event->event = (void (*)(event_t *self, player_t *player)) arr[0];
     event->command_name = my_strdup(arr[1]);
+    event->tag_id = -1;
+    event->tag = NULL;
 }
 
 event_t *new_solid_event(char **arr)
