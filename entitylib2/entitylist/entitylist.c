@@ -54,3 +54,18 @@ void destroy_entitylist(entitylist_t *entitylist)
     sfClock_destroy(entitylist->clock);
     free(entitylist);
 }
+
+void clear_entitylist(entitylist_t *entitylist)
+{
+    entity_t *tmp;
+    entity_t *tmp2;
+
+    if (entitylist == NULL)
+        return;
+    tmp = entitylist->next;
+    while (tmp) {
+        tmp2 = tmp->next;
+        tmp->destroy(tmp);
+        tmp = tmp2;
+    }
+}

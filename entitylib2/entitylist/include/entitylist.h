@@ -14,6 +14,7 @@
 void entitylist_update(entitylist_t *self, void *datas);
 entitylist_t *create_entitylist(void);
 void destroy_entitylist(entitylist_t *entitylist);
+void clear_entitylist(entitylist_t *entitylist);
 
 static inline entity_t *get_entity_by_id(dict_t *dict, int pos)
 {

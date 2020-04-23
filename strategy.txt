@@ -25,7 +25,7 @@ Fichiers configs : 3 extensions différentes :
 
 Fonctions :
 - call filename arg1 arg2 arg3 - appelle la fonction avec des arguments
-- @1 sera remplacé par l'argument 1
+- @1 sera remplacé par l'argument arg1
 
 Arguments :
 - @ signifie remplacer par l'argument n° (uniquemend dans les fichiers ".func")
@@ -37,7 +37,7 @@ Arguments :
 Parcourir :
 - Utilisez '.' comme séparateur (exemple : entity.mob1.health)
 - '+' pour un décalage (exemple : player.pos.+16)
-- '[' pour un décalage avec déréférencement (exemple : entitylists.[2]) (ptr-only)
+- '[' pour un décalage avec déréférencement (exemple : entitylists.[2]) (pointer-only)
 - '$' pour une position dans la liste chainée (exemple : entity.$3)
 - '@struct_type.key' pour caster en une structure et chercher un argument (sans le déréférencer)
 

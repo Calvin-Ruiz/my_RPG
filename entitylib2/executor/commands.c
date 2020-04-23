@@ -6,7 +6,10 @@
 */
 
 #include <executor.h>
-#include <SFML/System.h>
+#include <entitybase.h>
+#include <entitylist.h>
+#include <data_storage.h>
+#include <data_io.h>
 
 void append_to_list_cmd(char **args)
 {
@@ -14,6 +17,20 @@ void append_to_list_cmd(char **args)
         return;
     ((walk_t *) args[2])->next = *(walk_t **) args[1];
     *(walk_t **) args[1] = (walk_t *) args[2];
+}
+
+void change_of_map(char **args)
+{
+    data_storage_t *datas = get_data_storage();
+
+    save_entities(datas->path, datas->mapname);
+    for (uchar_t i = 0; ++i < datas->nb_entitylist;)
+        clear_entitylist(datas->entitylists[i]);
+    datas->mapname = args[1];
+    datas->player->pos = (pos_t) {(sfVector2f) {(long) args[2],
+        (long) args[3]}, (sfVector2f) {(long) args[2] + datas->player->size[0],
+        (long) args[3] + datas->player->size[1]}};
+    load_entities(datas->path, datas->mapname);
 }
 
 void sleep_cmd(char **args)

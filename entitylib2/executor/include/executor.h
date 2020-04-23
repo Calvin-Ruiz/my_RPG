@@ -87,6 +87,7 @@ void *build_struct(char *str);
 dict_t *get_sf_colors(void);
 void execute_if_true(char **arr);
 void operate(char **arr);
+void change_of_map(char **args);
 
 static inline void eval_args(char **arr, executor_t *executor)
 {
