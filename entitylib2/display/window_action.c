@@ -66,3 +66,11 @@ void check_window_size(sfRenderWindow *window, data_storage_t *datas)
     datas->coef_y = 800.f / size.y;
     sfRenderWindow_setSize(window, size);
 }
+
+void resize_window_cmd(char **arr)
+{
+    if ((long) arr[1] >= 800 && (long) arr[1] <= 1920
+        && (long) arr[2] >= 600 && (long) arr[2] <= 1080)
+        sfRenderWindow_setSize(get_data_storage()->window,
+            (sfVector2u) {(long) arr[1], (long) arr[2]});
+}

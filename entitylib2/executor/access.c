@@ -76,6 +76,8 @@ void set_value(char **arr)
         *((double *) arr[2]) = (long) arr[3];
     if (my_strcmp("ptr", arr[1]) == 0)
         *((void **) arr[2]) = (void *) arr[3];
+    if (my_strcmp("str", arr[1]) == 0)
+        *((char **) arr[2]) = my_strdup(arr[3]);
 }
 
 void create_variable(char **arr)

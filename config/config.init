@@ -9,3 +9,6 @@ create_player player $texture.player =48 =48 =4 =4 =10 =40 =40 $internal.pupdate
 # Define other entities
 # attributes : name texture size_x size_y frames_x frames_y health frame_delay_cs speed_pps func_update func_new func_destroy func_load func_save
 
+# Create tracing thread
+thread tracing create &tracer $datas
+

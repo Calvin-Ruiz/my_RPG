@@ -13,5 +13,6 @@ void update_window(sfRenderWindow *window, data_storage_t *stor);
 void destroy_window(data_storage_t *stor);
 void my_take_screenshoot(sfRenderWindow *window);
 void check_window_size(sfRenderWindow *window, data_storage_t *datas);
+void resize_window_cmd(char **arr);
 
 #endif /* WINDOW_MANAGER_H_ */

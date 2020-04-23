@@ -72,6 +72,7 @@ typedef struct data_storage {
     char on_mainloop;
     char is_alive;
     char ask_command;
+    char debug;
 } data_storage_t;
 
 data_storage_t *get_data_storage(void);

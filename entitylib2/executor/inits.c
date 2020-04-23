@@ -11,6 +11,8 @@
 #include <data_storage.h>
 #include <menu.h>
 #include <cmd_inits.h>
+#include <sound_manager.h>
+#include <window_manager.h>
 
 static void reference_types_mouse_menu(dict_t **var, data_storage_t *datas)
 {
@@ -67,6 +69,9 @@ static void init_cmd(dict_t **cmd)
     append_to_dict(cmd, "create_particle_emitter", create_particle_emitter_cmd);
     append_to_dict(cmd, "if", execute_if_true);
     append_to_dict(cmd, "operate", operate);
+    append_to_dict(cmd, "set_volume", set_sound_volume_cmd);
+    append_to_dict(cmd, "set_music", set_music_cmd);
+    append_to_dict(cmd, "resize", resize_window_cmd);
     init_external_cmds(cmd);
 }
 

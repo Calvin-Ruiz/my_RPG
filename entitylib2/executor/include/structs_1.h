@@ -35,7 +35,7 @@ static inline dict_t *define_entity(entity_t * const ref)
     return (new);
 }
 
-static inline dict_t *define_data_storage(data_storage_t * const ref)
+static inline dict_t *define_data_storage_2(data_storage_t * const ref)
 {
     dict_t *new = NULL;
 
@@ -46,6 +46,8 @@ static inline dict_t *define_data_storage(data_storage_t * const ref)
     append_to_dict(&new, "path", &ref->path);
     append_to_dict(&new, "mapname", &ref->mapname);
     append_to_dict(&new, "saved", &ref->saved);
+    append_to_dict(&new, "mouse", &ref->mouse);
+    append_to_dict(&new, "key", &ref->key);
     append_to_dict(&new, "nb_entitylist", &ref->nb_entitylist);
     append_to_dict(&new, "coef_x", &ref->coef_x);
     append_to_dict(&new, "coef_y", &ref->coef_y);
@@ -53,9 +55,17 @@ static inline dict_t *define_data_storage(data_storage_t * const ref)
     append_to_dict(&new, "fps", &ref->fps);
     append_to_dict(&new, "music", &ref->music);
     append_to_dict(&new, "volume", &ref->volume);
+    return (new);
+}
+
+static inline dict_t *define_data_storage(data_storage_t * const ref)
+{
+    dict_t *new = define_data_storage_2(ref);
+
     append_to_dict(&new, "on_mainloop", &ref->on_mainloop);
     append_to_dict(&new, "is_alive", &ref->is_alive);
     append_to_dict(&new, "ask_command", &ref->ask_command);
+    append_to_dict(&new, "debug", &ref->debug);
     return (new);
 }
 

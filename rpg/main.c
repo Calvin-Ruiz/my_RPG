@@ -71,15 +71,9 @@ void mainloop(data_storage_t *datas, sfRenderWindow *window)
     }
 }
 
-int main(void)
+static void init_game(data_storage_t *datas)
 {
-    data_storage_t *datas = init_data_storage(NB_ENTITYLIST);
-    datas->path = "saves/model/";
     datas->mapname = "origin";
-    if (init_textures(datas) || init_sounds(datas) ||
-        create_window((sfVideoMode) {800, 600, 32}, "My RPG",
-        sfResize | sfClose, 60))
-        return (84);
     get_internal_data()->text_font = sfFont_createFromFile("text_font.ttf");
     init_some_datas(datas);
     init_pause_buttons(datas->pause_menu);
@@ -88,6 +82,18 @@ int main(void)
     init_executor();
     load_tags(datas->path);
     load_entities(datas->path, datas->mapname);
+    sfRenderWindow_setFramerateLimit(datas->window, datas->fps);
+}
+
+int main(void)
+{
+    data_storage_t *datas = init_data_storage(NB_ENTITYLIST);
+
+    if (init_textures(datas) || init_sounds(datas) ||
+        create_window((sfVideoMode) {800, 600, 32}, "My RPG",
+        sfResize | sfClose, 60))
+        return (84);
+    init_game(datas);
     open_menu(datas->main_menu);
     save_entities(datas->path, datas->mapname);
     save_tags(datas->path);
