@@ -18,12 +18,16 @@ static void reference_types_mouse_menu(dict_t **var, data_storage_t *datas)
 {
     dict_t *new = NULL;
 
+    append_to_dict(&new, "char", (void *) CHAR);
+    append_to_dict(&new, "ushort", (void *) USHORT);
+    append_to_dict(&new, "uint", (void *) UINT);
+    append_to_dict(&new, "raw", (void *) RAW);
+    append_to_dict(&new, "float", (void *) FLOAT);
+    append_to_dict(&new, "double", (void *) DOUBLE);
     append_to_dict(&new, "uchar", (void *) UCHAR);
     append_to_dict(&new, "short", (void *) SHORT);
     append_to_dict(&new, "int", (void *) INT);
     append_to_dict(&new, "long", (void *) LONG);
-    append_to_dict(&new, "float", (void *) FLOAT);
-    append_to_dict(&new, "double", (void *) DOUBLE);
     append_to_dict(var, "type", new);
     new = NULL;
     append_to_dict(&new, "x", &datas->mouse.pos.x);
@@ -32,17 +36,17 @@ static void reference_types_mouse_menu(dict_t **var, data_storage_t *datas)
     append_to_dict(&new, "wheel", &datas->mouse.wheel);
     append_to_dict(&new, "right", &datas->mouse.right);
     append_to_dict(var, "mouse", new);
-    new = NULL;
-    append_to_dict(&new, "main", &datas->main_menu);
-    append_to_dict(&new, "pause", &datas->pause_menu);
-    append_to_dict(var, "menu", new);
 }
 
 static void init_vars(dict_t **var)
 {
     data_storage_t *datas = get_data_storage();
+    dict_t *new = NULL;
 
     sub_init_vars(var, datas);
+    append_to_dict(&new, "main", &datas->main_menu);
+    append_to_dict(&new, "pause", &datas->pause_menu);
+    append_to_dict(var, "menu", new);
     reference_types_mouse_menu(var, datas);
     reference_keys(var, datas);
     append_to_dict(var, "particle_list", datas->particle_lists);

@@ -10,9 +10,6 @@
 
 #include <my_getnbr.h>
 
-float get_float(char *str);
-double get_double(char *str);
-
 typedef union universal_data {
     char c;
     short s;

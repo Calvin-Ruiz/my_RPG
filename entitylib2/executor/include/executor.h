@@ -13,12 +13,16 @@
 #include <my_getnbr.h>
 
 enum {
+    CHAR,
     UCHAR,
     SHORT,
+    USHORT,
     INT,
+    UINT,
     LONG,
     FLOAT,
     DOUBLE,
+    RAW,
 };
 
 typedef struct rec_dict {
@@ -88,6 +92,8 @@ dict_t *get_sf_colors(void);
 void execute_if_true(char **arr);
 void operate(char **arr);
 void change_of_map(char **args);
+float get_float(char *str);
+double get_double(char *str);
 
 static inline void eval_args(char **arr, executor_t *executor)
 {

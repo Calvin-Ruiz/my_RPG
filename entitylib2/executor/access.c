@@ -71,9 +71,9 @@ void set_value(char **arr)
     if (my_strcmp("long", arr[1]) == 0)
         *((long *) arr[2]) = (long) arr[3];
     if (my_strcmp("float", arr[1]) == 0)
-        *((float *) arr[2]) = (long) arr[3];
+        *((float *) arr[2]) = get_float(arr[3]);
     if (my_strcmp("double", arr[1]) == 0)
-        *((double *) arr[2]) = (long) arr[3];
+        *((double *) arr[2]) = get_double(arr[3]);
     if (my_strcmp("ptr", arr[1]) == 0)
         *((void **) arr[2]) = (void *) arr[3];
     if (my_strcmp("str", arr[1]) == 0)

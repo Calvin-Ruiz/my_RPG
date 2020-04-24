@@ -12,6 +12,7 @@
 #include <dynamic_npc.h>
 #include <cmds.h>
 #include <etools.h>
+#include <system_cmd.h>
 
 dict_t *get_sf_colors(void)
 {
@@ -38,6 +39,15 @@ void init_external_cmds(dict_t **cmd)
     append_to_dict(cmd, "create_npc", create_npc_cmd);
     append_to_dict(cmd, "create_way", create_way_cmd);
     append_to_dict(cmd, "give_item", give_item_cmd);
+    append_to_dict(cmd, "op", better_operator);
+    append_to_dict(cmd, "fop", float_operator);
+    append_to_dict(cmd, "set_from_var", set_from_var);
+    append_to_dict(cmd, "read", read_cmd);
+    append_to_dict(cmd, "write", write_cmd);
+    append_to_dict(cmd, "putstr", putstr_cmd);
+    append_to_dict(cmd, "open", open_cmd);
+    append_to_dict(cmd, "close", close_cmd);
+    append_to_dict(cmd, "randint", randint_cmd);
 }
 
 dict_t *get_internal_func(void)

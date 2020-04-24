@@ -37,6 +37,8 @@ FILES = entitylib2/data_center/data_loader.c \
 	entitylib2/tools/loader.c \
 	rpg/cmd/inits.c \
 	rpg/cmd/structs.c \
+	rpg/cmd/system_cmd_2.c \
+	rpg/cmd/system_cmd.c \
 	rpg/entity_groups/decor.c \
 	rpg/entity_groups/event.c \
 	rpg/entity_groups/npc.c \
