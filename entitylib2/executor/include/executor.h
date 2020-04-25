@@ -22,7 +22,8 @@ enum {
     LONG,
     FLOAT,
     DOUBLE,
-    RAW,
+    PTR,
+    STR,
 };
 
 typedef struct rec_dict {

@@ -58,25 +58,25 @@ void *get_data(char *name, rdict_t *var)
 
 void set_value(char **arr)
 {
-    if (my_strcmp("vec", arr[1]) == 0 && (long) arr[-1] == 5)
-        *((sfVector2f *) arr[2]) = (sfVector2f) {(long) arr[3], (long) arr[4]};
     if ((long) arr[-1] != 4)
         return;
-    if (my_strcmp("char", arr[1]) == 0)
+    if ((long) arr[1] == UCHAR)
+        *((u_char *) arr[2]) = (long) arr[3];
+    if ((long) arr[1] == CHAR)
         *((char *) arr[2]) = (long) arr[3];
-    if (my_strcmp("short", arr[1]) == 0)
+    if ((long) arr[1] == SHORT)
         *((short *) arr[2]) = (long) arr[3];
-    if (my_strcmp("int", arr[1]) == 0)
+    if ((long) arr[1] == INT)
         *((int *) arr[2]) = (long) arr[3];
-    if (my_strcmp("long", arr[1]) == 0)
+    if ((long) arr[1] == LONG)
         *((long *) arr[2]) = (long) arr[3];
-    if (my_strcmp("float", arr[1]) == 0)
-        *((float *) arr[2]) = get_float(arr[3]);
-    if (my_strcmp("double", arr[1]) == 0)
-        *((double *) arr[2]) = get_double(arr[3]);
-    if (my_strcmp("ptr", arr[1]) == 0)
+    if ((long) arr[1] == PTR)
         *((void **) arr[2]) = (void *) arr[3];
-    if (my_strcmp("str", arr[1]) == 0)
+    if ((long) arr[1] == FLOAT)
+        *((float *) arr[2]) = get_float(arr[3]);
+    if ((long) arr[1] == DOUBLE)
+        *((double *) arr[2]) = get_double(arr[3]);
+    if ((long) arr[1] == STR)
         *((char **) arr[2]) = my_strdup(arr[3]);
 }
 

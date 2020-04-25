@@ -50,6 +50,7 @@ typedef struct particle_list {
 } particle_list_t;
 
 typedef struct emitter {
+    char is_active;
     short min_particle;
     short variation;
     short spawn_waiting;
@@ -57,6 +58,7 @@ typedef struct emitter {
     short waiting;
     char holding;
     sfIntRect area;
+    particle_list_t *target;
     particle_param_t *particle;
     pos_t *rect;
     char nb_rect;
@@ -128,6 +130,6 @@ void update_particle_list(particle_list_t *plist, sfRenderWindow *window,
     sfVector2f *pos);
 void append_particle_cmd(char **arr);
 void create_particle_emitter_cmd(char **arr);
-void update_particle_emitter(particle_list_t *plist, emitter_t *emitter);
+void update_all_particle_emitter(dict_t *emitters);
 
 #endif /* PARTICLE_H_ */

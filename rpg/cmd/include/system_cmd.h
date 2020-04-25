@@ -21,7 +21,7 @@ static inline long get_value_from_basic_type(char **arr)
             return (*(u_short *) arr[1]);
         case SHORT:
             return (*(short *) arr[1]);
-        case RAW:
+        case UINT:
             return (*(u_int *) arr[1]);
         case INT:
             return (*(int *) arr[1]);
@@ -45,7 +45,7 @@ static inline double get_value_from_floating_type(char **arr)
             return (*(u_short *) arr[1]);
         case SHORT:
             return (*(short *) arr[1]);
-        case RAW:
+        case UINT:
             return (*(u_int *) arr[1]);
         case INT:
             return (*(int *) arr[1]);

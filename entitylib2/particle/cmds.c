@@ -5,8 +5,9 @@
 ** cmds.c
 */
 #include <entitybase.h>
-#include <particle.h>
 #include <tools.h>
+#include <dict.h>
+#include <particle.h>
 
 void append_particle_cmd(char **arr)
 {

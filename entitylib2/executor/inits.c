@@ -17,17 +17,17 @@
 static void reference_types_mouse_menu(dict_t **var, data_storage_t *datas)
 {
     dict_t *new = NULL;
-
-    append_to_dict(&new, "char", (void *) CHAR);
+    append_to_dict(&new, "str", (void *) STR);
+    append_to_dict(&new, "ptr", (void *) PTR);
     append_to_dict(&new, "ushort", (void *) USHORT);
     append_to_dict(&new, "uint", (void *) UINT);
-    append_to_dict(&new, "raw", (void *) RAW);
     append_to_dict(&new, "float", (void *) FLOAT);
     append_to_dict(&new, "double", (void *) DOUBLE);
     append_to_dict(&new, "uchar", (void *) UCHAR);
+    append_to_dict(&new, "char", (void *) CHAR);
     append_to_dict(&new, "short", (void *) SHORT);
-    append_to_dict(&new, "int", (void *) INT);
     append_to_dict(&new, "long", (void *) LONG);
+    append_to_dict(&new, "int", (void *) INT);
     append_to_dict(var, "type", new);
     new = NULL;
     append_to_dict(&new, "x", &datas->mouse.pos.x);

@@ -46,7 +46,7 @@ void update_particle_list(particle_list_t *plist, sfRenderWindow *window,
         plist->length << 2, sfQuads, (sfRenderStates *) plist);
 }
 
-void update_particle_emitter(particle_list_t *plist, emitter_t *emitter)
+static void update_particle_emitter(emitter_t *emitter)
 {
     short nb_spawn;
     particle_param_t *param = emitter->particle;
@@ -64,7 +64,16 @@ void update_particle_emitter(particle_list_t *plist, emitter_t *emitter)
         param->pos.v1.y = emitter->area.top + rand() % emitter->area.height;
         param->pos.v2.x = param->pos.v1.x + param->rect.v2.x - param->rect.v1.x;
         param->pos.v2.y = param->pos.v1.y + param->rect.v2.y - param->rect.v1.y;
-        append_particle(plist, param);
+        append_particle(emitter->target, param);
+    }
+}
+
+void update_all_particle_emitter(dict_t *emitters)
+{
+    while (emitters) {
+        if (((emitter_t *) emitters->data)->is_active)
+            update_particle_emitter(emitters->data);
+        emitters = emitters->next;
     }
 }
 
@@ -75,11 +84,12 @@ void create_particle_emitter_cmd(char **arr)
     char *name = arr[1];
     pos_t *rect;
 
-    *emitter = (emitter_t) {(long) arr[2], (long) arr[3], (long) arr[4],
+    *emitter = (emitter_t) {0, (long) arr[2], (long) arr[3], (long) arr[4],
         (long) arr[5], 0, 0, (sfIntRect) {(long) arr[6], (long) arr[7],
-        (long) arr[8], (long) arr[9]}, (particle_param_t *) arr[10],
-        my_malloc((long) arr[11] * sizeof(pos_t)), (long) arr[11]};
-    arr += 12;
+        (long) arr[8], (long) arr[9]}, (particle_list_t *) arr[10],
+        (particle_param_t *) arr[11],
+        my_malloc((long) arr[12] * sizeof(pos_t)), (long) arr[12]};
+    arr += 13;
     rect = emitter->rect;
     for (u_char i = (long) arr[-1]; i-- > 0; arr += 4) {
         *(rect++) = (pos_t) {(sfVector2f) {(long) arr[0], (long) arr[1]},
