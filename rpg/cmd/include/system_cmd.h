@@ -122,5 +122,6 @@ void putstr_cmd(char **arr);
 void open_cmd(char **arr);
 void close_cmd(char **arr);
 void randint_cmd(char **arr);
+void set_tag_cmd(char **arr);
 
 #endif /* SYSTEM_CMD_H_ */

@@ -48,6 +48,7 @@ void init_external_cmds(dict_t **cmd)
     append_to_dict(cmd, "open", open_cmd);
     append_to_dict(cmd, "close", close_cmd);
     append_to_dict(cmd, "randint", randint_cmd);
+    append_to_dict(cmd, "set_tag", set_tag_cmd);
 }
 
 dict_t *get_internal_func(void)
