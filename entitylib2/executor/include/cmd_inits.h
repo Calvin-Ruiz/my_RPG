@@ -29,6 +29,7 @@ static inline void reference_sizeof(dict_t **var)
     append_to_dict(&dict, "particle_param", (void *) sizeof(particle_param_t));
     append_to_dict(&dict, "particle_attr_t", (void *) sizeof(particle_attr_t));
     append_to_dict(&dict, "enemy_t", (void *) sizeof(enemy_t));
+    append_to_dict(&dict, "sprite_anim_t", (void *) sizeof(sprite_anim_t));
     append_to_dict(var, "sizeof", dict);
 }
 

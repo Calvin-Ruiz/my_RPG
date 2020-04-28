@@ -20,19 +20,17 @@ void create_capacity(char **arr)
 
 void create_sprite_anim(char **arr)
 {
-    sprite_anim_t *new = my_malloc(sizeof(sprite_anim_t));
-
-    *new = (sprite_anim_t) {sfSprite_create(), (sfSound *) arr[3],
-        (long) arr[4], (long) arr[5],
+    *(sprite_anim_t *) arr[1] = (sprite_anim_t) {sfSprite_create(),
+        (sfSound *) arr[3], (long) arr[4], (long) arr[5],
         (sfIntRect) {0, 0, (long) arr[6], (long) arr[7]}};
-    *(sprite_anim_t **) arr[1] = new;
-    if (new->sprite == NULL || arr[2] == NULL) {
+    if (((sprite_anim_t *) arr[1])->sprite == NULL || arr[2] == NULL) {
         my_puterr("\e[31mCreateError : Failed to create animation\n\e[0m");
         return;
     }
-    sfSprite_setOrigin(new->sprite, (sfVector2f) {(long) arr[6] >> 1,
-        (long) arr[7] >> 1});
-    sfSprite_setTexture(new->sprite, (sfTexture *) arr[2], sfTrue);
+    sfSprite_setOrigin(((sprite_anim_t *) arr[1])->sprite,
+        (sfVector2f) {(long) arr[6] >> 1, (long) arr[7] >> 1});
+    sfSprite_setTexture(((sprite_anim_t *) arr[1])->sprite,
+        (sfTexture *) arr[2], sfTrue);
 }
 
 void player_atk_sprite(player_t *player, enemy_t *enemy,
@@ -57,6 +55,7 @@ void player_atk_sprite(player_t *player, enemy_t *enemy,
         }
     }
 }
+
 void enemy_atk_sprite(enemy_t *enemy, player_t *player,
     sprite_anim_t *animation, fighting_t *fight)
 {
@@ -68,7 +67,7 @@ void enemy_atk_sprite(enemy_t *enemy, player_t *player,
     if (animation->sound)
         sfSound_play(animation->sound);
     sfSprite_setPosition(animation->sprite,
-        (sfVector2f) {600 + player->size[0], 250 + player->size[1]});
+        (sfVector2f) {500 + player->size[0] / 2, 250 + player->size[1] / 2});
     while (++frame < animation->nb_frames) {
         sfSprite_setTextureRect(animation->sprite, rect);
         rect.left += rect.width;

@@ -63,7 +63,7 @@ void mainloop(data_storage_t *datas, sfRenderWindow *window)
         update_particle_list(datas->particle_lists->data, window, NULL);
         update_window(window, datas);
         actual = sfClock_getElapsedTime(datas->clock).microseconds;
-        last += 25000;
+        last = actual < last + 2000000 ? last + 25000 : actual + 25000;
         if (actual < last)
             sfSleep((sfTime) {last - actual});
         my_event(datas, &last);

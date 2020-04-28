@@ -17,8 +17,9 @@ void create_enemy_cmd(char **arr)
     capacity_t *new = NULL;
 
     *(enemy_t *) arr[1] = (enemy_t) {sfSprite_create(), (sfVector2f)
-        {size.x >> 1, size.y >> 1}, (long) arr[3], (long) arr[3], (long) arr[4],
-        (long) arr[5], (long) arr[6], (long) arr[7], NULL, length - 8};
+        {100 + size.x / 2, 200 + size.y / 2}, (long) arr[3], (long) arr[3],
+        (long) arr[4], (long) arr[5], (long) arr[6], (long) arr[7], NULL,
+        length - 8};
     for (register u_char i = 7; ++i < length;) {
         if (arr[i] == NULL)
             continue;

@@ -11,6 +11,7 @@
 #include <event.h>
 #include <enemy.h>
 #include <fight.h>
+#include <pause.h>
 
 void engage_fight(enemy_t *enemy, menu_t *menu)
 {
@@ -19,7 +20,7 @@ void engage_fight(enemy_t *enemy, menu_t *menu)
         - datas->player->frame_dec], datas->player, enemy, menu, 0, 1};
 
     sfRenderWindow_setView(menu->window, menu->view);
-    sfSprite_setPosition(fight.player_sprite, (sfVector2f) {600, 250});
+    sfSprite_setPosition(fight.player_sprite, (sfVector2f) {500, 250});
     draw_scene(&fight);
     sfRenderWindow_display(datas->window);
     sfSleep((sfTime) {30000});
@@ -44,4 +45,5 @@ void engage_fight_event(event_t *self, player_t *player)
         ((char *) self->tag) + 2), get_from_dict(get_from_dict(var, "menu"),
         ((char *) self->tag) + 26));
     get_data_storage()->key = (my_keys_t) {0, 0, 0, 0, 0};
+    reset_timers(get_data_storage(), NULL);
 }
