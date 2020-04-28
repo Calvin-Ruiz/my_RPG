@@ -76,7 +76,7 @@ static void init_cmd(dict_t **cmd)
     append_to_dict(cmd, "set_volume", set_sound_volume_cmd);
     append_to_dict(cmd, "set_music", set_music_cmd);
     append_to_dict(cmd, "resize", resize_window_cmd);
-    append_to_dict(cmd, "change_of_map", change_of_map);
+    append_to_dict(cmd, "change_map", change_of_map);
     append_to_dict(cmd, "create_menu", create_menu_cmd);
     append_to_dict(cmd, "create_button", create_button_cmd);
 }
