@@ -24,9 +24,9 @@ void init_some_datas(data_storage_t *datas)
     sfFont *font = get_internal_data()->text_font;
     datas->pause_menu = create_menu(datas->window, background);
     datas->main_menu = main_menu;
-    main_menu->button = create_button(btn_back, font, (pos_t) {(sfVector2f)
+    main_menu->button = create_button(btn_back, font, &(pos_t) {(sfVector2f)
         {272, 200}, (sfVector2f) {256, 64}}, (void (*)(void *)) start_mainloop);
-    main_menu->button->next = create_button(btn_back, font, (pos_t)
+    main_menu->button->next = create_button(btn_back, font, &(pos_t)
         {(sfVector2f) {272, 500}, (sfVector2f) {256, 64}},
         (void (*)(void *)) my_closure);
     main_menu->button->data = get_data_storage();

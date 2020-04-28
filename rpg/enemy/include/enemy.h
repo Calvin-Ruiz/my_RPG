@@ -9,7 +9,8 @@
 #define ENEMY_H_
 
 typedef struct enemy {
-    sfSprite sprite;
+    sfSprite *sprite;
+    sfVector2f center;
     int hp;
     int max_hp;
     int atk;
@@ -17,6 +18,7 @@ typedef struct enemy {
     int xp_drop;
     int money_drop;
     capacity_t *capacity;
+    char nb_capacity;
 } enemy_t;
 
 #endif /* ENEMY_H_ */

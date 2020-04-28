@@ -1,0 +1,12 @@
+# target raw50 enemy_name menu_name
+set $type.short @2 =48
+
+set_from_var $type.long @2.+2 $type.long @3
+set_from_var $type.long @2.+10 $type.long @3.+8
+set_from_var $type.long @2.+18 $type.long @3.+16
+
+set_from_var $type.long @2.+26 $type.long @4
+set_from_var $type.long @2.+34 $type.long @4.+8
+set_from_var $type.long @2.+42 $type.long @4.+16
+
+set_tag @1 @2

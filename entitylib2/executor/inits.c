@@ -77,6 +77,12 @@ static void init_cmd(dict_t **cmd)
     append_to_dict(cmd, "set_music", set_music_cmd);
     append_to_dict(cmd, "resize", resize_window_cmd);
     append_to_dict(cmd, "change_of_map", change_of_map);
+    append_to_dict(cmd, "create_menu", create_menu_cmd);
+    append_to_dict(cmd, "create_button", create_button_cmd);
+}
+
+static void init_cmd_2(dict_t **cmd)
+{
     init_external_cmds(cmd);
 }
 
@@ -85,6 +91,7 @@ void init_executor(void)
     executor_t *executor = get_executor();
 
     init_cmd((dict_t **) &executor->cmd);
+    init_cmd_2((dict_t **) &executor->cmd);
     init_vars((dict_t **) &executor->var);
     load_config(executor);
 }

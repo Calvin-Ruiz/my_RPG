@@ -1,0 +1,82 @@
+/*
+** EPITECH PROJECT, 2019
+** MUL_my_rpg_2019
+** File description:
+** capacity.c
+*/
+
+#include <entitybase.h>
+#include <capacity.h>
+#include <enemy.h>
+#include <data_storage.h>
+#include <menu.h>
+#include <event.h>
+#include <fight.h>
+
+void create_capacity(char **arr)
+{
+    append_to_dict((dict_t **) arr[1], arr[2], arr[3]);
+}
+
+void create_sprite_anim(char **arr)
+{
+    sprite_anim_t *new = my_malloc(sizeof(sprite_anim_t));
+
+    *new = (sprite_anim_t) {sfSprite_create(), (sfSound *) arr[3],
+        (long) arr[4], (long) arr[5],
+        (sfIntRect) {0, 0, (long) arr[6], (long) arr[7]}};
+    *(sprite_anim_t **) arr[1] = new;
+    if (new->sprite == NULL || arr[2] == NULL) {
+        my_puterr("\e[31mCreateError : Failed to create animation\n\e[0m");
+        return;
+    }
+    sfSprite_setOrigin(new->sprite, (sfVector2f) {(long) arr[6] >> 1,
+        (long) arr[7] >> 1});
+    sfSprite_setTexture(new->sprite, (sfTexture *) arr[2], sfTrue);
+}
+
+void player_atk_sprite(player_t *player, enemy_t *enemy,
+    sprite_anim_t *animation, fighting_t *fight)
+{
+    short frame = -1;
+    sfIntRect rect = animation->scale;
+    sfRenderWindow *window = fight->menu->window;
+
+    enemy->hp -= player->atk * 1.5 - enemy->def;
+    if (animation->sound)
+        sfSound_play(animation->sound);
+    sfSprite_setPosition(animation->sprite, enemy->center);
+    while (++frame < animation->nb_frames) {
+        sfSprite_setTextureRect(animation->sprite, rect);
+        rect.left += rect.width;
+        for (char n = animation->frame_duration; n-- > 0;) {
+            draw_scene(fight);
+            sfRenderWindow_drawSprite(window, animation->sprite, NULL);
+            sfRenderWindow_display(window);
+            sfSleep((sfTime) {25000});
+        }
+    }
+}
+void enemy_atk_sprite(enemy_t *enemy, player_t *player,
+    sprite_anim_t *animation, fighting_t *fight)
+{
+    short frame = -1;
+    sfIntRect rect = animation->scale;
+    sfRenderWindow *window = fight->menu->window;
+
+    player->hp -= enemy->atk * 1.5 - player->def;
+    if (animation->sound)
+        sfSound_play(animation->sound);
+    sfSprite_setPosition(animation->sprite,
+        (sfVector2f) {600 + player->size[0], 250 + player->size[1]});
+    while (++frame < animation->nb_frames) {
+        sfSprite_setTextureRect(animation->sprite, rect);
+        rect.left += rect.width;
+        for (char n = animation->frame_duration; n-- > 0;) {
+            draw_scene(fight);
+            sfRenderWindow_drawSprite(window, animation->sprite, NULL);
+            sfRenderWindow_display(window);
+            sfSleep((sfTime) {25000});
+        }
+    }
+}

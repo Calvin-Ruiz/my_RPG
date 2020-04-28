@@ -76,6 +76,8 @@ static void init_game(data_storage_t *datas)
     get_internal_data()->text_font = sfFont_createFromFile("text_font.ttf");
     init_some_datas(datas);
     init_pause_buttons(datas->pause_menu);
+    append_to_dict(&datas->particle_lists, "fight", create_particle_list(
+        get_from_dict(datas->textures, "particle"), 3000));
     append_to_dict(&datas->particle_lists, "main", create_particle_list(
         get_from_dict(datas->textures, "particle"), 3000));
     init_executor();

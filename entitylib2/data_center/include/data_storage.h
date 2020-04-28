@@ -15,6 +15,7 @@ enum {
     ITEMS,
     CAPACITY,
     EFFECTS,
+    ACTION,
     NB_DATAS,
 };
 

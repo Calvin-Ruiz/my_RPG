@@ -8,6 +8,8 @@
 #ifndef PLAYER_H_
 #define PLAYER_H_
 
+#include <capacity.h>
+
 enum {
     EQUIPMENT,
     MAP_ONLY,
@@ -15,14 +17,6 @@ enum {
     FIGHT_ONLY,
     QUEST_ITEM,
     BASIC_ITEM,
-};
-
-enum {
-    HIMSELF,
-    ENNEMY,
-    ALLIES,
-    ENNEMIES,
-    EVERYONE,
 };
 
 typedef struct item {
@@ -56,14 +50,6 @@ typedef struct effect {
     void (*remove)();
 } effect_t;
 
-typedef struct capacity {
-    struct capacity *next;
-    short id;
-    char target;
-    void *animation;
-    void (*effect)(void *user, void *target);
-} capacity_t;
-
 typedef struct player {
     struct entity *next;
     struct entity *prev;
@@ -85,13 +71,13 @@ typedef struct player {
     void (*save)();
     inventory_t *inventory;
     capacity_t *capacity;
+    int hp;
+    int max_hp;
+    int atk;
+    int def;
     int money;
     int xp;
     char level;
-    int atk;
-    int def;
-    int hp;
-    int max_hp;
 } player_t;
 
 void create_item_cmd(char **arr);

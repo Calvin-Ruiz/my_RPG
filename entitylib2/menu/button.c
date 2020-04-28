@@ -33,23 +33,24 @@ static char create_button_sprite(button_t *new, sfTexture *texture, pos_t *pos)
     return (0);
 }
 
-button_t *create_button(sfTexture *texture, sfFont *font, pos_t pos,
+button_t *create_button(sfTexture *texture, sfFont *font, pos_t *pos,
     void (*press_action)(void *data))
 {
     button_t *new = malloc(sizeof(button_t));
 
-    if (new == NULL || create_button_sprite(new, texture, &pos))
+    if (new == NULL || create_button_sprite(new, texture, pos))
         return (NULL);
     new->text = sfText_create();
     sfText_setFont(new->text, font);
-    sfText_setPosition(new->text, (sfVector2f) {pos.v1.x + 16, pos.v1.y + 16});
+    sfText_setPosition(new->text,
+        (sfVector2f) {pos->v1.x + 16, pos->v1.y + 16});
     sfText_setCharacterSize(new->text, 12);
     sfText_setFillColor(new->text, sfBlack);
     new->data = NULL;
     new->press_action = press_action;
-    new->pos.v1 = pos.v1;
-    new->pos.v2.x = pos.v1.x + pos.v2.x;
-    new->pos.v2.y = pos.v1.y + pos.v2.y;
+    new->pos.v1 = pos->v1;
+    new->pos.v2.x = pos->v1.x + pos->v2.x;
+    new->pos.v2.y = pos->v1.y + pos->v2.y;
     return (new);
 }
 

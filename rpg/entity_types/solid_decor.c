@@ -18,7 +18,7 @@ void create_solid_decor_cmd(char **arr)
 
     arr = create_entity_base((entity_t *) decor, &datas->entities, arr);
     if (arr == NULL) {
-        my_puterr("\e[91mFatal : Faild to build '");
+        my_puterr("\e[91mFatal : Failed to build '");
         my_puterr(name);
         my_puterr("' decor.\n\e[0m");
     }

@@ -10,6 +10,7 @@
 #include <entitylist.h>
 #include <data_storage.h>
 #include <data_io.h>
+#include <dynamic_printer.h>
 
 void append_to_list_cmd(char **args)
 {
@@ -40,11 +41,12 @@ void sleep_cmd(char **args)
 
 void put_in_log(char **arr)
 {
+    my_puterr("\e[37m> ");
     while (*++arr) {
         my_puterr(*arr);
         write(2, " ", 1);
     }
-    write(2, "\n", 1);
+    my_puterr("\e[0m\n");
 }
 
 void operate(char **arr)

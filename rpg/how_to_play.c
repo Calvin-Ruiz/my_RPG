@@ -55,7 +55,7 @@ void init_htp_button(data_storage_t *datas)
 {
     button_t *button = create_button((sfTexture *) sfSprite_getTexture(
         ((menu_t *) datas->main_menu)->button->display[0]),
-        get_internal_data()->text_font, (pos_t) {(sfVector2f) {272, 300},
+        get_internal_data()->text_font, &(pos_t) {(sfVector2f) {272, 300},
         (sfVector2f) {256, 64}}, (void (*)(void *)) htp_menu);
 
     button->data = datas;

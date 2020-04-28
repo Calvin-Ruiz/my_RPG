@@ -8,6 +8,8 @@
 #ifndef CMD_INITS_H_
 #define CMD_INITS_H_
 
+#include <enemy.h>
+
 static inline void reference_sizeof(dict_t **var)
 {
     dict_t *dict = NULL;
@@ -26,6 +28,7 @@ static inline void reference_sizeof(dict_t **var)
     append_to_dict(&dict, "int", (void *) sizeof(int));
     append_to_dict(&dict, "particle_param", (void *) sizeof(particle_param_t));
     append_to_dict(&dict, "particle_attr_t", (void *) sizeof(particle_attr_t));
+    append_to_dict(&dict, "enemy_t", (void *) sizeof(enemy_t));
     append_to_dict(var, "sizeof", dict);
 }
 

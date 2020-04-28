@@ -17,7 +17,7 @@ void create_event_cmd(char **arr)
 
     arr = create_entity_base((entity_t *) event, &datas->entities, arr);
     if (arr == NULL) {
-        my_puterr("\e[91mFatal : Faild to build '");
+        my_puterr("\e[91mFatal : Failed to build '");
         my_puterr(name);
         my_puterr("' event.\n\e[0m");
         return;

@@ -19,6 +19,7 @@ FILES = entitylib2/data_center/data_loader.c \
 	entitylib2/entity.c \
 	entitylib2/entitylist/entitylist.c \
 	entitylib2/executor/access.c \
+	entitylib2/executor/commands_2.c \
 	entitylib2/executor/commands.c \
 	entitylib2/executor/dynamic_structures.c \
 	entitylib2/executor/executor.c \
@@ -27,6 +28,7 @@ FILES = entitylib2/data_center/data_loader.c \
 	entitylib2/executor/structs.c \
 	entitylib2/executor/trace.c \
 	entitylib2/menu/button.c \
+	entitylib2/menu/image.c \
 	entitylib2/menu/menu.c \
 	entitylib2/menu/sub_menu.c \
 	entitylib2/particle/cmds.c \
@@ -39,6 +41,8 @@ FILES = entitylib2/data_center/data_loader.c \
 	rpg/cmd/structs.c \
 	rpg/cmd/system_cmd_2.c \
 	rpg/cmd/system_cmd.c \
+	rpg/enemy/enemy.c \
+	rpg/enemy/fight.c \
 	rpg/entity_groups/decor.c \
 	rpg/entity_groups/event.c \
 	rpg/entity_groups/npc.c \
@@ -50,6 +54,7 @@ FILES = entitylib2/data_center/data_loader.c \
 	rpg/main.c \
 	rpg/menu.c \
 	rpg/pause.c \
+	rpg/player/capacity.c \
 	rpg/player/item.c \
 	rpg/player/player.c \
 	tools/dict.c \

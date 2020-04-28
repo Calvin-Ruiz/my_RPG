@@ -17,7 +17,7 @@ typedef struct btn {
     void (*press_action)(void *data);
 } button_t;
 
-button_t *create_button(sfTexture *texture, sfFont *font, pos_t pos,
+button_t *create_button(sfTexture *texture, sfFont *font, pos_t *pos,
     void (*press_action)(void *data));
 void update_button_array(sfRenderWindow *window, button_t *button,
     my_mouse_t *mouse, sfVector2f *pos);
@@ -35,6 +35,9 @@ typedef struct imagez {
     struct imagez *next;
     sfSprite *image;
 } image_t;
+
+image_t *create_image(sfTexture *texture, pos_t *pos);
+void update_image_array(sfRenderWindow *window, image_t *image);
 
 typedef struct jge {
     struct jge *next;

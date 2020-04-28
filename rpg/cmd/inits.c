@@ -13,6 +13,8 @@
 #include <cmds.h>
 #include <etools.h>
 #include <system_cmd.h>
+#include <enemy.h>
+#include <fight.h>
 
 dict_t *get_sf_colors(void)
 {
@@ -49,9 +51,12 @@ void init_external_cmds(dict_t **cmd)
     append_to_dict(cmd, "close", close_cmd);
     append_to_dict(cmd, "randint", randint_cmd);
     append_to_dict(cmd, "set_tag", set_tag_cmd);
+    append_to_dict(cmd, "create_sprite_anim", create_sprite_anim);
+    append_to_dict(cmd, "create_capacity", create_capacity);
+    append_to_dict(cmd, "create_enemy", create_enemy_cmd);
 }
 
-dict_t *get_internal_func(void)
+static dict_t *get_internal_func_part(void)
 {
     dict_t *new = NULL;
 
@@ -70,5 +75,16 @@ dict_t *get_internal_func(void)
     append_to_dict(&new, "npc_save", save_dynamic_npc);
     append_to_dict(&new, "event_load", load_solid_event);
     append_to_dict(&new, "event_save", save_solid_event);
+    append_to_dict(&new, "fight", engage_fight_event);
+    append_to_dict(&new, "player_atk_sprite", player_atk_sprite);
+    return (new);
+}
+
+dict_t *get_internal_func(void)
+{
+    dict_t *new = get_internal_func_part();
+
+    append_to_dict(&new, "enemy_atk_sprite", enemy_atk_sprite);
+    append_to_dict(&new, "use_capacity", use_capacity);
     return (new);
 }

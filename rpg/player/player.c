@@ -19,7 +19,7 @@ void create_player_cmd(char **arr)
 
     arr = create_entity_base((entity_t *) player, &datas->entities, arr);
     if (arr == NULL || size == NULL) {
-        my_puterr("\e[91mFatal : Faild to create player\n\e[0m");
+        my_puterr("\e[91mFatal : Failed to create player\n\e[0m");
         return;
     }
     datas->player = player;

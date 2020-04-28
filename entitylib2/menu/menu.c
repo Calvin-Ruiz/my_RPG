@@ -38,6 +38,7 @@ void menu_update(menu_t *menu, data_storage_t *datas)
 
     pos = (sfVector2f) {real.x * pos.x / size.x, real.y * pos.y / size.y};
     sfRenderWindow_setView(menu->window, menu->view);
+    update_image_array(menu->window, menu->images);
     update_button_array(menu->window, menu->button, &datas->mouse, &pos);
     sfRenderWindow_display(menu->window);
 }
