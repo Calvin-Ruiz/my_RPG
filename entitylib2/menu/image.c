@@ -24,6 +24,16 @@ image_t *create_image(sfTexture *texture, pos_t *pos)
     return (new);
 }
 
+void create_image_cmd(char **arr)
+{
+    image_t *image = create_image((sfTexture *) arr[2], (pos_t *) arr[3]);
+
+    if (image == NULL)
+        return;
+    image->next = ((menu_t *) arr[1])->images;
+    ((menu_t *) arr[1])->images = image;
+}
+
 void update_image_array(sfRenderWindow *window, image_t *image)
 {
     while (image) {

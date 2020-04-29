@@ -37,6 +37,7 @@ typedef struct imagez {
 } image_t;
 
 image_t *create_image(sfTexture *texture, pos_t *pos);
+void create_image_cmd(char **arr);
 void update_image_array(sfRenderWindow *window, image_t *image);
 
 typedef struct jge {
@@ -60,18 +61,27 @@ typedef struct crsr {
 } cursor_t;
 
 typedef struct dtx {
-    struct tx *next;
+    struct dtx *next;
     sfText *text;
     sfVector2f pos;
     void *data;
+    void *last;
     void (*update)(struct dtx *self);
 } dynamic_text_t;
+
+void create_dynamic_text_cmd(char **arr);
+void update_dynamic_text_from_2int(dynamic_text_t *self);
+void update_dynamic_text_from_int(dynamic_text_t *self);
+void update_dynamic_text_array(sfRenderWindow *window, dynamic_text_t *dtext);
 
 typedef struct tx {
     struct tx *next;
     sfText *text;
     sfVector2f pos;
 } text_t;
+
+void create_text_cmd(char **arr);
+void update_text_array(sfRenderWindow *window, text_t *text);
 
 typedef struct {
     sfRenderWindow *window;

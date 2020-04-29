@@ -11,7 +11,7 @@
 typedef struct fighting {
     sfSprite *player_sprite;
     player_t *player;
-    enemy_t *enemy;
+    enemy_t enemy;
     menu_t *menu;
     char turn;
     char is_alive;
@@ -30,17 +30,17 @@ static inline void draw_scene(fighting_t *fight)
 
     sfRenderWindow_drawSprite(window, fight->menu->background, NULL);
     sfRenderWindow_drawSprite(window, fight->player_sprite, NULL);
-    sfRenderWindow_drawSprite(window, fight->enemy->sprite, NULL);
+    sfRenderWindow_drawSprite(window, fight->enemy.sprite, NULL);
 }
 
 static inline void enemy_atk(fighting_t *fight)
 {
-    capacity_t *capacity = fight->enemy->capacity;
-    register char c = rand() % fight->enemy->nb_capacity;
+    capacity_t *capacity = fight->enemy.capacity;
+    register char c = rand() % fight->enemy.nb_capacity;
 
     while (c--)
         capacity = capacity->next;
-    capacity->effect(fight->enemy, fight->player, capacity->animation, fight);
+    capacity->effect(&fight->enemy, fight->player, capacity->animation, fight);
 }
 
 #endif /* FIGHT_H_ */

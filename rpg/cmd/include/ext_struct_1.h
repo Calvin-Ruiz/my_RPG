@@ -21,4 +21,20 @@ static inline dict_t *define_npc_structure(npc_t * const ref)
     return (new);
 }
 
+static inline dict_t *define_player_structure(player_t * const ref)
+{
+    dict_t *new = define_entity(NULL);
+
+    append_to_dict(&new, "inventory", &ref->inventory);
+    append_to_dict(&new, "capacity", &ref->capacity);
+    append_to_dict(&new, "hp", &ref->hp);
+    append_to_dict(&new, "max_hp", &ref->max_hp);
+    append_to_dict(&new, "atk", &ref->atk);
+    append_to_dict(&new, "def", &ref->def);
+    append_to_dict(&new, "money", &ref->money);
+    append_to_dict(&new, "xp", &ref->xp);
+    append_to_dict(&new, "level", &ref->level);
+    return (new);
+}
+
 #endif /* EXT_STRUCT_1_H_ */

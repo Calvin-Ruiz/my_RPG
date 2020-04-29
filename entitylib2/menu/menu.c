@@ -40,6 +40,8 @@ void menu_update(menu_t *menu, data_storage_t *datas)
     sfRenderWindow_setView(menu->window, menu->view);
     update_image_array(menu->window, menu->images);
     update_button_array(menu->window, menu->button, &datas->mouse, &pos);
+    update_dynamic_text_array(menu->window, menu->dtext);
+    update_text_array(menu->window, menu->text);
     sfRenderWindow_display(menu->window);
 }
 

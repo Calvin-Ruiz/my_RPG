@@ -77,6 +77,8 @@ static dict_t *get_internal_func_part(void)
     append_to_dict(&new, "event_save", save_solid_event);
     append_to_dict(&new, "fight", engage_fight_event);
     append_to_dict(&new, "player_atk_sprite", player_atk_sprite);
+    append_to_dict(&new, "dtext_update_int", update_dynamic_text_from_int);
+    append_to_dict(&new, "dtext_update_2int", update_dynamic_text_from_2int);
     return (new);
 }
 

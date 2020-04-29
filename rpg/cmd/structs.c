@@ -15,4 +15,5 @@
 void define_external_structs(dict_t **structs)
 {
     append_to_dict(structs, "npc", define_npc_structure(NULL));
+    append_to_dict(structs, "player", define_player_structure(NULL));
 }
