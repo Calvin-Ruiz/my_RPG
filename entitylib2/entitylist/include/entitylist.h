@@ -61,6 +61,7 @@ static inline void append_to_entitylist(entitylist_t *display_list,
         return;
     conditionnal_insertion(&display_list->next, entity);
     entity->next = self->next;
+    entity->prev = (entity_t *) self;
     if (self->next)
         self->next->prev = entity;
     self->next = entity;
