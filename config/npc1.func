@@ -1,5 +1,3 @@
-# Just npc interaction test
-#log Hello !
-#if $key.space b  &log Interaction with npc :)
-# It work
-
+if $key.space b  &said $menu.speak Hello.\How_are_you_?
+if $key.space b  &said $menu.speak Fine,_thank_you.
+set $type.char $key.space =0

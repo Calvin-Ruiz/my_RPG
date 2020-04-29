@@ -96,8 +96,10 @@ int main(void)
         return (84);
     init_game(datas);
     open_menu(datas->main_menu);
-    save_entities(datas->path, datas->mapname);
-    save_tags(datas->path);
+    if (datas->player->hp > 0) {
+        save_entities(datas->path, datas->mapname);
+        save_tags(datas->path);
+    }
     free_storage_content(datas, 7);
     return (0);
 }

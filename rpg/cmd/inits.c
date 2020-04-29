@@ -32,7 +32,7 @@ dict_t *get_sf_colors(void)
     return (tmp);
 }
 
-void init_external_cmds(dict_t **cmd)
+static void init_external_cmds_part(dict_t **cmd)
 {
     append_to_dict(cmd, "create_item", create_item_cmd);
     append_to_dict(cmd, "create_player", create_player_cmd);
@@ -56,6 +56,12 @@ void init_external_cmds(dict_t **cmd)
     append_to_dict(cmd, "create_enemy", create_enemy_cmd);
 }
 
+void init_external_cmds(dict_t **cmd)
+{
+    init_external_cmds_part(cmd);
+    append_to_dict(cmd, "said", my_said);
+}
+
 static dict_t *get_internal_func_part(void)
 {
     dict_t *new = NULL;
@@ -77,8 +83,6 @@ static dict_t *get_internal_func_part(void)
     append_to_dict(&new, "event_save", save_solid_event);
     append_to_dict(&new, "fight", engage_fight_event);
     append_to_dict(&new, "player_atk_sprite", player_atk_sprite);
-    append_to_dict(&new, "dtext_update_int", update_dynamic_text_from_int);
-    append_to_dict(&new, "dtext_update_2int", update_dynamic_text_from_2int);
     return (new);
 }
 
@@ -88,5 +92,8 @@ dict_t *get_internal_func(void)
 
     append_to_dict(&new, "enemy_atk_sprite", enemy_atk_sprite);
     append_to_dict(&new, "use_capacity", use_capacity);
+    append_to_dict(&new, "dtext_update_int", update_dynamic_text_from_int);
+    append_to_dict(&new, "dtext_update_2int", update_dynamic_text_from_2int);
+    append_to_dict(&new, "exit_menu", exit_menu);
     return (new);
 }

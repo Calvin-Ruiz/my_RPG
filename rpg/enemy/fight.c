@@ -23,6 +23,18 @@ static void init_fight(fighting_t *fight, menu_t *menu)
     sfSleep((sfTime) {30000});
 }
 
+static void uninit_fight(fighting_t *fight, data_storage_t *datas)
+{
+    if (fight->player->hp <= 0) {
+        datas->is_alive = 0;
+        datas->on_mainloop = 0;
+    } else {
+        give_xp(datas->player, fight->enemy.money_drop);
+        datas->player->money += fight->enemy.money_drop;
+    }
+    reset_timers(datas, NULL);
+}
+
 void engage_fight(enemy_t *enemy, menu_t *menu)
 {
     data_storage_t *datas = get_data_storage();
@@ -39,9 +51,7 @@ void engage_fight(enemy_t *enemy, menu_t *menu)
             break;
         enemy_atk(&fight);
     }
-    if (fight.player->hp <= 0)
-        datas->is_alive = 0;
-    reset_timers(datas, NULL);
+    uninit_fight(&fight, datas);
 }
 
 void engage_fight_event(event_t *self, player_t *player)

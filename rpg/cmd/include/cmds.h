@@ -16,5 +16,7 @@ void create_capacity(char **arr);
 void create_sprite_anim(char **arr);
 void create_enemy_cmd(char **arr);
 void use_capacity(void *data);
+void exit_menu(menu_t *menu);
+void my_said(char **arr);
 
 #endif /* CMDS_H_ */

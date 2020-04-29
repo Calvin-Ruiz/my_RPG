@@ -16,6 +16,28 @@ void start_mainloop(data_storage_t *datas)
     mainloop(datas, datas->window);
 }
 
+void exit_menu(menu_t *menu)
+{
+    menu->opened = 0;
+    reset_timers(get_data_storage(), NULL);
+}
+
+void my_said(char **arr)
+{
+    for (short i = -1; arr[2][++i] != '\0';) {
+        switch (arr[2][i]) {
+            case '_':
+                arr[2][i] = ' ';
+                break;
+            case '\\':
+                arr[2][i] = '\n';
+                break;
+        }
+    }
+    sfText_setString(((menu_t *) arr[1])->text->text, arr[2]);
+    open_sub_menu((menu_t *) arr[1]);
+}
+
 void init_some_datas(data_storage_t *datas)
 {
     sfTexture *btn_back = get_from_dict(datas->textures, "button");

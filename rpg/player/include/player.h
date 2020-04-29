@@ -77,8 +77,23 @@ typedef struct player {
     int def;
     int money;
     int xp;
+    int xp_next;
     char level;
 } player_t;
+
+static inline void give_xp(player_t *player, int xp)
+{
+    player->xp += xp;
+    if (player->xp >= player->xp_next) {
+        player->xp -= player->xp_next;
+        player->xp_next *= 1.5;
+        player->max_hp *= 1.3;
+        player->hp = player->max_hp;
+        player->atk *= 1.2;
+        player->def *= 1.2;
+        player->level += 1;
+    }
+}
 
 void create_item_cmd(char **arr);
 void create_player_cmd(char **arr);
