@@ -30,9 +30,20 @@ void create_dynamic_text_cmd(char **arr)
 
 void update_dynamic_text_from_int(dynamic_text_t *self)
 {
+    static char buffer[16];
+    char *ptr = buffer + 15;
+    int tmp;
+
     if (*(int *) self->data == (long) self->last)
         return;
     self->last = (void *) (long) *(int *) self->data;
+    buffer[15] = '\0';
+    tmp = *(int *) self->data;
+    while (tmp > 0) {
+        *(--ptr) = '0' + tmp % 10;
+        tmp /= 10;
+    }
+    sfText_setString(self->text, buffer);
 }
 
 static char *vec2i_to_str(sfVector2i *vec)

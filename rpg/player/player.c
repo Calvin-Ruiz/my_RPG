@@ -27,23 +27,35 @@ void create_player_cmd(char **arr)
     *(player->inventory) = (inventory_t) {NULL, -1};
 }
 
-void update_player(player_t *self, u_int frame_dec, my_keys_t *keys)
+static void move_player(player_t *self, my_keys_t *keys)
 {
     const char coef = (keys->left || keys->right) && (keys->up || keys->down);
+
+    self->frame_dec = coef ? self->size[2] * 4 : 0;
     if (keys->right) {
+        self->frame_dec = 0;
         self->pos.v1.x += coef ? self->speed * 0.7 : self->speed;
-        self->pos.v2.x = self->pos.v1.x + self->size[0];
     } else if (keys->left) {
+        self->frame_dec = self->size[2] * 2;
         self->pos.v1.x -= coef ? self->speed * 0.7 : self->speed;
-        self->pos.v2.x = self->pos.v1.x + self->size[0];
     }
     if (keys->down) {
+        self->frame_dec = self->size[2];
         self->pos.v1.y += coef ? self->speed * 0.7 : self->speed;
-        self->pos.v2.y = self->pos.v1.y + self->size[1];
     } else if (keys->up) {
+        self->frame_dec = self->size[2] * 3;
         self->pos.v1.y -= coef ? self->speed * 0.7 : self->speed;
-        self->pos.v2.y = self->pos.v1.y + self->size[1];
     }
+}
+
+
+void update_player(player_t *self, u_int frame_dec, my_keys_t *keys)
+{
+    self->sprite -= self->frame_dec;
+    move_player(self, keys);
+    self->sprite += self->frame_dec;
+    self->pos.v2.x = self->pos.v1.x + self->size[0];
+    self->pos.v2.y = self->pos.v1.y + self->size[1];
     self->timer += frame_dec;
     if (self->timer > self->frame_delay) {
         self->timer -= self->frame_delay;

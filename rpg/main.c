@@ -13,6 +13,7 @@
 #include <event.h>
 #include <npc.h>
 #include <data_io.h>
+#include <player_io.h>
 
 void my_closure(data_storage_t *datas)
 {
@@ -63,7 +64,7 @@ void mainloop(data_storage_t *datas, sfRenderWindow *window)
         update_particle_list(datas->particle_lists->data, window, NULL);
         update_window(window, datas);
         actual = sfClock_getElapsedTime(datas->clock).microseconds;
-        last = actual < last + 2000000 ? last + 25000 : actual + 25000;
+        last = actual < last + 1000000 ? last + 25000 : actual + 25000;
         if (actual < last)
             sfSleep((sfTime) {last - actual});
         my_event(datas, &last);
@@ -83,6 +84,7 @@ static void init_game(data_storage_t *datas)
     init_executor();
     load_tags(datas->path);
     load_entities(datas->path, datas->mapname);
+    load_player(datas->player, datas);
     sfRenderWindow_setFramerateLimit(datas->window, datas->fps);
 }
 
@@ -99,6 +101,7 @@ int main(void)
     if (datas->player->hp > 0) {
         save_entities(datas->path, datas->mapname);
         save_tags(datas->path);
+        save_player(datas->player, datas);
     }
     free_storage_content(datas, 7);
     return (0);

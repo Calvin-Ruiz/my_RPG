@@ -78,8 +78,22 @@ typedef struct player {
     int money;
     int xp;
     int xp_next;
-    char level;
+    int level;
 } player_t;
+
+typedef struct psave {
+    int health;
+    float speed;
+    sfVector2f pos;
+    int hp;
+    int max_hp;
+    int atk;
+    int def;
+    int money;
+    int xp;
+    int xp_next;
+    int level;
+} player_save_t;
 
 static inline void give_xp(player_t *player, int xp)
 {
