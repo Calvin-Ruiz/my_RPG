@@ -17,4 +17,3 @@ thread tracing create &tracer $datas
 # Define menus
 create_menu fight $datas.@datas.window.[0] $texture.background
 create_menu speak $datas.@datas.window.[0] $texture.background
-

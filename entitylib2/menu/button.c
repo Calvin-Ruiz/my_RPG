@@ -69,10 +69,8 @@ void update_button_array(sfRenderWindow *window, button_t *button,
     }
 }
 
-char button_clic(menu_t *menu, sfVector2f *pos)
+char button_clic(button_t *button, sfVector2f *pos)
 {
-    button_t *button = menu->button;
-
     while (button) {
         if (button->pos.v1.x <= pos->x && button->pos.v2.x > pos->x
             && button->pos.v1.y <= pos->y && button->pos.v2.y > pos->y) {

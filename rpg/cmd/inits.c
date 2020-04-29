@@ -15,6 +15,7 @@
 #include <system_cmd.h>
 #include <enemy.h>
 #include <fight.h>
+#include <action_list.h>
 
 dict_t *get_sf_colors(void)
 {
@@ -60,6 +61,7 @@ void init_external_cmds(dict_t **cmd)
 {
     init_external_cmds_part(cmd);
     append_to_dict(cmd, "said", my_said);
+    append_to_dict(cmd, "create_dynamic_list", create_dynamic_list_cmd);
 }
 
 static dict_t *get_internal_func_part(void)
@@ -95,5 +97,8 @@ dict_t *get_internal_func(void)
     append_to_dict(&new, "dtext_update_int", update_dynamic_text_from_int);
     append_to_dict(&new, "dtext_update_2int", update_dynamic_text_from_2int);
     append_to_dict(&new, "exit_menu", exit_menu);
+    append_to_dict(&new, "update_capacity_selection",
+        update_capacity_selection);
+    append_to_dict(&new, "action_list_clic", action_list_clic);
     return (new);
 }

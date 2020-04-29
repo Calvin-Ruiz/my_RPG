@@ -17,7 +17,8 @@ void create_item_cmd(char **arr)
     if (new == NULL)
         return;
     *new = (item_t) {*item, (*item) ? (*item)->id + 1 : 0, (long) arr[2],
-        arr[3], (long) arr[4], sfSprite_create(), (void (*)()) arr[6]};
+        (long) arr[4], my_strdup(arr[3]), sfSprite_create(),
+        (void (*)()) arr[6]};
     if (new->icon)
         sfSprite_setTexture(new->icon, (sfTexture *) arr[5], sfTrue);
     *item = new;

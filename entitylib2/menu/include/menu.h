@@ -83,6 +83,19 @@ typedef struct tx {
 void create_text_cmd(char **arr);
 void update_text_array(sfRenderWindow *window, text_t *text);
 
+typedef struct dlist {
+    struct dlist *next;
+    sfSprite *background;
+    pos_t pos;
+    void *local;
+    void *data;
+    void (*update)(struct dlist *self, sfRenderWindow *window,
+        data_storage_t *datas, sfVector2f *mouse);
+    char (*on_clic)(struct dlist *self, sfVector2f *pos);
+} dynamic_list_t;
+
+void create_dynamic_list_cmd(char **arr);
+
 typedef struct {
     sfRenderWindow *window;
     sfView *view;
@@ -95,10 +108,12 @@ typedef struct {
     text_t *text;
     dynamic_text_t *dtext;
     write_box_t *selected_write_box;
+    dynamic_list_t *dlist;
     char opened;
 } menu_t;
 
-char button_clic(menu_t *menu, sfVector2f *pos);
+char button_clic(button_t *button, sfVector2f *pos);
+char dynamic_list_clic(menu_t *menu, sfVector2f *pos);
 menu_t *create_menu(sfRenderWindow *window, sfTexture *background);
 void menu_update(menu_t *menu, data_storage_t *datas);
 char menu_clic(menu_t *menu, sfMouseButtonEvent *mouse);

@@ -16,6 +16,7 @@ typedef struct my_dict {
 
 void append_to_dict(dict_t **dict, char *name, void *data);
 void *get_from_dict(dict_t *dict, char *name);
+char *get_name_from_dict(dict_t *dict, void *data);
 void **get_ptr_from_dict(dict_t *dict, char *name);
 void destroy_dict(dict_t *dict, void (*destroy_content)());
 

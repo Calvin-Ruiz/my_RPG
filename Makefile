@@ -28,6 +28,7 @@ FILES = entitylib2/data_center/data_loader.c \
 	entitylib2/executor/structs.c \
 	entitylib2/executor/trace.c \
 	entitylib2/menu/button.c \
+	entitylib2/menu/dynamic_list.c \
 	entitylib2/menu/dynamic_text.c \
 	entitylib2/menu/image.c \
 	entitylib2/menu/menu.c \
@@ -43,6 +44,7 @@ FILES = entitylib2/data_center/data_loader.c \
 	rpg/cmd/structs.c \
 	rpg/cmd/system_cmd_2.c \
 	rpg/cmd/system_cmd.c \
+	rpg/enemy/action_list.c \
 	rpg/enemy/enemy.c \
 	rpg/enemy/fight.c \
 	rpg/entity_groups/decor.c \

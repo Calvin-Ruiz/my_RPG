@@ -23,8 +23,8 @@ typedef struct item {
     struct item *next;
     short id;
     char type;
-    char *name;
     int cost;
+    char *name;
     sfSprite *icon;
     void (*action)();
 } item_t;

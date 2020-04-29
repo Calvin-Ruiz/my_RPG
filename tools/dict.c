@@ -21,6 +21,19 @@ void append_to_dict(dict_t **dict, char *name, void *data)
     }
 }
 
+
+char *get_name_from_dict(dict_t *dict, void *data)
+{
+    while (dict) {
+        if (data != dict->data) {
+            dict = dict->next;
+            continue;
+        }
+        return (dict->name);
+    }
+    return (NULL);
+}
+
 void *get_from_dict(dict_t *dict, char *name)
 {
     while (dict) {

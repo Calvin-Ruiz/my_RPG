@@ -27,6 +27,7 @@ menu_t *create_menu(sfRenderWindow *window, sfTexture *background)
     new->text = NULL;
     new->dtext = NULL;
     new->selected_write_box = NULL;
+    new->dlist = NULL;
     return (new);
 }
 
@@ -42,6 +43,8 @@ void menu_update(menu_t *menu, data_storage_t *datas)
     update_button_array(menu->window, menu->button, &datas->mouse, &pos);
     update_dynamic_text_array(menu->window, menu->dtext);
     update_text_array(menu->window, menu->text);
+    for (dynamic_list_t *dlist = menu->dlist; dlist; dlist = dlist->next)
+        dlist->update(dlist, menu->window, datas, &pos);
     sfRenderWindow_display(menu->window);
 }
 
@@ -51,7 +54,9 @@ char menu_clic(menu_t *menu, sfMouseButtonEvent *mouse)
     sfVector2f pos = sfView_getSize(menu->view);
 
     pos = (sfVector2f) {mouse->x * pos.x / size.x, mouse->y * pos.y / size.y};
-    if (button_clic(menu, &pos))
+    if (button_clic(menu->button, &pos))
+        return (1);
+    if (dynamic_list_clic(menu, &pos))
         return (1);
     return (0);
 }
