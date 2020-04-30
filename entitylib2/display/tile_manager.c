@@ -47,7 +47,7 @@ void create_tile_map_cmd(char **arr)
     build_tiles(new);
     *(tile_map_t **) arr[1] = new;
 }
-#include <stdio.h>
+
 void load_tiles_from_file(tile_map_t *self, char *filename)
 {
     vertex4_t *vertex = (vertex4_t *) self->vertex;
