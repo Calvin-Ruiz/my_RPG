@@ -21,5 +21,6 @@ enum {
 
 void init_some_datas(data_storage_t *datas);
 void mainloop(data_storage_t *datas, sfRenderWindow *window);
+void open_inventory(data_storage_t *datas);
 
 #endif /* MAIN_H_ */

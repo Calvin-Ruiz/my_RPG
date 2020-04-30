@@ -29,6 +29,8 @@ static inline void event_press(data_storage_t *datas, sfKeyCode code,
         open_sub_menu(datas->pause_menu);
         reset_timers(datas, last);
     }
+    if (code == sfKeyI)
+        open_inventory(datas);
 }
 
 static inline void event_release(data_storage_t *datas, sfKeyCode code)

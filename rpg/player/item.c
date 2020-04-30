@@ -6,8 +6,11 @@
 */
 
 #include <entitybase.h>
+#include <data_storage.h>
 #include <player.h>
 #include <tools.h>
+#include <menu.h>
+#include <item_list.h>
 
 void create_item_cmd(char **arr)
 {
@@ -67,6 +70,14 @@ void buy_item(player_t *player, item_t *item, char *name)
         return;
     *tmp = (sitem_t) {player->inventory->next, item, 1};
     player->inventory->next = tmp;
+}
+
+void consume_item_from_inventory(sitem_t *item, sfText *amount)
+{
+    if (item->amount <= 0)
+        return;
+    update_text_value(--item->amount, amount);
+    item->item->action(item->item, get_data_storage()->player);
 }
 
 void give_item_cmd(char **arr)

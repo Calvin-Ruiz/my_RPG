@@ -16,6 +16,7 @@
 #include <enemy.h>
 #include <fight.h>
 #include <action_list.h>
+#include <item_list.h>
 
 dict_t *get_sf_colors(void)
 {
@@ -100,5 +101,7 @@ dict_t *get_internal_func(void)
     append_to_dict(&new, "update_capacity_selection",
         update_capacity_selection);
     append_to_dict(&new, "action_list_clic", action_list_clic);
+    append_to_dict(&new, "on_clic_item_list", on_clic_item_list);
+    append_to_dict(&new, "update_item_list", update_item_list);
     return (new);
 }

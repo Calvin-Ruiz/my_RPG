@@ -60,6 +60,7 @@ FILES = entitylib2/data_center/data_loader.c \
 	rpg/pause.c \
 	rpg/player/capacity.c \
 	rpg/player/item.c \
+	rpg/player/item_list.c \
 	rpg/player/player.c \
 	rpg/player/player_io.c \
 	tools/dict.c \
