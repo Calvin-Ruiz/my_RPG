@@ -14,6 +14,7 @@ FILES = entitylib2/data_center/data_loader.c \
 	entitylib2/data_center/internal_data.c \
 	entitylib2/display/displays.c \
 	entitylib2/display/entity_display.c \
+	entitylib2/display/tile_manager.c \
 	entitylib2/display/window_action.c \
 	entitylib2/display/window_manager.c \
 	entitylib2/entity.c \

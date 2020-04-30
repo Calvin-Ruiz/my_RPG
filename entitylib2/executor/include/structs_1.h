@@ -62,6 +62,7 @@ static inline dict_t *define_data_storage(data_storage_t * const ref)
 {
     dict_t *new = define_data_storage_2(ref);
 
+    append_to_dict(&new, "background", &ref->background);
     append_to_dict(&new, "on_mainloop", &ref->on_mainloop);
     append_to_dict(&new, "is_alive", &ref->is_alive);
     append_to_dict(&new, "ask_command", &ref->ask_command);

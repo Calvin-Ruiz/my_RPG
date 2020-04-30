@@ -14,6 +14,7 @@
 #include <npc.h>
 #include <data_io.h>
 #include <player_io.h>
+#include <tile_manager.h>
 
 void my_closure(data_storage_t *datas)
 {
@@ -54,7 +55,7 @@ void mainloop(data_storage_t *datas, sfRenderWindow *window)
 
     while (datas->on_mainloop) {
         srand(actual);
-        sfRenderWindow_clear(window, sfBlack);
+        draw_tile_map(window, datas->background);
         update_player_attributes(datas);
         decor_update(datas->entitylists[DECOR_LIST], datas->player);
         event_update(datas->entitylists[EVENT_LIST], datas->player);
@@ -104,5 +105,6 @@ int main(void)
         save_player(datas->player, datas);
     }
     free_storage_content(datas, 7);
+    free(datas->background->vertex);
     return (0);
 }

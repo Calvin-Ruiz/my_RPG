@@ -1,0 +1,4 @@
+BABA
+ABBA
+AABB
+AAAB

@@ -37,3 +37,8 @@ void use_capacity(void *data)
     ((menu_t *) get_from_rec_dict(get_from_rec_dict(get_executor()->var,
         "menu"), "fight"))->opened = 0;
 }
+
+void free_cmd(char **arr)
+{
+    free(arr[1]);
+}

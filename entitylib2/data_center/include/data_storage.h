@@ -10,6 +10,7 @@
 
 #include <dict.h>
 #include <player.h>
+#include <tile_manager.h>
 
 enum {
     ITEMS,
@@ -40,11 +41,17 @@ typedef struct my_keys {
     char space;
 } my_keys_t;
 
+typedef struct vector2s {
+    short x;
+    short y;
+} vector2s_t;
+
 typedef struct data_storage {
     sfRenderWindow *window;
     sfView *view;
     sfVector2f pos;
     sfVector2f size;
+    tile_map_t *background;
     char *path;
     char *mapname;
     saved_t *saved;

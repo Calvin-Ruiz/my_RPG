@@ -97,6 +97,9 @@ float get_float(char *str);
 double get_double(char *str);
 void create_menu_cmd(char **arr);
 void create_button_cmd(char **arr);
+void free_cmd(char **arr);
+void load_tiles_from_file_cmd(char **arr);
+void create_tile_map_cmd(char **arr);
 
 static inline void eval_args(char **arr, executor_t *executor)
 {

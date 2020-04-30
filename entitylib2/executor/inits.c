@@ -86,6 +86,9 @@ static void init_cmd_2(dict_t **cmd)
     append_to_dict(cmd, "create_dynamic_text", create_dynamic_text_cmd);
     append_to_dict(cmd, "create_image", create_image_cmd);
     append_to_dict(cmd, "create_text", create_text_cmd);
+    append_to_dict(cmd, "load_tiles_from_file", load_tiles_from_file_cmd);
+    append_to_dict(cmd, "create_tile_map", create_tile_map_cmd);
+    append_to_dict(cmd, "free", free_cmd);
     init_external_cmds(cmd);
 }
 
