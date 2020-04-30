@@ -34,6 +34,8 @@ void update_dynamic_text_from_int(dynamic_text_t *self)
     char *ptr = buffer + 15;
     int tmp;
 
+    if (*(int *) self->data == 0)
+        sfText_setString(self->text, "0");
     if (*(int *) self->data == (long) self->last)
         return;
     self->last = (void *) (long) *(int *) self->data;
@@ -43,7 +45,7 @@ void update_dynamic_text_from_int(dynamic_text_t *self)
         *(--ptr) = '0' + tmp % 10;
         tmp /= 10;
     }
-    sfText_setString(self->text, buffer);
+    sfText_setString(self->text, ptr);
 }
 
 static char *vec2i_to_str(sfVector2i *vec)
@@ -58,6 +60,8 @@ static char *vec2i_to_str(sfVector2i *vec)
         tmp.y /= 10;
     }
     *(ptr--) = '/';
+    if (tmp.x == 0)
+        *(ptr--) = '0';
     while (tmp.x > 0) {
         *(ptr--) = '0' + tmp.x % 10;
         tmp.x /= 10;
@@ -67,9 +71,9 @@ static char *vec2i_to_str(sfVector2i *vec)
 
 void update_dynamic_text_from_2int(dynamic_text_t *self)
 {
-    if (*(int *) self->data == (long) self->last)
+    if (*(long *) self->data == (long) self->last)
         return;
-    self->last = (void *) (long) *(int *) self->data;
+    self->last = (void *) *(long *) self->data;
     sfText_setString(self->text, vec2i_to_str(self->data) + 1);
 }
 

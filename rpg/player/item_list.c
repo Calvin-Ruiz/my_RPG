@@ -15,23 +15,6 @@
 #include <executor.h>
 #include <pause.h>
 
-static void destroy_item_list_content(dynamic_list_t *self)
-{
-    item_list_t *tmp = self->local;
-
-    while (tmp != NULL) {
-        self->local = tmp->next;
-        sfSprite_destroy(tmp->button->display[0]);
-        sfSprite_destroy(tmp->button->display[1]);
-        sfSprite_destroy(tmp->button->display[2]);
-        sfText_destroy(tmp->button->text);
-        free(tmp->button);
-        sfText_destroy(tmp->text);
-        free(tmp);
-        tmp = self->local;
-    }
-}
-
 static void build_item_list(dynamic_list_t *self)
 {
     item_list_t *new = NULL;
@@ -103,4 +86,9 @@ void open_inventory(data_storage_t *datas)
     menu->dlist->data = datas->player->inventory->next;
     open_sub_menu(menu);
     reset_timers(datas, NULL);
+}
+
+void close_menu(menu_t *menu)
+{
+    menu->opened = 0;
 }

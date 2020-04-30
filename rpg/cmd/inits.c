@@ -103,5 +103,6 @@ dict_t *get_internal_func(void)
     append_to_dict(&new, "action_list_clic", action_list_clic);
     append_to_dict(&new, "on_clic_item_list", on_clic_item_list);
     append_to_dict(&new, "update_item_list", update_item_list);
+    append_to_dict(&new, "close_menu", close_menu);
     return (new);
 }
