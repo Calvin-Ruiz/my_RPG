@@ -21,4 +21,14 @@ static inline capacity_t *get_capacity_from_id(dict_t *capacities, short id)
     return (NULL);
 }
 
+static inline item_t *get_item_from_id(item_t *items, short id)
+{
+    while (items) {
+        if (items->id == id)
+            return (items);
+        items = items->next;
+    }
+    return (NULL);
+}
+
 #endif /* PLAYER_IO_H_ */

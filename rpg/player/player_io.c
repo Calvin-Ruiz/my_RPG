@@ -26,6 +26,10 @@ void save_player(player_t *self, data_storage_t *datas)
     write(fd, &tmp, 2);
     for (capacity_t *temp = self->capacity; temp; temp = temp->next)
         write(fd, &temp->id, sizeof(short));
+    for (sitem_t *sitem = self->inventory->next; sitem; sitem = sitem->next) {
+        write(fd, &sitem->item->id, sizeof(short));
+        write(fd, &sitem->amount, sizeof(sitem->amount));
+    }
 }
 
 static void load_player_capacities(player_t *player, data_storage_t *datas,
@@ -48,6 +52,23 @@ static void load_player_capacities(player_t *player, data_storage_t *datas,
     }
 }
 
+static void load_player_items(player_t *player, data_storage_t *datas, int fd)
+{
+    short id = 0;
+    sitem_t *new = NULL;
+
+    while (read(fd, &id, sizeof(short)) == sizeof(short)) {
+        new = malloc(sizeof(sitem_t));
+        if (new == NULL)
+            continue;
+        new->next = player->inventory->next;
+        new->item = get_item_from_id(datas->global[0], id);
+        if (read(fd, &new->amount, sizeof(new->amount)) == sizeof(new->amount)
+            && new->item)
+            player->inventory->next = new;
+    }
+}
+
 void load_player(player_t *self, data_storage_t *datas)
 {
     player_save_t save;
@@ -67,4 +88,5 @@ void load_player(player_t *self, data_storage_t *datas)
     self->xp_next = save.xp_next;
     self->level = save.level;
     load_player_capacities(self, datas, fd);
+    load_player_items(self, datas, fd);
 }
