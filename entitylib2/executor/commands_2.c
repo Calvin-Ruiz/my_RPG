@@ -42,3 +42,9 @@ void free_cmd(char **arr)
 {
     free(arr[1]);
 }
+
+void clear_trace(char **arr)
+{
+    (void) arr;
+    *get_trace() = NULL;
+}

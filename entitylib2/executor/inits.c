@@ -89,6 +89,7 @@ static void init_cmd_2(dict_t **cmd)
     append_to_dict(cmd, "load_tiles_from_file", load_tiles_from_file_cmd);
     append_to_dict(cmd, "create_tile_map", create_tile_map_cmd);
     append_to_dict(cmd, "free", free_cmd);
+    append_to_dict(cmd, "clear_trace", clear_trace);
     init_external_cmds(cmd);
 }
 

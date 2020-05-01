@@ -52,7 +52,7 @@ char load_tags(char *path)
         *(short *) data = *(short *) (buf + 2);
         *new = (saved_t) {NULL, data, *(short *) buf};
         *saved = new;
-        saved = &new;
+        saved = &new->next;
     }
     close(fd);
     return (0);

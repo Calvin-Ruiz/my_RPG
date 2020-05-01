@@ -43,7 +43,7 @@ static inline void set_item_list_parameters(item_list_t *new, sitem_t *item)
     new->button->data = item;
     new->icon = item->item->icon;
     sfText_setString(new->button->text, tmpcat("     ", item->item->name));
-    sfText_setFillColor(new->text, sfBlack);
+    sfText_setFillColor(new->text, sfBlue);
     sfText_setCharacterSize(new->text, 16);
     update_text_value(item->amount, new->text);
 }

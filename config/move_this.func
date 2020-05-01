@@ -1,0 +1,6 @@
+# (entity_t **self, char *pos_x, char *pos_y)
+set $type.float @1.[0].@entity.pos_x1 @2
+set $type.float @1.[0].@entity.pos_y1 @3
+fop $type.float @1.[0].@entity.pos_x2 $type.float @1.[0].@entity.pos_x1 + $type.int @1.[0].@entity.size.[0]
+fop $type.float @1.[0].@entity.pos_y2 $type.float @1.[0].@entity.pos_y1 + $type.int @1.[0].@entity.size.[0].+4
+

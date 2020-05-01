@@ -66,8 +66,9 @@ void menu_events(menu_t *menu, data_storage_t *datas)
     sfEvent event;
 
     while (menu->opened && sfRenderWindow_pollEvent(menu->window, &event)) {
-        if (event.type == sfEvtClosed) {
-            my_closure(datas);
+        if (event.type == sfEvtClosed || (event.type == sfEvtKeyPressed
+            && event.key.code == sfKeyEscape)) {
+            menu->opened = 0;
             return;
         }
         if (event.type == sfEvtMouseButtonReleased

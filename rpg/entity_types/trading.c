@@ -16,26 +16,27 @@
 #include <trading.h>
 #include <executor.h>
 #include <pause.h>
+#include <player_io.h>
 
 static void build_trade_list(dynamic_list_t *self)
 {
     trade_list_t *new = NULL;
-    sfTexture *texture = get_from_dict(get_data_storage()->textures, "button");
+    data_storage_t *datas = get_data_storage();
+    sfTexture *texture = get_from_dict(datas->textures, "button");
     sfFont *font = get_internal_data()->text_font;
     pos_t pos = {{self->pos.v1.x + 16, self->pos.v1.y + 8},
         {self->pos.v2.x - 48, 48}};
-
+    short *item_id = self->data;
+    item_t *item = NULL;
     destroy_trade_list_content(self);
-    for (item_t *item = self->data; item; item = item->next) {
+    for (short nb_items = (*(short *) self->data) / 2; nb_items-- > 0;) {
+        item = get_item_from_id(datas->global[ITEMS], *(++item_id));
         new = malloc(sizeof(trade_list_t));
         *new = (trade_list_t) {create_button(texture, font, &pos, NULL),
             item->icon, sfText_create(), sfText_create(), self->local};
-        set_trade_list_parameters(new, item, get_sitem_from_item(item));
+        set_trade_list_parameters(new, item, datas, &pos);
         sfText_setFont(new->text, font);
-        sfSprite_setPosition(new->icon, (sfVector2f) {pos.v1.x + 16,
-            pos.v1.y + 8});
-        sfText_setPosition(new->text, (sfVector2f) {pos.v1.x + pos.v2.x - 52,
-            pos.v1.y + 16});
+        sfText_setFont(new->amount, font);
         self->local = new;
         pos.v1.y += 64;
     }
@@ -60,6 +61,7 @@ void update_trade_list(dynamic_list_t *self, sfRenderWindow *window,
         sfRenderWindow_drawText(window, item->button->text, NULL);
         sfRenderWindow_drawSprite(window, item->icon, NULL);
         sfRenderWindow_drawText(window, item->text, NULL);
+        sfRenderWindow_drawText(window, item->amount, NULL);
     }
 }
 
@@ -88,10 +90,10 @@ void trade_event(event_t *self, player_t *player)
     if (!datas->key.space)
         return;
     (void) player;
-    datas->key.space = 0;
+    datas->key = (my_keys_t) {0, 0, 0, 0, 0};
     menu = (menu_t *) get_from_rec_dict(get_from_rec_dict(
-        get_executor()->var, "menu"), "GUI");
+        get_executor()->var, "menu"), "trade");
     menu->dlist->data = self->tag;
     open_sub_menu(menu);
-    reset_timers(get_data_storage(), NULL);
+    reset_timers(datas, NULL);
 }
