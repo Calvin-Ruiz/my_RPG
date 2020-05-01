@@ -11,15 +11,19 @@
 #include <fcntl.h>
 #include <tools.h>
 #include <player_io.h>
+#include <string.h>
 
 void save_player(player_t *self, data_storage_t *datas)
 {
     player_save_t save = (player_save_t) {self->health, self->speed,
         self->pos.v1, self->hp, self->max_hp, self->atk, self->def,
-        self->money, self->xp, self->xp_next, self->level};
+        self->money, self->xp, self->xp_next, self->level, "\0"};
     int fd = open(tmpcat(datas->path, "player.dat"), O_WRONLY | O_CREAT, 0666);
     int tmp = 0;
 
+    memset(save.mapname, '\0', 24);
+    for (register u_char i = 0; datas->mapname[i] != '\0' && i < 24; i++)
+        save.mapname[i] = datas->mapname[i];
     write(fd, (char *) &save, sizeof(save));
     for (capacity_t *temp = self->capacity; temp; temp = temp->next)
         tmp++;
@@ -87,6 +91,7 @@ void load_player(player_t *self, data_storage_t *datas)
     self->xp = save.xp;
     self->xp_next = save.xp_next;
     self->level = save.level;
+    datas->mapname = my_strdup(save.mapname);
     load_player_capacities(self, datas, fd);
     load_player_items(self, datas, fd);
 }

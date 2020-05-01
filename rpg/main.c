@@ -74,7 +74,6 @@ void mainloop(data_storage_t *datas, sfRenderWindow *window)
 
 static void init_game(data_storage_t *datas)
 {
-    datas->mapname = "origin";
     get_internal_data()->text_font = sfFont_createFromFile("text_font.ttf");
     init_some_datas(datas);
     init_pause_buttons(datas->pause_menu);
@@ -84,8 +83,9 @@ static void init_game(data_storage_t *datas)
         get_from_dict(datas->textures, "particle"), 3000));
     init_executor();
     load_tags(datas->path);
-    load_entities(datas->path, datas->mapname);
     load_player(datas->player, datas);
+    load_tiles_from_file(datas->background, datas->mapname);
+    load_entities(datas->path, datas->mapname);
     sfRenderWindow_setFramerateLimit(datas->window, datas->fps);
 }
 

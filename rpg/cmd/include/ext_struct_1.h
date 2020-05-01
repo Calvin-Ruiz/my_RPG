@@ -33,6 +33,7 @@ static inline dict_t *define_player_structure(player_t * const ref)
     append_to_dict(&new, "def", &ref->def);
     append_to_dict(&new, "money", &ref->money);
     append_to_dict(&new, "xp", &ref->xp);
+    append_to_dict(&new, "xp_next", &ref->xp_next);
     append_to_dict(&new, "level", &ref->level);
     return (new);
 }

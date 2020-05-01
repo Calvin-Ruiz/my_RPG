@@ -21,6 +21,7 @@ void update_item_list(dynamic_list_t *self, sfRenderWindow *window,
     data_storage_t *datas, sfVector2f *pos);
 void open_inventory(data_storage_t *datas);
 void close_menu(menu_t *menu);
+void buy_this_item(player_t *player, item_t *item);
 
 static inline void update_text_value(long value, sfText *amount)
 {

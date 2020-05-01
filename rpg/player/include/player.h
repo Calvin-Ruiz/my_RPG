@@ -93,6 +93,7 @@ typedef struct psave {
     int xp;
     int xp_next;
     int level;
+    char mapname[24];
 } player_save_t;
 
 static inline void give_xp(player_t *player, int xp)

@@ -48,14 +48,10 @@ void give_item(player_t *player, item_t *item, char *name)
     player->inventory->next = tmp;
 }
 
-void buy_item(player_t *player, item_t *item, char *name)
+void buy_this_item(player_t *player, item_t *item)
 {
     sitem_t *tmp = player->inventory->next;
 
-    while (item && my_strcmp(item->name, name))
-        item = item->next;
-    if (item == NULL)
-        return;
     if (player->money < item->cost)
         return;
     player->money -= item->cost;

@@ -55,7 +55,7 @@ void load_tiles_from_file(tile_map_t *self, char *filename)
     const short tex_size = self->tile_size.x;
     const float tex_width = 1 << self->tile_size.x;
     const float tex_heigh = 1 << self->tile_size.y;
-    int fd = open(filename, O_RDONLY);
+    int fd = open(tmpcat(tmpcat("maps/", filename), ".map"), O_RDONLY);
     long len = 0;
     char *map = my_read(fd, &len);
     register float tex = 0;
@@ -74,5 +74,5 @@ void load_tiles_from_file(tile_map_t *self, char *filename)
 
 void load_tiles_from_file_cmd(char **arr)
 {
-    load_tiles_from_file(*(tile_map_t **) arr[1], arr[2]);
+    load_tiles_from_file(*(tile_map_t **) arr[1], *(char **) arr[2]);
 }

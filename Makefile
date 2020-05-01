@@ -55,6 +55,7 @@ FILES = entitylib2/data_center/data_loader.c \
 	rpg/entity_types/npc_event_io.c \
 	rpg/entity_types/solid_decor.c \
 	rpg/entity_types/solid_event.c \
+	rpg/entity_types/trading.c \
 	rpg/how_to_play.c \
 	rpg/main.c \
 	rpg/menu.c \
