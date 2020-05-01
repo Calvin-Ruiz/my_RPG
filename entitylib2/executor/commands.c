@@ -32,6 +32,7 @@ void change_of_map(char **args)
         (long) args[3]}, (sfVector2f) {(long) args[2] + datas->player->size[0],
         (long) args[3] + datas->player->size[1]}};
     load_entities(datas->path, datas->mapname);
+    load_tiles_from_file(datas->background, datas->mapname);
 }
 
 void sleep_cmd(char **args)
