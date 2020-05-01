@@ -53,7 +53,7 @@ void put_in_log(char **arr)
 void operate(char **arr)
 {
     if (arr[1] == NULL || arr[2] == NULL || arr[4] == NULL) {
-        my_puterr("\e[94mIfError : nullptr received for variables\n\e[0m");
+        my_puterr("\e[94mOperateError : nullptr received for variables\n\e[0m");
         return;
     }
     if (*(arr[3]) == '+')
