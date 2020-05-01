@@ -90,6 +90,8 @@ void destroy_text_array(text_t *text);
 typedef struct dlist {
     struct dlist *next;
     sfSprite *background;
+    sfView *view;
+    sfVector2f center;
     pos_t pos;
     void *local;
     void *data;
@@ -118,6 +120,7 @@ typedef struct {
 
 char button_clic(button_t *button, sfVector2f *pos);
 char dynamic_list_clic(menu_t *menu, sfVector2f *pos);
+void dynamic_list_scroll(menu_t *menu, char delta);
 menu_t *create_menu(sfRenderWindow *window, sfTexture *background);
 void menu_update(menu_t *menu, data_storage_t *datas);
 char menu_clic(menu_t *menu, sfMouseButtonEvent *mouse);

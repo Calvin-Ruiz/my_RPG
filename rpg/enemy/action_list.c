@@ -37,7 +37,6 @@ void update_capacity_selection(dynamic_list_t *self, sfRenderWindow *window,
 {
     if (self->local == NULL)
         build_capacity_selection(self, datas);
-    sfRenderWindow_drawSprite(window, self->background, NULL);
     update_button_array(window, self->local, &datas->mouse, mouse);
 }
 

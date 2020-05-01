@@ -38,13 +38,16 @@ void menu_update(menu_t *menu, data_storage_t *datas)
     sfVector2f pos = sfView_getSize(menu->view);
 
     pos = (sfVector2f) {real.x * pos.x / size.x, real.y * pos.y / size.y};
-    sfRenderWindow_setView(menu->window, menu->view);
     update_image_array(menu->window, menu->images);
     update_button_array(menu->window, menu->button, &datas->mouse, &pos);
     update_dynamic_text_array(menu->window, menu->dtext);
     update_text_array(menu->window, menu->text);
-    for (dynamic_list_t *dlist = menu->dlist; dlist; dlist = dlist->next)
+    for (dynamic_list_t *dlist = menu->dlist; dlist; dlist = dlist->next) {
+        sfRenderWindow_setView(menu->window, menu->view);
+        sfRenderWindow_drawSprite(menu->window, dlist->background, NULL);
+        sfRenderWindow_setView(menu->window, dlist->view);
         dlist->update(dlist, menu->window, datas, &pos);
+    }
     sfRenderWindow_display(menu->window);
 }
 
@@ -79,6 +82,8 @@ void menu_events(menu_t *menu, data_storage_t *datas)
         if (event.type == sfEvtMouseButtonPressed
             && event.mouseButton.button == sfMouseLeft)
             datas->mouse.left = 1;
+        if (event.type == sfEvtMouseWheelScrolled)
+            dynamic_list_scroll(menu, event.mouseWheelScroll.delta);
     }
 }
 
@@ -88,6 +93,7 @@ void open_menu(menu_t *menu)
 
     menu->opened = 1;
     while (menu->opened) {
+        sfRenderWindow_setView(menu->window, menu->view);
         sfRenderWindow_drawSprite(menu->window, menu->background, NULL);
         menu_update(menu, datas);
         menu_events(menu, datas);

@@ -21,6 +21,8 @@ void create_dynamic_list_cmd(char **arr)
     new->update = (void (*)(struct dlist *self, sfRenderWindow *window,
         data_storage_t *datas, sfVector2f *mouse)) arr[5];
     new->on_clic = (char (*)(struct dlist *self, sfVector2f *pos)) arr[6];
+    new->view = sfView_copy(((menu_t *) arr[1])->view);
+    new->center = sfView_getCenter(new->view);
     sfSprite_setTexture(new->background, (sfTexture *) arr[2], sfTrue);
     sfSprite_setPosition(new->background, new->pos.v1);
     sfSprite_setScale(new->background,
@@ -40,4 +42,18 @@ char dynamic_list_clic(menu_t *menu, sfVector2f *pos)
         dlist = dlist->next;
     }
     return (0);
+}
+
+void dynamic_list_scroll(menu_t *menu, char delta)
+{
+    sfVector2f center = sfView_getCenter(menu->view);
+    dynamic_list_t *dlist = menu->dlist;
+
+    while (dlist) {
+        dlist->center.y -= delta * 64;
+        if (dlist->center.y < center.y)
+            dlist->center.y = center.y;
+        sfView_setCenter(dlist->view, dlist->center);
+        dlist = dlist->next;
+    }
 }

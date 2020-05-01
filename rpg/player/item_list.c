@@ -46,7 +46,6 @@ void update_item_list(dynamic_list_t *self, sfRenderWindow *window,
 
     if (self->data != here)
         build_item_list(self);
-    sfRenderWindow_drawSprite(window, self->background, NULL);
     for (item_list_t *item = self->local; item; item = item->next) {
         if (item->button->pos.v1.x <= pos->x && item->button->pos.v2.x > pos->x
             && item->button->pos.v1.y <= pos->y

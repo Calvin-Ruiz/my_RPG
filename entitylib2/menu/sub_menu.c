@@ -12,6 +12,7 @@ void open_sub_menu(menu_t *menu)
 {
     data_storage_t *datas = get_data_storage();
     sfVector2u size = sfRenderWindow_getSize(menu->window);
+    sfVector2f vs = sfView_getSize(menu->view);
     sfTexture *texture = sfTexture_create(size.x, size.y);
     sfSprite *back = sfSprite_create();
 
@@ -19,8 +20,10 @@ void open_sub_menu(menu_t *menu)
     if (texture && back) {
         sfTexture_updateFromRenderWindow(texture, menu->window, 0, 0);
         sfSprite_setTexture(back, texture, sfTrue);
+        sfSprite_setScale(back, (sfVector2f) {vs.x / size.x , vs.y / size.y});
     }
     while (menu->opened) {
+        sfRenderWindow_setView(menu->window, menu->view);
         sfRenderWindow_drawSprite(menu->window, back, NULL);
         menu_update(menu, datas);
         menu_events(menu, datas);
