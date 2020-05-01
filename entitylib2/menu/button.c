@@ -81,3 +81,18 @@ char button_clic(button_t *button, sfVector2f *pos)
     }
     return (0);
 }
+
+void destroy_button_array(button_t *button)
+{
+    button_t *tmp = NULL;
+
+    while (button) {
+        tmp = button;
+        button = button->next;
+        sfSprite_destroy(tmp->display[0]);
+        sfSprite_destroy(tmp->display[1]);
+        sfSprite_destroy(tmp->display[2]);
+        sfText_destroy(tmp->text);
+        free(tmp);
+    }
+}

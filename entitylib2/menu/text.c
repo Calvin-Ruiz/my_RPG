@@ -39,3 +39,27 @@ void update_text_array(sfRenderWindow *window, text_t *text)
         text = text->next;
     }
 }
+
+void destroy_text_array(text_t *text)
+{
+    text_t *tmp = NULL;
+
+    while (text) {
+        tmp = text;
+        text = text->next;
+        sfText_destroy(tmp->text);
+        free(tmp);
+    }
+}
+
+void destroy_dynamic_text_array(dynamic_text_t *dynamic_text)
+{
+    dynamic_text_t *tmp = NULL;
+
+    while (dynamic_text) {
+        tmp = dynamic_text;
+        dynamic_text = dynamic_text->next;
+        sfText_destroy(tmp->text);
+        free(tmp);
+    }
+}

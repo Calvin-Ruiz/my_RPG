@@ -45,6 +45,11 @@ void free_cmd(char **arr)
 
 void clear_trace(char **arr)
 {
-    (void) arr;
+    arr = (char **) *get_trace();
     *get_trace() = NULL;
+    sfSleep((sfTime) {100000});
+    while (arr) {
+        free(arr[2]);
+        arr = (char **) arr[0];
+    }
 }

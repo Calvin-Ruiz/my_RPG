@@ -76,7 +76,7 @@ void set_value(char **arr)
     if ((long) arr[1] == DOUBLE)
         *((double *) arr[2]) = get_double(arr[3]);
     if ((long) arr[1] == STR)
-        *((char **) arr[2]) = my_strdup(arr[3]);
+        *((char **) arr[2]) = my_tmpdup(arr[3]);
 }
 
 void create_variable(char **arr)

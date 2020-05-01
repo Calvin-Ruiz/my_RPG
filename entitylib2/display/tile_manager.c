@@ -59,7 +59,6 @@ void load_tiles_from_file(tile_map_t *self, char *filename)
     long len = 0;
     char *map = my_read(fd, &len);
     register float tex = 0;
-
     for (register short y = -1; ++y < max.y; map++) {
         for (register short x = -1; ++x < max.x;) {
             tex = ((short) ((*(map++)) - 'A')) << tex_size;
@@ -69,6 +68,7 @@ void load_tiles_from_file(tile_map_t *self, char *filename)
             (vertex++)->p4.texCoords = (sfVector2f) {tex, tex_heigh};
         }
     }
+    free(map - len);
     close(fd);
 }
 

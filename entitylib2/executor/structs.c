@@ -19,3 +19,15 @@ dict_t *define_structs(void)
     define_external_structs(&structs);
     return (structs);
 }
+
+void destroy_func(func_t *func)
+{
+    func_t *tmp = NULL;
+
+    while (func) {
+        tmp = func;
+        func = func->next;
+        free(tmp->data);
+        free(tmp);
+    }
+}

@@ -101,6 +101,7 @@ void free_cmd(char **arr);
 void load_tiles_from_file_cmd(char **arr);
 void create_tile_map_cmd(char **arr);
 void clear_trace(char **arr);
+void destroy_func(func_t *func);
 
 static inline void eval_args(char **arr, executor_t *executor)
 {

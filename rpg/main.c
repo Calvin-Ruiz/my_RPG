@@ -15,6 +15,7 @@
 #include <data_io.h>
 #include <player_io.h>
 #include <tile_manager.h>
+#include <cmd_uninit.h>
 
 void my_closure(data_storage_t *datas)
 {
@@ -99,12 +100,13 @@ int main(void)
         return (84);
     init_game(datas);
     open_menu(datas->main_menu);
+    clear_trace(NULL);
     if (datas->player->hp > 0) {
         save_entities(datas->path, datas->mapname);
         save_tags(datas->path);
         save_player(datas->player, datas);
     }
     free_storage_content(datas, 7);
-    free(datas->background->vertex);
+    cmd_uninit();
     return (0);
 }

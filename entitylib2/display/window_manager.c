@@ -52,6 +52,7 @@ void destroy_window(data_storage_t *stor)
 {
     internal_data_t *datas = get_internal_data();
 
+    sfView_destroy(stor->view);
     sfTexture_destroy(datas->cursor_skin);
     sfTexture_destroy(datas->background_skin);
     sfSprite_destroy(datas->cursor);

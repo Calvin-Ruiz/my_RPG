@@ -44,8 +44,8 @@ static void init_vars(dict_t **var)
     dict_t *new = NULL;
 
     sub_init_vars(var, datas);
-    append_to_dict(&new, "main", &datas->main_menu);
-    append_to_dict(&new, "pause", &datas->pause_menu);
+    append_to_dict(&new, "main", datas->main_menu);
+    append_to_dict(&new, "pause", datas->pause_menu);
     append_to_dict(var, "menu", new);
     reference_types_mouse_menu(var, datas);
     reference_keys(var, datas);

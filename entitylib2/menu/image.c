@@ -41,3 +41,15 @@ void update_image_array(sfRenderWindow *window, image_t *image)
         image = image->next;
     }
 }
+
+void destroy_image_array(image_t *image)
+{
+    image_t *tmp = NULL;
+
+    while (image) {
+        tmp = image;
+        image = image->next;
+        sfSprite_destroy(tmp->image);
+        free(tmp);
+    }
+}

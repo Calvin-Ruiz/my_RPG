@@ -28,3 +28,16 @@ void open_sub_menu(menu_t *menu)
     sfTexture_destroy(texture);
     sfSprite_destroy(back);
 }
+
+void destroy_menu(menu_t *menu)
+{
+    if (menu->background)
+        sfSprite_destroy(menu->background);
+    if (menu->view)
+        sfView_destroy(menu->view);
+    destroy_button_array(menu->button);
+    destroy_image_array(menu->images);
+    destroy_text_array(menu->text);
+    destroy_dynamic_text_array(menu->dtext);
+    free(menu);
+}

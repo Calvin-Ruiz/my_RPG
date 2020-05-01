@@ -33,9 +33,9 @@ static inline fdata_t convert_to_farg(char *arr, executor_t *executor)
             return ((fdata_t) {get_from_dict((dict_t *) executor->cmd,
                 arr + 1), 1});
         case '@':
-            return ((fdata_t) {my_strdup(arr + 1), 0});
+            return ((fdata_t) {my_tmpdup(arr + 1), 0});
         default:
-            return ((fdata_t) {my_strdup(arr), 1});
+            return ((fdata_t) {my_tmpdup(arr), 1});
     }
 }
 

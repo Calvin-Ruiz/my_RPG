@@ -38,4 +38,19 @@ static inline char *my_strdup(char *str)
     return (new);
 }
 
+static inline char *my_tmpdup(char *str)
+{
+    int len = -1;
+    int i = -1;
+    char *new = NULL;
+
+    while (str[++len] != '\0');
+    new = my_malloc(len + 1);
+    if (new == NULL)
+        return (NULL);
+    while (i++ < len)
+        new[i] = str[i];
+    return (new);
+}
+
 #endif /* TOOLS_H_ */

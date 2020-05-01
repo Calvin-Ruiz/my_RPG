@@ -21,6 +21,7 @@ button_t *create_button(sfTexture *texture, sfFont *font, pos_t *pos,
     void (*press_action)(void *data));
 void update_button_array(sfRenderWindow *window, button_t *button,
     my_mouse_t *mouse, sfVector2f *pos);
+void destroy_button_array(button_t *button);
 
 typedef struct wbx {
     struct write_box *next;
@@ -39,6 +40,7 @@ typedef struct imagez {
 image_t *create_image(sfTexture *texture, pos_t *pos);
 void create_image_cmd(char **arr);
 void update_image_array(sfRenderWindow *window, image_t *image);
+void destroy_image_array(image_t *image);
 
 typedef struct jge {
     struct jge *next;
@@ -73,6 +75,7 @@ void create_dynamic_text_cmd(char **arr);
 void update_dynamic_text_from_2int(dynamic_text_t *self);
 void update_dynamic_text_from_int(dynamic_text_t *self);
 void update_dynamic_text_array(sfRenderWindow *window, dynamic_text_t *dtext);
+void destroy_dynamic_text_array(dynamic_text_t *dynamic_text);
 
 typedef struct tx {
     struct tx *next;
@@ -82,6 +85,7 @@ typedef struct tx {
 
 void create_text_cmd(char **arr);
 void update_text_array(sfRenderWindow *window, text_t *text);
+void destroy_text_array(text_t *text);
 
 typedef struct dlist {
     struct dlist *next;
@@ -121,5 +125,6 @@ void open_menu(menu_t *menu);
 void my_closure(data_storage_t *datas);
 void open_sub_menu(menu_t *menu);
 void menu_events(menu_t *menu, data_storage_t *datas);
+void destroy_menu(menu_t *menu);
 
 #endif /* MENU_H_ */

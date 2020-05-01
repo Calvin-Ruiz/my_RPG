@@ -131,5 +131,6 @@ void update_particle_list(particle_list_t *plist, sfRenderWindow *window,
 void append_particle_cmd(char **arr);
 void create_particle_emitter_cmd(char **arr);
 void update_all_particle_emitter(dict_t *emitters);
+void destroy_particle_list(particle_list_t *plist);
 
 #endif /* PARTICLE_H_ */

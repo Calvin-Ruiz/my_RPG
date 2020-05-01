@@ -40,7 +40,7 @@ void create_npc_cmd(char **arr)
         return;
     }
     npc->event = (void (*)(npc_t *self, player_t *player)) arr[0];
-    npc->command_name = my_strdup(arr[1]);
+    npc->command_name = my_tmpdup(arr[1]);
     npc->tag_id = -1;
     npc->tag = NULL;
 }

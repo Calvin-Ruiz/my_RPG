@@ -91,7 +91,7 @@ void load_player(player_t *self, data_storage_t *datas)
     self->xp = save.xp;
     self->xp_next = save.xp_next;
     self->level = save.level;
-    datas->mapname = my_strdup(save.mapname);
+    datas->mapname = my_tmpdup(save.mapname);
     load_player_capacities(self, datas, fd);
     load_player_items(self, datas, fd);
 }

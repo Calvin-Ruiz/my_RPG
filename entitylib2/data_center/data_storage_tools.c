@@ -54,9 +54,15 @@ void save_higher_score(data_storage_t *datas)
     }
 }
 
-static void auto_destroy(entity_t *self)
+static void destroy_entity_base(entity_t *self)
 {
-    self->destroy(self);
+    const short max = self->size[2] * self->size[3];
+
+    for (short i = -1; ++i < max;)
+        sfSprite_destroy(self->sprite[i]);
+    free(self->size);
+    free(self->sprite);
+    free(self);
 }
 
 void free_storage_content(data_storage_t *datas, int mask)
@@ -66,13 +72,19 @@ void free_storage_content(data_storage_t *datas, int mask)
     destroy_dict(datas->sounds, sfSound_destroy);
     destroy_dict(datas->sound_buffs, sfSoundBuffer_destroy);
     destroy_dict(datas->textures, sfTexture_destroy);
-    destroy_dict(datas->entities, auto_destroy);
+    destroy_dict(datas->entities, destroy_entity_base);
+    destroy_dict(datas->particle_lists, destroy_particle_list);
+    if (datas->music)
+        sfMusic_destroy(datas->music);
     if (mask & 4) {
         while (++i < datas->nb_entitylist)
             destroy_entitylist(datas->entitylists[i]);
     }
+    sfClock_destroy(datas->entitylists[0]->clock);
+    free(datas->entitylists[0]);
     if ((mask & 2) && datas->window != NULL)
         destroy_window(datas);
     free(datas->entitylists);
     sfClock_destroy(datas->clock);
+    free(datas->background->vertex);
 }
