@@ -64,6 +64,7 @@ void init_external_cmds(dict_t **cmd)
     init_external_cmds_part(cmd);
     append_to_dict(cmd, "said", my_said);
     append_to_dict(cmd, "create_dynamic_list", create_dynamic_list_cmd);
+    append_to_dict(cmd, "give_capacity", give_capacity_cmd);
 }
 
 static dict_t *get_internal_func_part(void)

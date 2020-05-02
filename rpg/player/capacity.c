@@ -79,3 +79,19 @@ void enemy_atk_sprite(enemy_t *enemy, player_t *player,
         }
     }
 }
+
+void give_capacity_cmd(char **arr)
+{
+    char i = (long) arr[-1] - 2;
+    player_t *player = (player_t *) arr[1];
+    capacity_t *capacity = NULL;
+
+    while (i-- > 0) {
+        capacity = malloc(sizeof(capacity_t));
+        if (capacity == NULL)
+            continue;
+        *capacity = **(capacity_t **) (++arr);
+        capacity->next = player->capacity;
+        player->capacity = capacity;
+    }
+}

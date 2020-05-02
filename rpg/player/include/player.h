@@ -27,6 +27,7 @@ typedef struct item {
     char *name;
     sfSprite *icon;
     void (*action)(struct item *self, void *target);
+    void *data;
 } item_t;
 
 typedef struct stored_item {

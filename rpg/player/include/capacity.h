@@ -29,4 +29,6 @@ typedef struct animation_sprites {
     sfIntRect scale;
 } sprite_anim_t;
 
+void give_capacity_cmd(char **arr);
+
 #endif /* CAPACITY_H_ */

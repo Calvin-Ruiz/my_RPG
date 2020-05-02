@@ -22,7 +22,7 @@ void create_item_cmd(char **arr)
         return;
     *new = (item_t) {*item, (*item) ? (*item)->id + 1 : 0, (long) arr[2],
         (long) arr[4], my_strdup(arr[3]), sfSprite_create(),
-        (void (*)()) arr[6]};
+        (void (*)()) arr[6], arr[7]};
     if (new->icon)
         sfSprite_setTexture(new->icon, (sfTexture *) arr[5], sfTrue);
     *item = new;
@@ -73,8 +73,10 @@ void consume_item_from_inventory(sitem_t *item, sfText *amount)
 {
     if (item->amount <= 0)
         return;
-    update_text_value(--item->amount, amount);
-    item->item->action(item->item, get_data_storage()->player);
+    if (item->item->type == MAP_ONLY)
+        update_text_value(--item->amount, amount);
+    if (item->item->type == EQUIPMENT || item->item->type == MAP_ONLY)
+        item->item->action(item->item, get_data_storage()->player);
 }
 
 void give_item_cmd(char **arr)
