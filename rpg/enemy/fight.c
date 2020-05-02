@@ -68,4 +68,6 @@ void engage_fight_event(event_t *self, player_t *player)
         ((char *) self->tag) + 2), menu);
     destroy_button_array(menu->dlist->local);
     menu->dlist->local = NULL;
+    player->atk = player->base_atk;
+    player->def = player->base_def;
 }

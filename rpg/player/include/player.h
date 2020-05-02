@@ -80,6 +80,8 @@ typedef struct player {
     int xp;
     int xp_next;
     int level;
+    int base_atk;
+    int base_def;
 } player_t;
 
 typedef struct psave {

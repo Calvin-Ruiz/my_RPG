@@ -36,7 +36,6 @@ void create_sprite_anim(char **arr)
 void player_atk_sprite(player_t *player, enemy_t *enemy,
     sprite_anim_t *animation, fighting_t *fight)
 {
-    short frame = -1;
     sfIntRect rect = animation->scale;
     sfRenderWindow *window = fight->menu->window;
 
@@ -44,10 +43,15 @@ void player_atk_sprite(player_t *player, enemy_t *enemy,
     if (animation->sound)
         sfSound_play(animation->sound);
     sfSprite_setPosition(animation->sprite, enemy->center);
-    while (++frame < animation->nb_frames) {
+    for (short frame = -1; ++frame < animation->nb_frames;) {
         sfSprite_setTextureRect(animation->sprite, rect);
         rect.left += rect.width;
         for (char n = animation->frame_duration; n-- > 0;) {
+            sfSprite_setColor(fight->enemy.sprite, (sfColor) {255,
+                255 - 255 * (n + frame * animation->frame_duration) /
+                (animation->frame_duration * animation->nb_frames),
+                255 - 255 * (n + frame * animation->frame_duration) /
+                (animation->frame_duration * animation->nb_frames), 255});
             draw_scene(fight);
             sfRenderWindow_drawSprite(window, animation->sprite, NULL);
             sfRenderWindow_display(window);
@@ -59,7 +63,6 @@ void player_atk_sprite(player_t *player, enemy_t *enemy,
 void enemy_atk_sprite(enemy_t *enemy, player_t *player,
     sprite_anim_t *animation, fighting_t *fight)
 {
-    short frame = -1;
     sfIntRect rect = animation->scale;
     sfRenderWindow *window = fight->menu->window;
 
@@ -68,10 +71,15 @@ void enemy_atk_sprite(enemy_t *enemy, player_t *player,
         sfSound_play(animation->sound);
     sfSprite_setPosition(animation->sprite,
         (sfVector2f) {500 + player->size[0] / 2, 250 + player->size[1] / 2});
-    while (++frame < animation->nb_frames) {
+    for (short frame = animation->nb_frames; frame-- > 0;) {
         sfSprite_setTextureRect(animation->sprite, rect);
         rect.left += rect.width;
         for (char n = animation->frame_duration; n-- > 0;) {
+            sfSprite_setColor(fight->player_sprite, (sfColor) {255,
+                255 - 255 * (n + frame * animation->frame_duration) /
+                (animation->frame_duration * animation->nb_frames),
+                255 - 255 * (n + frame * animation->frame_duration) /
+                (animation->frame_duration * animation->nb_frames), 255});
             draw_scene(fight);
             sfRenderWindow_drawSprite(window, animation->sprite, NULL);
             sfRenderWindow_display(window);
