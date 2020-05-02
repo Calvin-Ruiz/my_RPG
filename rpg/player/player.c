@@ -88,4 +88,5 @@ void destroy_player(player_t *player)
         player->capacity = cap->next;
         free(cap);
     }
+    player->sprite -= player->frame_dec;
 }

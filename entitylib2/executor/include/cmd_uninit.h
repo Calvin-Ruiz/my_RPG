@@ -24,9 +24,10 @@ static inline void destroy_dict_rec_once(dict_t *dict,
 
 static inline void cmd_uninit(void)
 {
-    dict_t *var = (dict_t *) get_executor()->var;
+    executor_t *executor = get_executor();
+    dict_t *var = (dict_t *) executor->var;
 
-    destroy_dict((dict_t *) get_executor()->cmd, NULL);
+    destroy_dict((dict_t *) executor->cmd, NULL);
     destroy_dict(get_from_dict(var, "thread"), sfThread_destroy);
     destroy_dict(get_from_dict(var, "type"), NULL);
     destroy_dict(get_from_dict(var, "mouse"), NULL);
@@ -39,6 +40,8 @@ static inline void cmd_uninit(void)
     destroy_dict(get_from_dict(var, "internal"), NULL);
     destroy_dict(get_from_dict(var, "key"), NULL);
     destroy_dict(var, NULL);
+    executor->cmd = NULL;
+    executor->var = NULL;
 }
 
 #endif /* CMD_UNINIT_H_ */

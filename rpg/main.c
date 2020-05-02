@@ -107,9 +107,10 @@ int main(void)
         save_tags(datas->path);
         save_player(datas->player, datas);
     }
-    datas->player->destroy(datas->player);
     destroy_items(datas->global[ITEMS]);
     free_storage_content(datas, 7);
     cmd_uninit();
+    if (datas->player->hp <= 0)
+        return (my_full_reset());
     return (0);
 }

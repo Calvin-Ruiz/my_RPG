@@ -28,6 +28,7 @@ static void uninit_fight(fighting_t *fight, data_storage_t *datas)
     if (fight->player->hp <= 0) {
         datas->is_alive = 0;
         datas->on_mainloop = 0;
+        ((menu_t *) datas->main_menu)->opened = 0;
     } else {
         give_xp(datas->player, fight->enemy.money_drop);
         datas->player->money += fight->enemy.money_drop;
@@ -59,9 +60,10 @@ void engage_fight_event(event_t *self, player_t *player)
     dict_t *var = (dict_t *) get_executor()->var;
     menu_t *menu = get_from_dict(get_from_dict(var, "menu"),
         ((char *) self->tag) + 26);
+    data_storage_t *datas = get_data_storage();
 
-    (void) player;
-    get_data_storage()->key = (my_keys_t) {0, 0, 0, 0, 0};
+    datas->key = (my_keys_t) {0, 0, 0, 0, 0};
+    datas->global[ACTION] = player->capacity;
     engage_fight(get_from_dict(get_from_dict(var, "local"),
         ((char *) self->tag) + 2), menu);
     destroy_button_array(menu->dlist->local);

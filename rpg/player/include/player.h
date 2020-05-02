@@ -116,4 +116,7 @@ void create_player_cmd(char **arr);
 void give_item_cmd(char **arr);
 void destroy_player(player_t *player);
 
+void recover_effect(item_t *item, player_t *player);
+void equip_item(item_t *item, player_t *player);
+
 #endif /* PLAYER_H_ */

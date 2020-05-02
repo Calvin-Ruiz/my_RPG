@@ -9,8 +9,13 @@
 void *my_malloc(size_t size)
 {
     static char buffer[1024*64];
-    static long int pos = 0;
+    static u_long pos = 0;
 
+    if (size == (size_t) -1) {
+        my_puterr("\e[91mMyMallocReset : free all my_malloc.\n\e[0m");
+        pos = 0;
+        return (NULL);
+    }
     pos += size;
     if (pos >= 1024*64) {
         my_puterr("\e[31mMyMallocOverflow : my_malloc area is full.\n\e[91mS");

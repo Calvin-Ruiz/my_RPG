@@ -6,6 +6,7 @@
 */
 #include <entitylib.h>
 #include <converters.h>
+#include <string.h>
 
 data_storage_t *get_data_storage(void)
 {
@@ -39,11 +40,13 @@ data_storage_t *init_data_storage(int nb_entitylist)
 {
     data_storage_t *datas = get_data_storage();
 
+    memset(datas->global, '\0', sizeof(void *) * NB_DATAS);
     datas->sound_buffs = NULL;
     datas->sounds = NULL;
     datas->textures = NULL;
     datas->entities = NULL;
     datas->particle_lists = NULL;
+    datas->particle_emitters = NULL;
     datas->entitylists = malloc(sizeof(*(datas->entitylists)) * nb_entitylist);
     datas->nb_entitylist = nb_entitylist;
     datas->score = 0;

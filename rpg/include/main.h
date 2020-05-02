@@ -10,6 +10,7 @@
 
 #include <entitylib.h>
 #include <player_func.h>
+#include <tools.h>
 
 enum {
     DISPLAY_LIST,
@@ -22,5 +23,12 @@ enum {
 void init_some_datas(data_storage_t *datas);
 void mainloop(data_storage_t *datas, sfRenderWindow *window);
 void open_inventory(data_storage_t *datas);
+int main(void);
+
+static inline int my_full_reset(void)
+{
+    my_malloc(-1);
+    return (main());
+}
 
 #endif /* MAIN_H_ */

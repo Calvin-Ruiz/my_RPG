@@ -67,8 +67,7 @@ static void destroy_entity_base(entity_t *self)
 
 void free_storage_content(data_storage_t *datas, int mask)
 {
-    int i = 0;
-
+    datas->player->destroy(datas->player);
     destroy_dict(datas->sounds, sfSound_destroy);
     destroy_dict(datas->sound_buffs, sfSoundBuffer_destroy);
     destroy_dict(datas->textures, sfTexture_destroy);
@@ -77,7 +76,7 @@ void free_storage_content(data_storage_t *datas, int mask)
     if (datas->music)
         sfMusic_destroy(datas->music);
     if (mask & 4) {
-        while (++i < datas->nb_entitylist)
+        for (int i = 0; ++i < datas->nb_entitylist;)
             destroy_entitylist(datas->entitylists[i]);
     }
     sfClock_destroy(datas->entitylists[0]->clock);

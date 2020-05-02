@@ -67,7 +67,7 @@ void init_external_cmds(dict_t **cmd)
     append_to_dict(cmd, "give_capacity", give_capacity_cmd);
 }
 
-static dict_t *get_internal_func_part(void)
+static dict_t *get_internal_func_part_2(void)
 {
     dict_t *new = NULL;
 
@@ -91,9 +91,9 @@ static dict_t *get_internal_func_part(void)
     return (new);
 }
 
-dict_t *get_internal_func(void)
+static dict_t *get_internal_func_part(void)
 {
-    dict_t *new = get_internal_func_part();
+    dict_t *new = get_internal_func_part_2();
 
     append_to_dict(&new, "enemy_atk_sprite", enemy_atk_sprite);
     append_to_dict(&new, "use_capacity", use_capacity);
@@ -112,5 +112,14 @@ dict_t *get_internal_func(void)
     append_to_dict(&new, "destroy_player", destroy_player);
     append_to_dict(&new, "destroy_item_list", destroy_item_list_content);
     append_to_dict(&new, "destroy_trade_list", destroy_trade_list_content);
+    return (new);
+}
+
+dict_t *get_internal_func(void)
+{
+    dict_t *new = get_internal_func_part();
+
+    append_to_dict(&new, "recover_effect", recover_effect);
+    append_to_dict(&new, "equip_weapon", equip_item);
     return (new);
 }
