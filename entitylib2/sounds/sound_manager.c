@@ -33,22 +33,25 @@ void update_volume(data_storage_t *data)
 void set_music_cmd(char **arr)
 {
     data_storage_t *data = get_data_storage();
-
-    my_puterr("\e[37;3m");
-    data->music = sfMusic_createFromFile(arr[1]);
-    if (data->music == NULL) {
-        my_puterr("\e[0;95mMusicError : Failed to load '");
-        my_puterr(arr[1]);
-        my_puterr("' music.\n\e[0m");
-        return;
+    if (arr[1] != NULL) {
+        my_puterr("\e[37;3m");
+        data->music = sfMusic_createFromFile(arr[1]);
+        if (data->music == NULL) {
+            my_puterr("\e[0;95mMusicError : Failed to load '");
+            my_puterr(arr[1]);
+            my_puterr("' music.\n\e[0m");
+            return;
+        }
+        sfMusic_setLoop(data->music, sfTrue);
+        sfMusic_play(data->music);
+        my_puterr("\e[0m");
     }
-    my_puterr("\e[0m");
-    sfMusic_setLoop(data->music, sfTrue);
-    if ((ulong_t) arr[2] > 100)
+    if (data->music == NULL)
+        return;
+    if ((long) arr[2] > 100)
         sfMusic_setVolume(data->music, 100);
-    else
+    else if ((long) arr[2] >= 0)
         sfMusic_setVolume(data->music, (long) arr[1]);
-    sfMusic_play(data->music);
 }
 
 void set_sound_volume_cmd(char **arr)
