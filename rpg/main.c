@@ -57,7 +57,7 @@ void mainloop(data_storage_t *datas, sfRenderWindow *window)
 
     while (datas->on_mainloop) {
         srand(actual);
-        draw_tile_map(window, datas->background);
+        draw_tile_map(window, datas->background, actual);
         update_player_attributes(datas);
         decor_update(datas->entitylists[DECOR_LIST], datas->player);
         event_update(datas->entitylists[EVENT_LIST], datas->player);

@@ -39,10 +39,15 @@ void create_tile_map_cmd(char **arr)
 {
     tile_map_t *new = my_malloc(sizeof(tile_map_t));
 
-    new->state = (sfRenderStates) {sfBlendAlpha, sfTransform_Identity,
-        (sfTexture *) arr[2], NULL};
-    new->tile_size = (sfVector2u) {(long) arr[3], (long) arr[4]};
-    new->map_size = (sfVector2u) {(long) arr[5], (long) arr[6]};
+    new->state = (sfRenderStates) {sfBlendNone, sfTransform_Identity,
+        (sfTexture *) arr[7], NULL};
+    new->nb_textures = (long) arr[-1] - 7;
+    new->textures = my_malloc(sizeof(sfTexture *) * new->nb_textures);
+    for (u_char i = -1; ++i < new->nb_textures;)
+        new->textures[i] = (sfTexture *) arr[i + 7];
+    new->delta_time = (long) arr[6];
+    new->tile_size = (sfVector2u) {(long) arr[2], (long) arr[3]};
+    new->map_size = (sfVector2u) {(long) arr[4], (long) arr[5]};
     new->nb_vertex = new->map_size.x * new->map_size.y * 4;
     build_tiles(new);
     *(tile_map_t **) arr[1] = new;

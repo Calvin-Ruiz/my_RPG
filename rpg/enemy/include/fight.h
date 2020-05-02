@@ -31,6 +31,7 @@ static inline void draw_scene(fighting_t *fight)
     sfRenderWindow_drawSprite(window, fight->menu->background, NULL);
     sfRenderWindow_drawSprite(window, fight->player_sprite, NULL);
     sfRenderWindow_drawSprite(window, fight->enemy.sprite, NULL);
+    sfSleep((sfTime) {25000});
 }
 
 static inline void enemy_atk(fighting_t *fight)

@@ -38,24 +38,22 @@ void player_atk_sprite(player_t *player, enemy_t *enemy,
 {
     sfIntRect rect = animation->scale;
     sfRenderWindow *window = fight->menu->window;
+    const short s = animation->frame_duration * animation->nb_frames;
 
     enemy->hp -= player->atk * 1.5 - enemy->def;
     if (animation->sound)
         sfSound_play(animation->sound);
     sfSprite_setPosition(animation->sprite, enemy->center);
-    for (short frame = -1; ++frame < animation->nb_frames;) {
+    for (short frame = animation->nb_frames; frame-- > 0;) {
         sfSprite_setTextureRect(animation->sprite, rect);
         rect.left += rect.width;
         for (char n = animation->frame_duration; n-- > 0;) {
-            sfSprite_setColor(fight->enemy.sprite, (sfColor) {255,
-                255 - 255 * (n + frame * animation->frame_duration) /
-                (animation->frame_duration * animation->nb_frames),
-                255 - 255 * (n + frame * animation->frame_duration) /
-                (animation->frame_duration * animation->nb_frames), 255});
+            sfSprite_setColor(enemy->sprite, (sfColor) {255,
+                255 - 255 * (n + frame * animation->frame_duration) / s,
+                255 - 255 * (n + frame * animation->frame_duration) / s, 255});
             draw_scene(fight);
             sfRenderWindow_drawSprite(window, animation->sprite, NULL);
             sfRenderWindow_display(window);
-            sfSleep((sfTime) {25000});
         }
     }
 }
@@ -65,7 +63,7 @@ void enemy_atk_sprite(enemy_t *enemy, player_t *player,
 {
     sfIntRect rect = animation->scale;
     sfRenderWindow *window = fight->menu->window;
-
+    const short s = animation->frame_duration * animation->nb_frames;
     player->hp -= enemy->atk * 1.5 - player->def;
     if (animation->sound)
         sfSound_play(animation->sound);
@@ -76,14 +74,11 @@ void enemy_atk_sprite(enemy_t *enemy, player_t *player,
         rect.left += rect.width;
         for (char n = animation->frame_duration; n-- > 0;) {
             sfSprite_setColor(fight->player_sprite, (sfColor) {255,
-                255 - 255 * (n + frame * animation->frame_duration) /
-                (animation->frame_duration * animation->nb_frames),
-                255 - 255 * (n + frame * animation->frame_duration) /
-                (animation->frame_duration * animation->nb_frames), 255});
+                255 - 255 * (n + frame * animation->frame_duration) / s,
+                255 - 255 * (n + frame * animation->frame_duration) / s, 255});
             draw_scene(fight);
             sfRenderWindow_drawSprite(window, animation->sprite, NULL);
             sfRenderWindow_display(window);
-            sfSleep((sfTime) {25000});
         }
     }
 }
