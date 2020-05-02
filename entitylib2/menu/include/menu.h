@@ -98,9 +98,11 @@ typedef struct dlist {
     void (*update)(struct dlist *self, sfRenderWindow *window,
         data_storage_t *datas, sfVector2f *mouse);
     char (*on_clic)(struct dlist *self, sfVector2f *pos);
+    void (*destroy_local)(struct dlist *self);
 } dynamic_list_t;
 
 void create_dynamic_list_cmd(char **arr);
+void destroy_dynamic_list(dynamic_list_t *self);
 
 typedef struct {
     sfRenderWindow *window;

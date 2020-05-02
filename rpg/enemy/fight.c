@@ -57,10 +57,13 @@ void engage_fight(enemy_t *enemy, menu_t *menu)
 void engage_fight_event(event_t *self, player_t *player)
 {
     dict_t *var = (dict_t *) get_executor()->var;
+    menu_t *menu = get_from_dict(get_from_dict(var, "menu"),
+        ((char *) self->tag) + 26);
 
     (void) player;
     get_data_storage()->key = (my_keys_t) {0, 0, 0, 0, 0};
     engage_fight(get_from_dict(get_from_dict(var, "local"),
-        ((char *) self->tag) + 2), get_from_dict(get_from_dict(var, "menu"),
-        ((char *) self->tag) + 26));
+        ((char *) self->tag) + 2), menu);
+    destroy_button_array(menu->dlist->local);
+    menu->dlist->local = NULL;
 }

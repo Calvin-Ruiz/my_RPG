@@ -51,27 +51,10 @@ static inline void set_trade_list_parameters(trade_list_t * const new,
         pos->v1.y + 16});
 }
 
-static inline void destroy_trade_list_content(dynamic_list_t *self)
-{
-    trade_list_t *tmp = self->local;
-
-    while (tmp != NULL) {
-        self->local = tmp->next;
-        sfSprite_destroy(tmp->button->display[0]);
-        sfSprite_destroy(tmp->button->display[1]);
-        sfSprite_destroy(tmp->button->display[2]);
-        sfText_destroy(tmp->button->text);
-        free(tmp->button);
-        sfText_destroy(tmp->text);
-        sfText_destroy(tmp->amount);
-        free(tmp);
-        tmp = self->local;
-    }
-}
-
 void update_trade_list(dynamic_list_t *self, sfRenderWindow *window,
     data_storage_t *datas, sfVector2f *pos);
 char on_clic_trade_list(dynamic_list_t *self, sfVector2f *pos);
 void trade_event(event_t *self, player_t *player);
+void destroy_trade_list_content(dynamic_list_t *self);
 
 #endif /* TRADING_H_ */

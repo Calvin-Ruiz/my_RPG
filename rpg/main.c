@@ -16,6 +16,7 @@
 #include <player_io.h>
 #include <tile_manager.h>
 #include <cmd_uninit.h>
+#include <item_list.h>
 
 void my_closure(data_storage_t *datas)
 {
@@ -106,6 +107,8 @@ int main(void)
         save_tags(datas->path);
         save_player(datas->player, datas);
     }
+    datas->player->destroy(datas->player);
+    destroy_items(datas->global[ITEMS]);
     free_storage_content(datas, 7);
     cmd_uninit();
     return (0);

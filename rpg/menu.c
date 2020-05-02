@@ -44,6 +44,7 @@ void init_some_datas(data_storage_t *datas)
     sfTexture *background = get_from_dict(datas->textures, "menu");
     menu_t *main_menu = create_menu(datas->window, background);
     sfFont *font = get_internal_data()->text_font;
+
     datas->pause_menu = create_menu(datas->window, background);
     datas->main_menu = main_menu;
     main_menu->button = create_button(btn_back, font, &(pos_t) {(sfVector2f)
@@ -56,7 +57,6 @@ void init_some_datas(data_storage_t *datas)
     main_menu->button->next->next = NULL;
     sfText_setString(main_menu->button->text, "Play");
     sfText_setString(main_menu->button->next->text, "Quit");
-    datas->view = sfView_copy(sfRenderWindow_getView(datas->window));
     datas->pos = sfView_getCenter(datas->view);
     datas->size = sfView_getSize(datas->view);
     init_htp_button(datas);

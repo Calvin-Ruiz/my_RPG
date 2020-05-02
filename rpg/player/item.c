@@ -10,6 +10,7 @@
 #include <player.h>
 #include <tools.h>
 #include <menu.h>
+#include <internal_data.h>
 #include <item_list.h>
 
 void create_item_cmd(char **arr)

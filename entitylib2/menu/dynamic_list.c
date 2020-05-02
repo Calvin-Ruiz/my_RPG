@@ -21,6 +21,7 @@ void create_dynamic_list_cmd(char **arr)
     new->update = (void (*)(struct dlist *self, sfRenderWindow *window,
         data_storage_t *datas, sfVector2f *mouse)) arr[5];
     new->on_clic = (char (*)(struct dlist *self, sfVector2f *pos)) arr[6];
+    new->destroy_local = (void (*) (struct dlist *self)) arr[7];
     new->view = sfView_copy(((menu_t *) arr[1])->view);
     new->center = sfView_getCenter(new->view);
     sfSprite_setTexture(new->background, (sfTexture *) arr[2], sfTrue);
@@ -55,5 +56,20 @@ void dynamic_list_scroll(menu_t *menu, char delta)
             dlist->center.y = center.y;
         sfView_setCenter(dlist->view, dlist->center);
         dlist = dlist->next;
+    }
+}
+
+void destroy_dynamic_list(dynamic_list_t *self)
+{
+    dynamic_list_t *tmp = NULL;
+
+    while (self) {
+        tmp = self->next;
+        if (self->destroy_local)
+            self->destroy_local(self);
+        sfSprite_destroy(self->background);
+        sfView_destroy(self->view);
+        free(self);
+        self = tmp;
     }
 }

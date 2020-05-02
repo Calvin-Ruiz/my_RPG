@@ -113,5 +113,6 @@ static inline void give_xp(player_t *player, int xp)
 void create_item_cmd(char **arr);
 void create_player_cmd(char **arr);
 void give_item_cmd(char **arr);
+void destroy_player(player_t *player);
 
 #endif /* PLAYER_H_ */

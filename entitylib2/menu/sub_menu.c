@@ -42,5 +42,6 @@ void destroy_menu(menu_t *menu)
     destroy_image_array(menu->images);
     destroy_text_array(menu->text);
     destroy_dynamic_text_array(menu->dtext);
+    destroy_dynamic_list(menu->dlist);
     free(menu);
 }

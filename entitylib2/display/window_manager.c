@@ -37,6 +37,7 @@ int create_window(sfVideoMode mode, char *name, long int args, int fps)
 {
     data_storage_t *stor = get_data_storage();
     internal_data_t *datas = get_internal_data();
+
     stor->fps = fps;
     stor->window = sfRenderWindow_create(mode, name, args, NULL);
     if (!stor->window)

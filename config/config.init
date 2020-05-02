@@ -6,7 +6,7 @@ create_variable $sizeof.ptr last
 
 # Define player
 # attributes : name texture size_x size_y frames_x frames_y health frame_delay_cs speed_pps func_update func_new func_destroy func_load func_save
-create_player player $texture.player =48 =48 =4 =4 =10 =40 =40 $internal.pupdate $internal.pclone $internal.def_destroy $internal.pload $internal.psave
+create_player player $texture.player =48 =48 =4 =4 =10 =40 =40 $internal.pupdate $internal.pclone $internal.destroy_player $internal.pload $internal.psave
 
 # Define other entities
 # attributes : name texture size_x size_y frames_x frames_y health frame_delay_cs speed_pps func_update func_new func_destroy func_load func_save

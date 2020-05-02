@@ -108,5 +108,8 @@ dict_t *get_internal_func(void)
     append_to_dict(&new, "trade", trade_event);
     append_to_dict(&new, "on_clic_trade_list", on_clic_trade_list);
     append_to_dict(&new, "update_trade_list", update_trade_list);
+    append_to_dict(&new, "destroy_player", destroy_player);
+    append_to_dict(&new, "destroy_item_list", destroy_item_list_content);
+    append_to_dict(&new, "destroy_trade_list", destroy_trade_list_content);
     return (new);
 }

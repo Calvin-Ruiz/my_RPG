@@ -18,6 +18,24 @@
 #include <pause.h>
 #include <player_io.h>
 
+void destroy_trade_list_content(dynamic_list_t *self)
+{
+    trade_list_t *tmp = self->local;
+
+    while (tmp != NULL) {
+        self->local = tmp->next;
+        sfSprite_destroy(tmp->button->display[0]);
+        sfSprite_destroy(tmp->button->display[1]);
+        sfSprite_destroy(tmp->button->display[2]);
+        sfText_destroy(tmp->button->text);
+        free(tmp->button);
+        sfText_destroy(tmp->text);
+        sfText_destroy(tmp->amount);
+        free(tmp);
+        tmp = self->local;
+    }
+}
+
 static void build_trade_list(dynamic_list_t *self)
 {
     trade_list_t *new = NULL;

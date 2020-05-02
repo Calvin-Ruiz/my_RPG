@@ -15,10 +15,9 @@ void create_player_cmd(char **arr)
 {
     player_t *player = malloc(sizeof(player_t));
     data_storage_t *datas = get_data_storage();
-    short *size = malloc(sizeof(short));
 
     arr = create_entity_base((entity_t *) player, &datas->entities, arr);
-    if (arr == NULL || size == NULL) {
+    if (arr == NULL) {
         my_puterr("\e[91mFatal : Failed to create player\n\e[0m");
         return;
     }
@@ -73,4 +72,20 @@ void update_player_attributes(data_storage_t *datas)
     datas->pos.y = player->pos.v1.y + (player->size[1] >> 1);
     sfView_setCenter(datas->view, datas->pos);
     sfRenderWindow_setView(datas->window, datas->view);
+}
+
+void destroy_player(player_t *player)
+{
+    sitem_t *item = player->inventory->next;
+    capacity_t *cap = player->capacity;
+
+    for (; item; item = player->inventory->next) {
+        player->inventory->next = item->next;
+        free(item);
+    }
+    free(player->inventory);
+    for (; cap; cap = player->capacity) {
+        player->capacity = cap->next;
+        free(cap);
+    }
 }
