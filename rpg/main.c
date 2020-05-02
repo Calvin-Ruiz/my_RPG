@@ -89,6 +89,7 @@ static void init_game(data_storage_t *datas)
     load_tiles_from_file(datas->background, datas->mapname);
     load_entities(datas->path, datas->mapname);
     sfRenderWindow_setFramerateLimit(datas->window, datas->fps);
+    calculate_final_characteristics(datas->player);
 }
 
 int main(void)

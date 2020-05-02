@@ -10,6 +10,7 @@
 #include <tools.h>
 #include <player.h>
 #include <entity_display.h>
+#include <string.h>
 
 void create_player_cmd(char **arr)
 {
@@ -24,6 +25,8 @@ void create_player_cmd(char **arr)
     datas->player = player;
     player->inventory = malloc(sizeof(inventory_t));
     *(player->inventory) = (inventory_t) {NULL, -1};
+    player->capacity = NULL;
+    memset(&player->equip, '\0', sizeof(equip_t) * NB_EQUIPMENT_TYPES);
 }
 
 static void move_player(player_t *self, my_keys_t *keys)

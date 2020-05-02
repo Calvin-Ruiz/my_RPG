@@ -18,5 +18,8 @@ void recover_effect(item_t *item, player_t *player)
 
 void equip_item(item_t *item, player_t *player)
 {
-    return;
+    u_char type = ((char *) item->data)[7];
+
+    player->equip[type] = *(equip_t *) item->data;
+    calculate_final_characteristics(player);
 }

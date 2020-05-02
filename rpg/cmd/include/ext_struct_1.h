@@ -35,6 +35,10 @@ static inline dict_t *define_player_structure(player_t * const ref)
     append_to_dict(&new, "xp", &ref->xp);
     append_to_dict(&new, "xp_next", &ref->xp_next);
     append_to_dict(&new, "level", &ref->level);
+    append_to_dict(&new, "base_hp", &ref->base_hp);
+    append_to_dict(&new, "base_atk", &ref->base_atk);
+    append_to_dict(&new, "base_def", &ref->base_def);
+    append_to_dict(&new, "equip", &ref->equip);
     return (new);
 }
 

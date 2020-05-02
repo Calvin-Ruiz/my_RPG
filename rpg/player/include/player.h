@@ -19,6 +19,8 @@ enum {
     BASIC_ITEM,
 };
 
+#define NB_EQUIPMENT_TYPES 6
+
 typedef struct item {
     struct item *next;
     short id;
@@ -51,6 +53,12 @@ typedef struct effect {
     void (*remove)();
 } effect_t;
 
+typedef struct equipment {
+    short hp;
+    short atk;
+    short def;
+} equip_t;
+
 typedef struct player {
     struct entity *next;
     struct entity *prev;
@@ -80,8 +88,10 @@ typedef struct player {
     int xp;
     int xp_next;
     int level;
+    int base_hp;
     int base_atk;
     int base_def;
+    equip_t equip[NB_EQUIPMENT_TYPES];
 } player_t;
 
 typedef struct psave {
@@ -97,7 +107,20 @@ typedef struct psave {
     int xp_next;
     int level;
     char mapname[24];
+    equip_t equip[NB_EQUIPMENT_TYPES];
 } player_save_t;
+
+static inline void calculate_final_characteristics(player_t *player)
+{
+    player->max_hp = player->base_hp;
+    player->atk = player->base_atk;
+    player->def = player->base_def;
+    for (u_char i = -1; ++i < NB_EQUIPMENT_TYPES;) {
+        player->max_hp += player->equip[i].hp;
+        player->atk += player->equip[i].atk;
+        player->def += player->equip[i].def;
+    }
+}
 
 static inline void give_xp(player_t *player, int xp)
 {
@@ -105,10 +128,11 @@ static inline void give_xp(player_t *player, int xp)
     if (player->xp >= player->xp_next) {
         player->xp -= player->xp_next;
         player->xp_next *= 1.5;
-        player->max_hp *= 1.3;
+        player->base_hp *= 1.3;
+        player->base_atk *= 1.2;
+        player->base_def *= 1.2;
+        calculate_final_characteristics(player);
         player->hp = player->max_hp;
-        player->atk *= 1.2;
-        player->def *= 1.2;
         player->level += 1;
     }
 }
