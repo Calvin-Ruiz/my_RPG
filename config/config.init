@@ -3,6 +3,7 @@ create_variable $sizeof.ptr particle_pattern_1
 create_variable $sizeof.sprite_anim_t anim1
 create_variable $sizeof.enemy_t enemy1
 create_variable $sizeof.ptr last
+create_variable $sizeof.char choice
 
 # Define player
 # attributes : name texture size_x size_y frames_x frames_y health frame_delay_cs speed_pps func_update func_new func_destroy func_load func_save
@@ -17,6 +18,8 @@ thread tracing create &tracer $datas
 # Define menus
 create_menu fight $datas.@datas.window.[0] $texture.background
 create_menu speak $datas.@datas.window.[0] $texture.background
+create_menu choice $datas.@datas.window.[0] $texture.background
 create_menu GUI $datas.@datas.window.[0] $texture.background
 create_menu trade $datas.@datas.window.[0] $texture.background
+create_menu fight_inv $datas.@datas.window.[0] $texture.background
 

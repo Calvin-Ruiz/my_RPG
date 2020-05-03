@@ -18,5 +18,7 @@ void create_enemy_cmd(char **arr);
 void use_capacity(void *data);
 void exit_menu(menu_t *menu);
 void my_said(char **arr);
+void choice_yes(menu_t *menu);
+void choice_no(menu_t *menu);
 
 #endif /* CMDS_H_ */

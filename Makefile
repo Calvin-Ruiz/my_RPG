@@ -42,6 +42,7 @@ FILES = entitylib2/data_center/data_loader.c \
 	entitylib2/tools/etools.c \
 	entitylib2/tools/fast_get_next_line.c \
 	entitylib2/tools/loader.c \
+	rpg/choices.c \
 	rpg/cmd/inits.c \
 	rpg/cmd/structs.c \
 	rpg/cmd/system_cmd_2.c \
@@ -61,6 +62,7 @@ FILES = entitylib2/data_center/data_loader.c \
 	rpg/main.c \
 	rpg/menu.c \
 	rpg/pause.c \
+	rpg/player/capacity_2.c \
 	rpg/player/capacity.c \
 	rpg/player/item_action.c \
 	rpg/player/item.c \

@@ -69,8 +69,10 @@ static void load_player_items(player_t *player, data_storage_t *datas, int fd)
         new->next = player->inventory->next;
         new->item = get_item_from_id(datas->global[0], id);
         if (read(fd, &new->amount, sizeof(new->amount)) == sizeof(new->amount)
-            && new->item)
+            && new->item && new->amount > 0)
             player->inventory->next = new;
+        else
+            free(new);
     }
 }
 

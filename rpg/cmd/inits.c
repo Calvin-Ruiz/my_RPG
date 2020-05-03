@@ -121,5 +121,11 @@ dict_t *get_internal_func(void)
 
     append_to_dict(&new, "recover_effect", recover_effect);
     append_to_dict(&new, "equip_weapon", equip_item);
+    append_to_dict(&new, "on_clic_fight_item", on_clic_fight_item);
+    append_to_dict(&new, "open_inventory", open_inventory);
+    append_to_dict(&new, "use_item_for_me", use_item_for_me);
+    append_to_dict(&new, "use_item_for_you", use_item_for_you);
+    append_to_dict(&new, "choice_yes", choice_yes);
+    append_to_dict(&new, "choice_no", choice_no);
     return (new);
 }

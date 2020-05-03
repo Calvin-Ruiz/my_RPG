@@ -7,9 +7,11 @@
 #include <entitybase.h>
 #include <capacity.h>
 #include <data_storage.h>
+#include <internal_data.h>
 #include <menu.h>
 #include <event.h>
 #include <enemy.h>
+#include <item_list.h>
 #include <fight.h>
 #include <pause.h>
 
@@ -42,6 +44,7 @@ void engage_fight(enemy_t *enemy, menu_t *menu)
     fighting_t fight = {datas->player->sprite[(datas->player->size[2] << 1)
         - datas->player->frame_dec], datas->player, *enemy, menu, 0, 1};
 
+    datas->global[ENEMY] = &fight.enemy;
     init_fight(&fight, menu);
     while (fight.player->hp > 0) {
         open_sub_menu(menu);
@@ -68,6 +71,27 @@ void engage_fight_event(event_t *self, player_t *player)
         ((char *) self->tag) + 2), menu);
     destroy_button_array(menu->dlist->local);
     menu->dlist->local = NULL;
-    player->atk = player->base_atk;
-    player->def = player->base_def;
+    calculate_final_characteristics(player);
+}
+
+char on_clic_fight_item(dynamic_list_t *self, sfVector2f *pos)
+{
+    item_list_t *ilist = self->local;
+    data_storage_t *data;
+
+    while (ilist) {
+        if (ilist->button->pos.v1.x <= pos->x
+            && ilist->button->pos.v2.x > pos->x
+            && ilist->button->pos.v1.y <= pos->y
+            && ilist->button->pos.v2.y > pos->y) {
+            data = get_data_storage();
+            consume_item_from_fight(ilist->button->data,
+                ((capacity_t *) data->global[ACTION])->effect ==
+                (void (*)(void *, void *, void *, void *)) use_item_for_me ?
+                data->player : data->global[ENEMY]);
+            return (1);
+        }
+        ilist = ilist->next;
+    }
+    return (0);
 }

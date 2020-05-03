@@ -23,6 +23,11 @@ void player_atk_sprite(player_t *player, enemy_t *enemy,
     sprite_anim_t *animation, fighting_t *fight);
 void enemy_atk_sprite(enemy_t *enemy, player_t *player,
     sprite_anim_t *animation, fighting_t *fight);
+char on_clic_fight_item(dynamic_list_t *self, sfVector2f *pos);
+void use_item_for_me(enemy_t *enemy, player_t *player,
+    sprite_anim_t *animation, fighting_t *fight);
+void use_item_for_you(enemy_t *enemy, player_t *player,
+    sprite_anim_t *animation, fighting_t *fight);
 
 static inline void draw_scene(fighting_t *fight)
 {
@@ -43,5 +48,24 @@ static inline void enemy_atk(fighting_t *fight)
         capacity = capacity->next;
     capacity->effect(&fight->enemy, fight->player, capacity->animation, fight);
 }
+
+#ifdef ITEM_LIST_H_
+    static inline void consume_item_from_fight(sitem_t *item, void *target)
+    {
+        if (item->amount <= 0)
+            return;
+        if (target == get_data_storage()->player) {
+            if (item->item->type != EFFECT)
+                return;
+            --item->amount;
+            item->item->action(item->item, target);
+        } else {
+            if (item->item->type != FIGHT_ONLY)
+                return;
+            --item->amount;
+            item->item->action(item->item, target);
+        }
+    }
+#endif
 
 #endif /* FIGHT_H_ */
