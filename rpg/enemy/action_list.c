@@ -29,7 +29,7 @@ static void build_capacity_selection(dynamic_list_t *self,
         button->data = cap;
         button->next = self->local;
         self->local = button;
-        pos.v1.x += 48;
+        pos.v1.y += 48;
     }
 }
 

@@ -18,13 +18,13 @@ void better_operator(char **arr)
 
     if (*(arr[5]) == '+')
         var1 += var2;
-    if (*(arr[3]) == '-')
+    if (*(arr[5]) == '-')
         var1 -= var2;
-    if (*(arr[3]) == '*')
+    if (*(arr[5]) == '*')
         var1 *= var2;
-    if (*(arr[3]) == '/')
+    if (*(arr[5]) == '/')
         var1 /= var2;
-    if (*(arr[3]) == '%')
+    if (*(arr[5]) == '%')
         var1 %= var2;
     set_value_from_basic_type(arr + 1, var1);
 }

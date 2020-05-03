@@ -1,0 +1,4 @@
+said $menu.speak Tenez,_voici_1000_pieces.\Sauvez_nous,_maintenant_!
+set $type.int $local.tmp =1000
+op $type.int $Player.[0].@player.money $type.int $Player.[0].@player.money + $type.int $local.tmp
+

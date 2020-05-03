@@ -20,6 +20,7 @@ char on_clic_item_list(dynamic_list_t *self, sfVector2f *pos);
 void update_item_list(dynamic_list_t *self, sfRenderWindow *window,
     data_storage_t *datas, sfVector2f *pos);
 void open_inventory(data_storage_t *datas);
+void open_fight_inventory(data_storage_t *datas);
 void close_menu(menu_t *menu);
 void buy_this_item(player_t *player, item_t *item);
 void destroy_item_list_content(dynamic_list_t *self);

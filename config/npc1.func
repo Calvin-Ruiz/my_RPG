@@ -1,3 +1,5 @@
-if $key.space b  &said $menu.speak Hello.\How_are_you_?
-if $key.space b  &said $menu.speak Fine,_thank_you.
+set $type.int $local.tmp =1000
+if $key.space b  &said $menu.speak Vous_etes_notre_seul_espoir
+if $key.space b  &said $menu.speak Tenez,_voici_1000_pieces.\Equippez_vous,_et_sauvez_nous_!
+if $key.space b  &op $type.int $Player.[0].@player.money $type.int $Player.[0].@player.money + $type.int $local.tmp
 set $type.char $key.space =0

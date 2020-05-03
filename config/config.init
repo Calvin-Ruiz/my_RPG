@@ -2,6 +2,13 @@
 create_variable $sizeof.ptr particle_pattern_1
 create_variable $sizeof.sprite_anim_t anim1
 create_variable $sizeof.enemy_t enemy1
+create_variable $sizeof.enemy_t enemy2
+create_variable $sizeof.enemy_t enemy3
+create_variable $sizeof.enemy_t enemy4
+create_variable $sizeof.enemy_t enemy5
+create_variable $sizeof.enemy_t enemy6
+create_variable $sizeof.enemy_t enemy7
+create_variable $sizeof.enemy_t enemy8
 create_variable $sizeof.ptr last
 create_variable $sizeof.char choice
 create_variable $sizeof.float xp_mult

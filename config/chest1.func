@@ -1,0 +1,4 @@
+if $key.space b  &give_item $Player $global.[0] casque_legendaire
+if $key.space b  &give_item $Player $global.[0] bottes_legendaire
+if $key.space b  &said $menu.speak Vous_avez_trouve_un_casque_legendaire_!\Et_des_bottes_legendaires_!
+set $type.char $key.space =0
