@@ -28,7 +28,8 @@ void putstr_cmd(char **arr)
 
 void open_cmd(char **arr)
 {
-    *(int *) arr[1] = open(arr[2], O_RDWR | O_CREAT, (long) arr[3]);
+    *(int *) arr[1] = open(arr[2],
+        ((long) arr[3] ? O_WRONLY | O_CREAT : O_RDONLY), (long) arr[3]);
 }
 
 void close_cmd(char **arr)

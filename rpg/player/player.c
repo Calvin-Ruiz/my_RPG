@@ -26,6 +26,7 @@ void create_player_cmd(char **arr)
     player->inventory = malloc(sizeof(inventory_t));
     *(player->inventory) = (inventory_t) {NULL, -1};
     player->capacity = NULL;
+    player->wpn = 1;
     memset(&player->equip, '\0', sizeof(equip_t) * NB_EQUIPMENT_TYPES);
 }
 

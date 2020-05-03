@@ -45,7 +45,6 @@ int create_window(sfVideoMode mode, char *name, long int args, int fps)
     stor->view = sfView_copy(sfRenderWindow_getView(stor->window));
     sfRenderWindow_setFramerateLimit(stor->window, fps);
     sfRenderWindow_setView(stor->window, stor->view);
-    sfSprite_setTexture(datas->cursor, datas->cursor_skin, sfTrue);
     return (create_window_2(datas, stor));
 }
 
@@ -54,9 +53,7 @@ void destroy_window(data_storage_t *stor)
     internal_data_t *datas = get_internal_data();
 
     sfView_destroy(stor->view);
-    sfTexture_destroy(datas->cursor_skin);
     sfTexture_destroy(datas->background_skin);
-    sfSprite_destroy(datas->cursor);
     sfSprite_destroy(datas->background);
     sfImage_destroy(datas->icon);
     sfRenderWindow_destroy(stor->window);

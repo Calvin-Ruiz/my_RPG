@@ -17,7 +17,7 @@ void save_player(player_t *self, data_storage_t *datas)
 {
     player_save_t save = (player_save_t) {self->health, self->speed,
         self->pos.v1, self->hp, self->base_hp, self->base_atk, self->base_def,
-        self->money, self->xp, self->xp_next, self->level, "", {{}}};
+        self->money, self->xp, self->xp_next, self->level, "", {{}}, self->wpn};
     int fd = open(tmpcat(datas->path, "player.dat"), O_WRONLY | O_CREAT, 0666);
     int tmp = 0;
     for (u_char i = -1; ++i < NB_EQUIPMENT_TYPES;)
@@ -76,26 +76,32 @@ static void load_player_items(player_t *player, data_storage_t *datas, int fd)
     }
 }
 
+static void transfert_values_from_save(player_t *self, player_save_t *save)
+{
+    self->health = save->health;
+    self->speed = save->speed;
+    self->pos.v1 = save->pos;
+    self->hp = save->hp;
+    self->base_hp = save->max_hp;
+    self->base_atk = save->atk;
+    self->base_def = save->def;
+    self->money = save->money;
+    self->xp = save->xp;
+    self->xp_next = save->xp_next;
+    self->level = save->level;
+    self->wpn = save->weapon_type;
+    for (u_char i = -1; ++i < NB_EQUIPMENT_TYPES;)
+        self->equip[i] = save->equip[i];
+}
+
 void load_player(player_t *self, data_storage_t *datas)
 {
     player_save_t save;
     int fd = open(tmpcat(datas->path, "player.dat"), O_RDONLY);
     if (fd == -1 || read(fd, (char *) &save, sizeof(save)) != sizeof(save))
         return;
-    self->health = save.health;
-    self->speed = save.speed;
-    self->pos.v1 = save.pos;
-    self->hp = save.hp;
-    self->base_hp = save.max_hp;
-    self->base_atk = save.atk;
-    self->base_def = save.def;
-    self->money = save.money;
-    self->xp = save.xp;
-    self->xp_next = save.xp_next;
-    self->level = save.level;
     datas->mapname = my_tmpdup(save.mapname);
-    for (u_char i = -1; ++i < NB_EQUIPMENT_TYPES;)
-        self->equip[i] = save.equip[i];
+    transfert_values_from_save(self, &save);
     load_player_capacities(self, datas, fd);
     load_player_items(self, datas, fd);
 }

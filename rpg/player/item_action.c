@@ -20,6 +20,8 @@ void equip_item(item_t *item, player_t *player)
 {
     u_char type = ((char *) item->data)[7];
 
+    if (type == 0)
+        player->wpn = ((char *) item->data)[8];
     player->equip[type] = *(equip_t *) item->data;
     calculate_final_characteristics(player);
 }

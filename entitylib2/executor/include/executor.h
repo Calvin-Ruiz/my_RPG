@@ -150,7 +150,7 @@ static inline void put_traced_nbr(void *nbr, char type)
     }
 }
 
-static inline u_char get_in_struct(char **arr)
+static inline u_short get_in_struct(char **arr)
 {
     dict_t *dict = get_from_dict(get_from_dict((dict_t *)
         get_executor()->var, "struct"), (*arr) + 1);

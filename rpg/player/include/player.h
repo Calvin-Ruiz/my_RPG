@@ -92,6 +92,7 @@ typedef struct player {
     int base_atk;
     int base_def;
     equip_t equip[NB_EQUIPMENT_TYPES];
+    char wpn;
 } player_t;
 
 typedef struct psave {
@@ -108,6 +109,7 @@ typedef struct psave {
     int level;
     char mapname[24];
     equip_t equip[NB_EQUIPMENT_TYPES];
+    char weapon_type;
 } player_save_t;
 
 static inline void calculate_final_characteristics(player_t *player)
@@ -122,15 +124,14 @@ static inline void calculate_final_characteristics(player_t *player)
     }
 }
 
+void update_capacities(void);
+
 static inline void give_xp(player_t *player, int xp)
 {
     player->xp += xp;
     if (player->xp >= player->xp_next) {
         player->xp -= player->xp_next;
-        player->xp_next *= 1.5;
-        player->base_hp *= 1.3;
-        player->base_atk *= 1.2;
-        player->base_def *= 1.2;
+        update_capacities();
         calculate_final_characteristics(player);
         player->hp = player->max_hp;
         player->level += 1;

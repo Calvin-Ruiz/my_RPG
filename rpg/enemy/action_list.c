@@ -21,14 +21,15 @@ static void build_capacity_selection(dynamic_list_t *self,
     button_t *button = NULL;
 
     sfSprite_setPosition(self->background, self->pos.v1);
-    while (cap) {
+    for (; cap; cap = cap->next) {
+        if (!(cap->weapon & datas->player->wpn))
+            continue;
         button = create_button(texture, font, &pos, use_capacity);
         sfText_setString(button->text, "attack");
         button->data = cap;
         button->next = self->local;
         self->local = button;
         pos.v1.x += 48;
-        cap = cap->next;
     }
 }
 

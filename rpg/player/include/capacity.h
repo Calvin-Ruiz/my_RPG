@@ -17,6 +17,7 @@ typedef struct capacity {
     struct capacity *next;
     short id;
     char target;
+    char weapon;
     void *animation;
     void (*effect)(void *user, void *target, void *animation, void *fight);
 } capacity_t;

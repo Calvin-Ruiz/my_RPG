@@ -22,3 +22,8 @@ void choice_no(menu_t *menu)
         "local"), "choice") = 0;
     menu->opened = 0;
 }
+
+void update_capacities(void)
+{
+    execute_line("call level_up", get_executor());
+}
