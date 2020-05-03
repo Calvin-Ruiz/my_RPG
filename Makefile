@@ -60,6 +60,7 @@ FILES = entitylib2/data_center/data_loader.c \
 	rpg/entity_types/trading.c \
 	rpg/how_to_play.c \
 	rpg/main.c \
+	rpg/map_builder.c \
 	rpg/menu.c \
 	rpg/pause.c \
 	rpg/player/capacity_2.c \

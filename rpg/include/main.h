@@ -24,6 +24,9 @@ void init_some_datas(data_storage_t *datas);
 void mainloop(data_storage_t *datas, sfRenderWindow *window);
 void open_inventory(data_storage_t *datas);
 int main(void);
+void create_map(void);
+void destroy_map(void);
+void mouse_edit(data_storage_t *datas, sfMouseButtonEvent *event, float delta);
 
 static inline int my_full_reset(void)
 {

@@ -1,4 +1,11 @@
+# Level up operations
 op $type.int $Player.[0].@player.xp_next $type.int $Player.[0].@player.xp_next * $type.float $local.xp_mult
 op $type.int $Player.[0].@player.base_hp $type.int $Player.[0].@player.base_hp * $type.float $local.hp_mult
 op $type.int $Player.[0].@player.base_atk $type.int $Player.[0].@player.base_atk * $type.float $local.atk_mult
 op $type.int $Player.[0].@player.base_def $type.int $Player.[0].@player.base_def * $type.float $local.def_mult
+
+# Level up capacities
+
+# inform player about level up
+said $menu.speak level_up
+

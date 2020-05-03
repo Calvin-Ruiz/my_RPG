@@ -68,8 +68,7 @@ void update_window(sfRenderWindow *window, data_storage_t *stor)
     if (size.y < 600 || size.y > 1080)
         size.y = (size.y < 600) ? 600 : 1080;
     sfRenderWindow_setSize(window, size);
-    sfView_setSize(stor->view, (sfVector2f) {size.x, size.y});
-    stor->coef_x = stor->size.x / size.x;
-    stor->coef_y = stor->size.y / size.y;
+    stor->size = (sfVector2f) {size.x, size.y};
+    sfView_setSize(stor->view, stor->size);
     sfRenderWindow_display(window);
 }

@@ -90,6 +90,8 @@ static void init_game(data_storage_t *datas)
     load_entities(datas->path, datas->mapname);
     sfRenderWindow_setFramerateLimit(datas->window, datas->fps);
     calculate_final_characteristics(datas->player);
+    if (datas->debug)
+        create_map();
 }
 
 int main(void)

@@ -55,6 +55,7 @@ static inline void mouse_clic(data_storage_t *datas, sfMouseButtonEvent *mouse)
             return;
         case sfMouseRight:
             datas->mouse.right = 1;
+            mouse_edit(datas, mouse, 0);
             return;
         case sfMouseMiddle:
             datas->mouse.wheel = 1;
@@ -84,8 +85,7 @@ static inline void mouse_release(data_storage_t *datas,
 
 static inline void event_scroll(data_storage_t *datas, float delta)
 {
-    (void) datas;
-    (void) delta;
+    mouse_edit(datas, NULL, delta);
 }
 
 #endif /* EVENTS_H_ */

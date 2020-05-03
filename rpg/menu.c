@@ -36,6 +36,7 @@ void my_said(char **arr)
     }
     sfText_setString(((menu_t *) arr[1])->text->text, arr[2]);
     open_sub_menu((menu_t *) arr[1]);
+    reset_timers(get_data_storage(), NULL);
 }
 
 void init_some_datas(data_storage_t *datas)

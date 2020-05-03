@@ -42,6 +42,7 @@ static inline void cmd_uninit(void)
     destroy_dict(var, NULL);
     executor->cmd = NULL;
     executor->var = NULL;
+    destroy_map();
 }
 
 #endif /* CMD_UNINIT_H_ */

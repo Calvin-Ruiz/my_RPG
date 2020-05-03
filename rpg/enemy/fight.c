@@ -72,6 +72,9 @@ void engage_fight_event(event_t *self, player_t *player)
     destroy_button_array(menu->dlist->local);
     menu->dlist->local = NULL;
     calculate_final_characteristics(player);
+    self->health = 0;
+    call_function(((char **) &(caller_t) {4, call_function,
+        self->command_name, self, player}) + 1);
 }
 
 char on_clic_fight_item(dynamic_list_t *self, sfVector2f *pos)
