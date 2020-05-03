@@ -54,7 +54,7 @@ static inline void build_item_list(dynamic_list_t *self)
     item_list_t *new = NULL;
     sfTexture *texture = get_from_dict(get_data_storage()->textures, "button");
     sfFont *font = get_internal_data()->text_font;
-    pos_t pos = {{self->pos.v1.x + 16, self->pos.v1.y + 8},
+    pos_t pos = {{self->pos.v1.x + 16, self->pos.v1.y + 20},
         {self->pos.v2.x - 48, 48}};
 
     destroy_item_list_content(self);

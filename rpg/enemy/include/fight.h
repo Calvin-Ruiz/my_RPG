@@ -59,11 +59,15 @@ static inline void enemy_atk(fighting_t *fight)
                 return;
             --item->amount;
             item->item->action(item->item, target);
+            ((menu_t *) get_from_rec_dict(get_from_rec_dict(
+                get_executor()->var, "menu"), "fight_inv"))->opened = 0;
         } else {
             if (item->item->type != FIGHT_ONLY)
                 return;
             --item->amount;
             item->item->action(item->item, target);
+            ((menu_t *) get_from_rec_dict(get_from_rec_dict(
+                get_executor()->var, "menu"), "fight_inv"))->opened = 0;
         }
     }
 #endif

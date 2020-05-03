@@ -129,7 +129,7 @@ void update_capacities(void);
 static inline void give_xp(player_t *player, int xp)
 {
     player->xp += xp;
-    if (player->xp >= player->xp_next) {
+    while (player->xp >= player->xp_next) {
         player->xp -= player->xp_next;
         update_capacities();
         calculate_final_characteristics(player);

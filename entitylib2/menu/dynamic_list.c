@@ -33,12 +33,14 @@ void create_dynamic_list_cmd(char **arr)
     ((menu_t *) arr[1])->dlist = new;
 }
 
-char dynamic_list_clic(menu_t *menu, sfVector2f *pos)
+char dynamic_list_clic(menu_t *menu, sfVector2f *real)
 {
     dynamic_list_t *dlist = menu->dlist;
+    sfVector2f pos = {real->x, real->y};
 
     while (dlist) {
-        if (dlist->on_clic && dlist->on_clic(dlist, pos))
+        pos.y = real->y + dlist->center.y - 300;
+        if (dlist->on_clic && dlist->on_clic(dlist, &pos))
             return (1);
         dlist = dlist->next;
     }

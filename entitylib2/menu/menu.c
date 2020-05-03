@@ -36,16 +36,18 @@ void menu_update(menu_t *menu, data_storage_t *datas)
     const sfVector2i real = sfMouse_getPositionRenderWindow(menu->window);
     const sfVector2u size = sfRenderWindow_getSize(menu->window);
     sfVector2f pos = sfView_getSize(menu->view);
+    sfVector2f rel = {real.x * pos.x / size.x, real.y * pos.y / size.y};
 
-    pos = (sfVector2f) {real.x * pos.x / size.x, real.y * pos.y / size.y};
+    pos.x = rel.x;
     update_image_array(menu->window, menu->images);
-    update_button_array(menu->window, menu->button, &datas->mouse, &pos);
+    update_button_array(menu->window, menu->button, &datas->mouse, &rel);
     update_dynamic_text_array(menu->window, menu->dtext);
     update_text_array(menu->window, menu->text);
     for (dynamic_list_t *dlist = menu->dlist; dlist; dlist = dlist->next) {
         sfRenderWindow_setView(menu->window, menu->view);
         sfRenderWindow_drawSprite(menu->window, dlist->background, NULL);
         sfRenderWindow_setView(menu->window, dlist->view);
+        pos.y = rel.y + dlist->center.y - 300;
         dlist->update(dlist, menu->window, datas, &pos);
     }
     sfRenderWindow_display(menu->window);

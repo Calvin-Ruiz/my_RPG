@@ -27,4 +27,5 @@ create_menu choice $datas.@datas.window.[0] $texture.background
 create_menu GUI $datas.@datas.window.[0] $texture.background
 create_menu trade $datas.@datas.window.[0] $texture.background
 create_menu fight_inv $datas.@datas.window.[0] $texture.background
+create_menu quest $datas.@datas.window.[0] $texture.background
 

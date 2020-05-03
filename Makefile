@@ -42,7 +42,6 @@ FILES = entitylib2/data_center/data_loader.c \
 	entitylib2/tools/etools.c \
 	entitylib2/tools/fast_get_next_line.c \
 	entitylib2/tools/loader.c \
-	rpg/choices.c \
 	rpg/cmd/inits.c \
 	rpg/cmd/structs.c \
 	rpg/cmd/system_cmd_2.c \
@@ -58,11 +57,14 @@ FILES = entitylib2/data_center/data_loader.c \
 	rpg/entity_types/solid_decor.c \
 	rpg/entity_types/solid_event.c \
 	rpg/entity_types/trading.c \
-	rpg/how_to_play.c \
 	rpg/main.c \
-	rpg/map_builder.c \
-	rpg/menu.c \
-	rpg/pause.c \
+	rpg/other/choices.c \
+	rpg/other/how_to_play.c \
+	rpg/other/map_builder.c \
+	rpg/other/menu.c \
+	rpg/other/pause.c \
+	rpg/other/quest_list.c \
+	rpg/other/quests.c \
 	rpg/player/capacity_2.c \
 	rpg/player/capacity.c \
 	rpg/player/item_action.c \
@@ -75,7 +77,7 @@ FILES = entitylib2/data_center/data_loader.c \
 	tools/my_read.c \
 	tools/tools.c
 
-INCLUDES = -I entitylib2/data_center/include -I entitylib2/display/include -I entitylib2/entitylist/include -I entitylib2/executor/include -I entitylib2/include -I entitylib2/menu/include -I entitylib2/particle/include -I entitylib2/sounds/include -I entitylib2/tools/include -I rpg/cmd/include -I rpg/enemy/include -I rpg/entity_groups/include -I rpg/entity_types/include -I rpg/include -I rpg/player/include -I tools/include 
+INCLUDES = -I entitylib2/data_center/include -I entitylib2/display/include -I entitylib2/entitylist/include -I entitylib2/executor/include -I entitylib2/include -I entitylib2/menu/include -I entitylib2/particle/include -I entitylib2/sounds/include -I entitylib2/tools/include -I rpg/cmd/include -I rpg/enemy/include -I rpg/entity_groups/include -I rpg/entity_types/include -I rpg/include -I rpg/other/include -I rpg/player/include -I tools/include 
 
 FLAGS = -lcsfml-graphics -lcsfml-system -lcsfml-audio -lcsfml-system
 

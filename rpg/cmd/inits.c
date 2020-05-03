@@ -18,6 +18,8 @@
 #include <action_list.h>
 #include <item_list.h>
 #include <trading.h>
+#include <quest.h>
+#include <quest_list.h>
 
 dict_t *get_sf_colors(void)
 {
@@ -65,6 +67,8 @@ void init_external_cmds(dict_t **cmd)
     append_to_dict(cmd, "said", my_said);
     append_to_dict(cmd, "create_dynamic_list", create_dynamic_list_cmd);
     append_to_dict(cmd, "give_capacity", give_capacity_cmd);
+    append_to_dict(cmd, "check_quest", check_quest);
+    append_to_dict(cmd, "create_quest", create_quest_cmd);
 }
 
 static dict_t *get_internal_func_part_2(void)
@@ -127,5 +131,8 @@ dict_t *get_internal_func(void)
     append_to_dict(&new, "use_item_for_you", use_item_for_you);
     append_to_dict(&new, "choice_yes", choice_yes);
     append_to_dict(&new, "choice_no", choice_no);
+    append_to_dict(&new, "update_quest_list", update_quest_list);
+    append_to_dict(&new, "destroy_quest_list", destroy_quest_list_content);
+    append_to_dict(&new, "open_quest_menu", open_quest_menu);
     return (new);
 }

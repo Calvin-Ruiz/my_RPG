@@ -42,7 +42,7 @@ static void build_trade_list(dynamic_list_t *self)
     data_storage_t *datas = get_data_storage();
     sfTexture *texture = get_from_dict(datas->textures, "button");
     sfFont *font = get_internal_data()->text_font;
-    pos_t pos = {{self->pos.v1.x + 16, self->pos.v1.y + 8},
+    pos_t pos = {{self->pos.v1.x + 16, self->pos.v1.y + 20},
         {self->pos.v2.x - 48, 48}};
     short *item_id = self->data;
     item_t *item = NULL;

@@ -18,6 +18,7 @@ enum {
     EFFECTS,
     ACTION,
     ENEMY,
+    QUEST,
     NB_DATAS,
 };
 

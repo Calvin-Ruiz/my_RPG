@@ -18,6 +18,7 @@ void use_item_for_me(enemy_t *enemy, player_t *player,
 {
     (void) player;
     (void) enemy;
+    
     if (animation->sound)
         sfSound_play(animation->sound);
     for (u_char i = -1; ++i < 11;) {
